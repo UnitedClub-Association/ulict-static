@@ -1,0 +1,30 @@
+:root {
+  --about-text: #ffbd59;
+  --about-bg: #41237b;
+  --about-accent: #ff5831;
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  color: var(--about-text);
+}
+
+.about-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.about-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.about-section {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 189, 89, 0.1);
+}

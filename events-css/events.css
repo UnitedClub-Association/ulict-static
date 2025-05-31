@@ -1,0 +1,297 @@
+/* events.css */
+:root {
+  --primary-color: #ff5831; /* Orange */
+  --secondary-color: #ffbd59; /* Gold */
+  --background-dark: #2d1857; /* Dark purple */
+  --text-light: #ffbd59; /* Gold */
+  --text-dark: #cc9747; /* Darker gold */
+  --text-medium: rgba(255, 189, 89, 0.85); /* Semi-transparent gold */
+  --hero-gradient: linear-gradient(45deg, rgba(45, 24, 87, 0.9), rgba(255, 88, 49, 0.8));
+  --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  --hover-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  --transition: all 0.3s ease;
+  --smooth-timing: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  font-family: "Iceberg", serif;
+  color: var(--text-light);
+  background: var(--background-dark);
+  margin: 0;
+}
+
+/* Load Animation */
+.load-anim {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s var(--smooth-timing) forwards;
+}
+
+.load-anim[data-delay="0.1s"] { animation-delay: 0.1s; }
+.load-anim[data-delay="0.2s"] { animation-delay: 0.2s; }
+.load-anim[data-delay="0.3s"] { animation-delay: 0.3s; }
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: var(--hero-gradient);
+  overflow: hidden;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('/images/ulic-hero-banner.jpg') center/cover no-repeat;
+  opacity: 0.3;
+  animation: zoom 20s ease infinite;
+}
+
+@keyframes zoom {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* Particle effect for uniqueness */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255, 189, 89, 0.1) 1px, transparent 1px);
+  background-size: 30px 30px;
+  animation: particleMove 15s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes particleMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 100px 100px; }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-content h1 {
+  font-family: "Blanka", sans-serif;
+  font-size: clamp(3rem, 8vw, 5rem);
+  color: var(--text-light);
+  text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--secondary-color);
+  margin-bottom: 1rem;
+  letter-spacing: 3px;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--secondary-color);
+  }
+  to {
+    text-shadow: 0 0 20px var(--primary-color), 0 0 40px var(--secondary-color);
+  }
+}
+
+.hero-subtitle {
+  font-family: "Iceberg", serif;
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  color: var(--text-medium);
+  text-shadow: 0 0 5px var(--text-light);
+}
+
+/* General Section Styles */
+.events-section, .mini-events-section, .sessions-section {
+  padding: 4rem 2rem;
+  background: linear-gradient(180deg, var(--background-dark), #41237b);
+  position: relative;
+  overflow: hidden;
+}
+
+.events-section::before,
+.mini-events-section::before,
+.sessions-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(255, 189, 89, 0.05) 0%, transparent 25%),
+    radial-gradient(circle at 80% 70%, rgba(255, 88, 49, 0.05) 0%, transparent 25%);
+  animation: patternMove 20s linear infinite;
+}
+
+@keyframes patternMove {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
+}
+
+.events-section h2,
+.mini-events-section h2,
+.sessions-section h2 {
+  font-family: "Iceberg", serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.event-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.event-card {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.4s var(--smooth-timing);
+  display: flex;
+  flex-direction: column;
+}
+
+.event-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--hover-shadow);
+}
+
+.event-image {
+  position: relative;
+  height: 250px;
+  overflow: hidden;
+}
+
+.event-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 0%, rgba(255, 88, 49, 0.3) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.event-card:hover .event-image::after {
+  opacity: 1;
+}
+
+.event-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--smooth-timing);
+}
+
+.event-card:hover .event-image img {
+  transform: scale(1.05);
+}
+
+.event-content {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
+}
+
+.event-date {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--background-dark));
+  padding: 0.9rem;
+  border-radius: 12px;
+  font-family: "Iceberg", serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-light);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s var(--smooth-timing), box-shadow 0.3s ease;
+}
+
+.event-date:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.event-card h3 {
+  font-family: "Iceberg", serif;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.event-card p {
+  font-family: "Iceberg", serif;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: var(--text-medium);
+  flex-grow: 1;
+}
+
+.read-more {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-light);
+  font-family: "Iceberg", serif;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.read-more:hover {
+  gap: 0.8rem;
+  color: var(--text-dark);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero {
+    height: 60vh;
+  }
+  .hero-content h1 {
+    font-size: 3rem;
+  }
+  .hero-subtitle {
+    font-size: 1.2rem;
+  }
+  .events-section,
+  .mini-events-section,
+  .sessions-section {
+    padding: 3rem 1rem;
+  }
+  .event-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 769px) {
+  body {
+    padding-top: 88px;
+  }
+}
