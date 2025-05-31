@@ -1,12 +1,12 @@
 /* Enhanced Navbar Variables */
 :root {
-  --primary: #6200ea; /* Deeper, more vibrant purple */
-  --primary-light: #9d46ff; /* Brighter purple for accents */
-  --primary-gradient: linear-gradient(135deg, #6200ea, #9d46ff);
-  --text: #ffffff; /* Pure white for better contrast */
-  --text-muted: rgba(255, 255, 255, 0.85); /* More visible muted text */
-  --background: rgba(26, 24, 38, 0.95); /* Darker, more sophisticated background */
-  --background-light: rgba(26, 24, 38, 0.92);
+  --primary: #ff5831;
+  --primary-light: #ffbd59;
+  --primary-gradient: linear-gradient(135deg, #ff5831, #ffbd59);
+  --text: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.85);
+  --background: rgba(65, 35, 123, 0.95);
+  --background-light: rgba(65, 35, 123, 0.92);
   --spacer: 1rem;
   --link-height: calc(var(--spacer) * 3.5);
   --transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);

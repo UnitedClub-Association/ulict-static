@@ -1,13 +1,13 @@
 /* footer.css - Enhanced design */
 :root {
-  --footer-bg: #1a182e;
+  --footer-bg: #41237b;
   --footer-text: #ffffff;
-  --footer-text-muted: #b4b7c5;
-  --footer-primary: #6200ea;
-  --footer-primary-light: #9d46ff;
-  --footer-gradient: linear-gradient(135deg, #6200ea, #9d46ff);
-  --footer-border: rgba(157, 70, 255, 0.15);
-  --footer-hover: rgba(157, 70, 255, 0.1);
+  --footer-text-muted: rgba(255, 255, 255, 0.85);
+  --footer-primary: #ff5831;
+  --footer-primary-light: #ffbd59;
+  --footer-gradient: linear-gradient(135deg, #ff5831, #ffbd59);
+  --footer-border: rgba(255, 189, 89, 0.15);
+  --footer-hover: rgba(255, 88, 49, 0.1);
   --footer-shadow: 0 -5px 25px rgba(0, 0, 0, 0.2);
 }
 

@@ -7,26 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // CSS animations triggered by IntersectionObserver
-  const animatedElements = document.querySelectorAll('.animate-on-scroll');
-  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && !prefersReducedMotion.matches) {
-        entry.target.classList.add('animated');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.1,
-    rootMargin: '20px'
-  });
-
-  animatedElements.forEach(element => {
-    observer.observe(element);
-  });
-
   // Smooth scroll for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
