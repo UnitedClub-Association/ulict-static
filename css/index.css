@@ -95,9 +95,9 @@ body {
 /* Hero Section */
 .hero {
   background-image: url('../images/ulic-hero-banner.jpg');
-  background-size: 100% 100%; /* Main banner at 100%*/
-  background-repeat: no-repeat; /* No repeat*/
-  background-position: center; /* Centerimage */
+  background-size: 100% 100%; /* Main banner at 100% */
+  background-repeat: no-repeat; /* No repeat */
+  background-position: center; /* Center image */
   animation: gradientBG 15s ease infinite;
   height: 100vh;
   display: flex;
@@ -107,7 +107,6 @@ body {
   position: relative;
   overflow: hidden;
 }
-
 
 .hero-content {
   position: relative;
@@ -181,170 +180,102 @@ body {
   color: var(--text-medium);
 }
 
-.about-stats {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-  margin-top: 3rem;
-}
-
-.stat-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: var(--card-shadow);
-  transition: transform 0.3s ease;
-  min-width: 180px;
-  animation: float 6s ease-in-out infinite;
-}
-
-.stat-item:nth-child(2) {
-  animation-delay: -2s;
-}
-
-.stat-item:nth-child(3) {
-  animation-delay: -4s;
-}
-
-.stat-icon {
-  width: 36px;
-  height: 36px;
-  background: linear-gradient(135deg, var(--primary-color), var(--text-light)); /* Fallback background */
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: var(--text-light); /* Fallback color if gradient fails */
-  margin-bottom: 1rem;
-  stroke-width: 1.5;
-}
-
-.stat-number {
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, var(--primary-color), var(--text-light));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent; /* Gradient text */
-  /* Fallback color if gradient fails */
-  color: var(--text-light);
-}
-
-.stat-label {
-  font-size: clamp(0.9rem, 2vw, 1.1rem);
-  color: var(--text-light);
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-}
-
 /* Activities Section */
 .activities {
   padding: 4rem 2rem;
-  background: linear-gradient(180deg, var(--background-dark), #2d1857); /* Purple to darker purple */
+  background: linear-gradient(180deg, var(--background-dark), #2d1857);
   position: relative;
 }
 
 .activities h2 {
   font-size: clamp(1.8rem, 4vw, 2.8rem);
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
   text-align: center;
+  color: var(--text-light);
 }
 
-.activity-grid {
+.cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2.5rem;
-  max-width: 1400px;
+  gap: 2rem;
+  padding: 1rem;
+  max-width: 1200px;
   margin: 0 auto;
+}
+
+.card {
+  background: rgba(65, 35, 123, 0.3);
+  border: 1px solid rgba(255, 189, 89, 0.1);
+  border-radius: 16px;
   padding: 2rem;
-}
-
-.activity-card {
   position: relative;
-  height: 350px;
-  border-radius: 24px;
   overflow: hidden;
-  cursor: pointer;
-  box-shadow: var(--card-shadow);
-  transition: transform 0.4s var(--smooth-timing);
-  will-change: transform;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.activity-card::before {
+.card::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent 0%, var(--primary-color) 100% /* Orange */);
+  background: linear-gradient(
+    45deg,
+    rgba(255, 88, 49, 0.1),
+    rgba(255, 189, 89, 0.1)
+  );
+  border-radius: 16px;
+  z-index: 0;
+}
+
+.card > div {
+  position: relative;
   z-index: 1;
-  opacity: 0.8;
-  transition: opacity 0.4s ease;
 }
 
-.activity-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s var(--smooth-timing);
-}
-
-.activity-info {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 2rem;
-  z-index: 2;
-  transform: translateY(30px);
-  transition: transform 0.4s var(--smooth-timing);
-}
-
-.activity-info h3 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
+.card h2 {
+  font-size: 1.5rem;
   color: var(--text-light);
-  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+  margin-bottom: 1rem;
+  font-family: 'Blanka', sans-serif;
+  text-align: left;
 }
 
-.activity-card:hover {
-  transform: translateY(-10px);
-  box-shadow: var(--hover-shadow);
+.card p {
+  color: var(--text-medium);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  font-size: 0.95rem;
 }
 
-.activity-card:hover img {
-  transform: scale(1.05);
+.card a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--secondary-color);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: gap 0.3s ease;
 }
 
-.activity-card:hover::before {
-  opacity: 0.9;
+.card a::after {
+  content: '→';
+  transition: transform 0.3s ease;
 }
 
-.activity-card:hover .activity-info {
-  transform: translateY(0);
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
 }
 
-.wave {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 80px;
-  background: linear-gradient(to top, rgba(255, 189, 89, 0.2) 0%, transparent 100%); /* Gold variant */
-  transform: translateY(100%);
-  transition: transform 0.4s ease;
+.card:hover a::after {
+  transform: translateX(5px);
 }
 
-.activity-card:hover .wave {
-  transform: translateY(0);
-}
-
-@keyframes waveAnimation {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+@media (max-width: 768px) {
+  .cards {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+  }
 }
 
 /* Events Section */
@@ -497,9 +428,11 @@ body {
     font-size: 1.3rem;
   }
   .about-content,
-  .activity-card,
   .event-card {
     padding: 1.5rem;
+  }
+  .cards {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* Fallback to responsive grid on smaller screens */
   }
 }
 
@@ -518,8 +451,6 @@ body {
   .events {
     padding: 3rem 1rem;
   }
-  .about-grid,
-  .activity-grid,
   .event-grid {
     grid-template-columns: 1fr;
   }

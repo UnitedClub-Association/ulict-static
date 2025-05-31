@@ -4,7 +4,7 @@
     <!-- Google tag (gtag.js) -->
     <script
       async
-      src="https://www.googletagmanager.com/gtag/js?id=G-H2YV0FNQ9X"
+      src="https://www.googletagmanager.com/gtag/js?id=G-MYXGNCY7V1"
     ></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -12,21 +12,12 @@
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
-
-      gtag("config", "G-H2YV0FNQ9X");
+      gtag("config", "G-MYXGNCY7V1");
     </script>
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Modern Navbar</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap"
-      rel="stylesheet"
-    />
+    <title>ULIC Navbar</title>
     <link rel="stylesheet" href="/css/navbar.css" />
     <!-- Feather Icons -->
     <script src="https://unpkg.com/feather-icons"></script>
@@ -43,27 +34,15 @@
           </a>
         </li>
         <li class="navbar__item dropdown">
-          <a href="/clubs/clubs.html" class="navbar__link">
-            <i data-feather="users"></i>
-            <span>Clubs</span>
-          </a>
-          <ul class="dropdown__menu">
-            <li><a href="/clubs/debate-club.html">Debate Club</a></li>
-            <li><a href="/clubs/photography-club.html">Photography Club</a></li>
-            <li><a href="/clubs/sports-club.html">Sports Club</a></li>
-            <li><a href="/clubs/quiz-club.html">Quiz Club</a></li>
-            <li><a href="/clubs/science-club.html">Science Club</a></li>
-            <li><a href="/clubs/language-club.html">Language Club</a></li>
-            <li><a href="/clubs/ict-club.html">ICT Club</a></li>
-            <li><a href="/clubs/literature-club.html">Literature Club</a></li>
-            <li><a href="/clubs/cultural-club.html">Cultural Club</a></li>
-          </ul>
-        </li>
-        <li class="navbar__item">
           <a href="/events/events.html" class="navbar__link">
             <i data-feather="calendar"></i>
             <span>Events</span>
           </a>
+          <ul class="dropdown__menu">
+            <li><a href="/events/events.html">Events</a></li>
+            <li><a href="/events/mini-events.html">Mini Events</a></li>
+            <li><a href="/events/sessions.html">Sessions</a></li>
+          </ul>
         </li>
         <li class="navbar__item dropdown">
           <a href="/about/about.html" class="navbar__link">
@@ -72,16 +51,20 @@
           </a>
           <ul class="dropdown__menu">
             <li><a href="/about/about.html">About Us</a></li>
-            <li><a href="/about/executive-panel.html">Executive Panel</a></li>
             <li><a href="/about/gallery.html">Gallery</a></li>
-            <li><a href="/about/achievements.html">Achievements</a></li>
+            <li><a href="/about/achievements.html">Achievement</a></li>
+            <li><a href="/contact/contact.html">Contact</a></li>
           </ul>
         </li>
-        <li class="navbar__item">
-          <a href="/contact/contact.html" class="navbar__link">
-            <i data-feather="mail"></i>
-            <span>Contact</span>
+        <li class="navbar__item dropdown">
+          <a href="/executives/executives.html" class="navbar__link">
+            <i data-feather="users"></i>
+            <span>Executives</span>
           </a>
+          <ul class="dropdown__menu">
+            <li><a href="/executives/2024-25.html">2024-25</a></li>
+            <li><a href="/executives/2026.html">2026</a></li>
+          </ul>
         </li>
         <li class="navbar__item">
           <a href="/contact/join-us.html" class="navbar__link">
@@ -101,6 +84,5 @@
     <script>
       feather.replace();
     </script>
-
   </body>
 </html>

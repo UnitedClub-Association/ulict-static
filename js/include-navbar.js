@@ -22,8 +22,8 @@ document.addEventListener("DOMContentLoaded", function () {
       logoContainer.classList.add("logo-container");
 
       const logoImg = document.createElement("img");
-      logoImg.src = "/images/uca_logo.png";
-      logoImg.alt = "UCA Logo";
+      logoImg.src = "/images/ulic-logo.jpg";
+      logoImg.alt = "ULIC Logo";
       logoImg.classList.add("logo-img");
 
       const logoText = document.createElement("div");
@@ -31,11 +31,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const logoTextMain = document.createElement("span");
       logoTextMain.classList.add("logo-text-main");
-      logoTextMain.textContent = "UCA";
+      logoTextMain.textContent = "ULIC";
 
       const logoTextSub = document.createElement("span");
       logoTextSub.classList.add("logo-text-sub");
-      logoTextSub.textContent = "United Club Association";
+      logoTextSub.textContent = "University Laboratory ICT Club";
 
       // Append elements to the logo container
       logoText.appendChild(logoTextMain);

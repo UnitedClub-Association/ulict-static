@@ -1,10 +1,10 @@
 /* footer.css - Enhanced design */
 :root {
-  --footer-bg: #41237b;
+  --footer-bg: #2d1857; /* Dark purple from ULIC theme */
   --footer-text: #ffffff;
   --footer-text-muted: rgba(255, 255, 255, 0.85);
-  --footer-primary: #ff5831;
-  --footer-primary-light: #ffbd59;
+  --footer-primary: #ff5831; /* Orange */
+  --footer-primary-light: #ffbd59; /* Gold */
   --footer-gradient: linear-gradient(135deg, #ff5831, #ffbd59);
   --footer-border: rgba(255, 189, 89, 0.15);
   --footer-hover: rgba(255, 88, 49, 0.1);
@@ -31,7 +31,7 @@ footer {
   flex-shrink: 0;
   background-color: var(--footer-bg);
   color: var(--footer-text);
-  font-family: "Poppins", sans-serif;
+  font-family: "Iceberg", serif; /* Default to Iceberg */
   padding: 4rem 0 2rem;
   box-shadow: var(--footer-shadow);
   position: relative;
@@ -93,7 +93,7 @@ footer::before {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Blanka", sans-serif; /* ULIC in Blanka */
   font-weight: 700;
   letter-spacing: 1px;
 }
@@ -102,6 +102,7 @@ footer::before {
   margin: 0;
   font-size: 0.9rem;
   color: var(--footer-text-muted);
+  font-family: "Iceberg", serif; /* Subtext in Iceberg */
   font-weight: 300;
   letter-spacing: 0.5px;
 }
@@ -137,9 +138,6 @@ footer::before {
 }
 .footer-section:nth-child(3) {
   animation-delay: 0.3s;
-}
-.footer-section:nth-child(4) {
-  animation-delay: 0.4s;
 }
 
 .footer-section h4 {
@@ -205,22 +203,6 @@ footer::before {
 .footer-section a:hover::before {
   opacity: 1;
   transform: translateX(-4px);
-}
-
-/* Clubs grid layout */
-.clubs-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.75rem;
-}
-
-.clubs-grid li {
-  margin-bottom: 0;
-}
-
-.clubs-grid a {
-  font-size: 0.9rem;
-  padding: 0.25rem 0;
 }
 
 .footer-bottom {
@@ -291,20 +273,12 @@ footer::before {
     align-items: center;
   }
   
-  .clubs-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
   .footer-section li:hover {
     transform: none;
   }
 }
 
 @media (max-width: 480px) {
-  .clubs-grid {
-    grid-template-columns: 1fr;
-  }
-  
   .footer-content {
     grid-template-columns: 1fr;
     gap: 2rem;
