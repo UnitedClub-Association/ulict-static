@@ -1,0 +1,109 @@
+.terms-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.terms-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #006400;
+}
+
+.terms-header h1 {
+  color: #006400;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.terms-header p {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.terms-section {
+  margin-bottom: 2.5rem;
+}
+
+.terms-section h2 {
+  color: #006400;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.terms-section h3 {
+  color: #333;
+  font-size: 1.4rem;
+  margin: 1.5rem 0 1rem 0;
+}
+
+.terms-section p {
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.terms-section ul {
+  list-style-type: disc;
+  margin-left: 2rem;
+  margin-bottom: 1rem;
+}
+
+.terms-section li {
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+.terms-footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 2px solid #006400;
+  text-align: center;
+  color: #666;
+}
+
+.last-updated {
+  font-style: italic;
+  color: #888;
+}
+
+/* Add navbar spacing and main content positioning */
+#main-content {
+  padding-top: 5rem; /* Space for fixed navbar */
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  #main-content {
+    padding-top: 4rem; /* Adjusted for mobile navbar height */
+  }
+
+  .terms-container {
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 4px;
+  }
+
+  .terms-header h1 {
+    font-size: 2rem;
+  }
+
+  .terms-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .terms-section h3 {
+    font-size: 1.2rem;
+  }
+}

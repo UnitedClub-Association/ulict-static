@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-H2YV0FNQ9X"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-H2YV0FNQ9X");
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern Navbar</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/navbar.css" />
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+  </head>
+  <body>
+    <nav class="navbar">
+      <!-- Logo will be injected here by include-navbar.js -->
+
+      <ul class="navbar__menu">
+        <li class="navbar__item">
+          <a href="/index.html" class="navbar__link">
+            <i data-feather="home"></i>
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="navbar__item dropdown">
+          <a href="/clubs/clubs.html" class="navbar__link">
+            <i data-feather="users"></i>
+            <span>Clubs</span>
+          </a>
+          <ul class="dropdown__menu">
+            <li><a href="/clubs/debate-club.html">Debate Club</a></li>
+            <li><a href="/clubs/photography-club.html">Photography Club</a></li>
+            <li><a href="/clubs/sports-club.html">Sports Club</a></li>
+            <li><a href="/clubs/quiz-club.html">Quiz Club</a></li>
+            <li><a href="/clubs/science-club.html">Science Club</a></li>
+            <li><a href="/clubs/language-club.html">Language Club</a></li>
+            <li><a href="/clubs/ict-club.html">ICT Club</a></li>
+            <li><a href="/clubs/literature-club.html">Literature Club</a></li>
+            <li><a href="/clubs/cultural-club.html">Cultural Club</a></li>
+          </ul>
+        </li>
+        <li class="navbar__item">
+          <a href="/events/events.html" class="navbar__link">
+            <i data-feather="calendar"></i>
+            <span>Events</span>
+          </a>
+        </li>
+        <li class="navbar__item dropdown">
+          <a href="/about/about.html" class="navbar__link">
+            <i data-feather="info"></i>
+            <span>About Us</span>
+          </a>
+          <ul class="dropdown__menu">
+            <li><a href="/about/about.html">About Us</a></li>
+            <li><a href="/about/executive-panel.html">Executive Panel</a></li>
+            <li><a href="/about/gallery.html">Gallery</a></li>
+            <li><a href="/about/achievements.html">Achievements</a></li>
+          </ul>
+        </li>
+        <li class="navbar__item">
+          <a href="/contact/contact.html" class="navbar__link">
+            <i data-feather="mail"></i>
+            <span>Contact</span>
+          </a>
+        </li>
+        <li class="navbar__item">
+          <a href="/contact/join-us.html" class="navbar__link">
+            <i data-feather="user-plus"></i>
+            <span>Join Us</span>
+          </a>
+        </li>
+      </ul>
+      <button class="navbar__toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+    <script src="/js/navbar.js"></script>
+    <!-- Initialize Feather Icons -->
+    <script>
+      feather.replace();
+    </script>
+
+  </body>
+</html>
