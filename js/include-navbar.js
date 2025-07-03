@@ -1,11 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // Check if navbar is already included to prevent duplication
+  if (document.getElementById("navbar-placeholder")) {
+    console.log("Navbar already included, skipping re-injection.");
+    return;
+  }
+
   // Create a placeholder element for the navbar
   const navbarPlaceholder = document.createElement("div");
   navbarPlaceholder.id = "navbar-placeholder";
   document.body.prepend(navbarPlaceholder); // Insert at the top of the body
 
   // Fetch the navbar HTML
-  fetch("/components/navbar.html") // Use relative path
+  fetch("/components/navbar.html")
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -16,51 +22,20 @@ document.addEventListener("DOMContentLoaded", function () {
       // Insert the navbar HTML into the placeholder
       navbarPlaceholder.innerHTML = data;
 
-      // Inject the logo and text into the navbar
-      const logoContainer = document.createElement("a");
-      logoContainer.href = "/index.html";
-      logoContainer.classList.add("logo-container");
-
-      const logoImg = document.createElement("img");
-      logoImg.src = "/images/ulic-logo.jpg";
-      logoImg.alt = "ULIC Logo";
-      logoImg.classList.add("logo-img");
-
-      const logoText = document.createElement("div");
-      logoText.classList.add("logo-text");
-
-      const logoTextMain = document.createElement("span");
-      logoTextMain.classList.add("logo-text-main");
-      logoTextMain.textContent = "ULIC";
-
-      const logoTextSub = document.createElement("span");
-      logoTextSub.classList.add("logo-text-sub");
-      logoTextSub.textContent = "University Laboratory ICT Club";
-
-      // Append elements to the logo container
-      logoText.appendChild(logoTextMain);
-      logoText.appendChild(logoTextSub);
-      logoContainer.appendChild(logoImg);
-      logoContainer.appendChild(logoText);
-
-      // Insert the logo container into the navbar
-      const navbar = document.querySelector(".navbar");
-      if (navbar) {
-        navbar.prepend(logoContainer);
-      }
-
       // Initialize Feather Icons
       if (window.feather) {
         feather.replace();
       }
 
-      // Load and initialize navbar.js
+      // Load and initialize navbar.js only if not already initialized
       if (!window.navbarInitialized) {
         const script = document.createElement("script");
         script.src = "/js/navbar.js";
         script.onload = () => console.log("navbar.js loaded successfully");
         script.onerror = () => console.error("Error loading navbar.js");
         document.head.appendChild(script);
+      } else {
+        console.log("navbar.js already initialized, skipping reload.");
       }
     })
     .catch((error) => {
