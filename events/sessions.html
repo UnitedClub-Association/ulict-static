@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MYXGNCY7V1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-MYXGNCY7V1");
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Explore the sessions organized by University Laboratory ICT Club (ULIC)."
+    />
+    <meta name="keywords" content="ULIC, sessions, ICT BUDDY, technology, Bangladesh" />
+    <meta name="author" content="University Laboratory ICT Club" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="ULIC Sessions" />
+    <meta property="og:description" content="Explore the sessions organized by University Laboratory ICT Club (ULIC)." />
+    <meta property="og:image" content="/images/ulic-logo.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="University Laboratory ICT Club - ULIC" />
+    <meta property="og:url" content="https://ulic-bd.org/events/sessions.html" />
+
+    <title>ULIC Sessions | University Laboratory ICT Club</title>
+
+    <!-- Preload Critical Assets -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Iceberg&display=swap" as="style" />
+    <link rel="preload" href="/events-css/sessions.css" as="style" />
+
+    <!-- Preconnect to Critical Origins -->
+    <link rel="preconnect" href="https://unpkg.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Include Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Iceberg&display=swap" rel="stylesheet" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/navbar.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+    <link rel="stylesheet" href="/events-css/sessions.css" />
+    <link rel="stylesheet" href="/css/custom-cursor.css" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/images/ulic-logo.ico" />
+
+    <!-- Modern Icons -->
+    <script src="https://unpkg.com/feather-icons" defer></script>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <script src="/js/include-navbar.js" defer></script>
+
+    <main id="main-content">
+      <!-- Hero Section -->
+      <section class="hero" aria-labelledby="hero-heading">
+        <div class="hero-content">
+          <h1 id="hero-heading" data-text="Sessions">Sessions</h1>
+          <p class="hero-subtitle" data-text="Learn and grow with ULIC sessions">Learn and grow with ULIC sessions</p>
+        </div>
+      </section>
+
+      <!-- Sessions Section -->
+      <section class="sessions-section" aria-labelledby="sessions-heading">
+        <div class="section-inner">
+          <div class="section-header">
+            <h2 id="sessions-heading" class="section-title">Sessions</h2>
+            <p class="section-description">Dive into tech with our expert-led sessions!</p>
+          </div>
+          <div class="session-grid">
+            <article class="session-card">
+              <figure class="session-image">
+                <img src="/images/ulic-logo.jpg" alt="ULIC First Session" loading="lazy" />
+                <div class="session-date">
+                  <span class="month">May</span>
+                  <span class="day">28</span>
+                  <span class="year">2025</span>
+                </div>
+              </figure>
+              <div class="session-content">
+                <h3 class="session-title">Introduction to ULIC</h3>
+                <p>Join us for our first session where we introduced ULIC and its vision.</p>
+                <a href="/events/sessions/offline-session1.html" class="details-btn">
+                  Details <span class="sr-only">about ULIC First Session</span>
+                  <i data-feather="info" class="icon"></i>
+                </a>
+              </div>
+            </article>
+            <article class="session-card">
+              <figure class="session-image">
+                <img src="/images/ulic-logo.jpg" alt="Placeholder Session" loading="lazy" />
+                <div class="session-date">
+                  <span class="month">TBD</span>
+                  <span class="day">TBD</span>
+                  <span class="year">TBD</span>
+                </div>
+              </figure>
+              <div class="session-content">
+                <h3 class="session-title">Coming Soon</h3>
+                <p>Stay tuned for our next session!</p>
+                <a href="#" class="details-btn">
+                  Details <span class="sr-only">about Placeholder Session</span>
+                  <i data-feather="info" class="icon"></i>
+                </a>
+              </div>
+            </article>
+            <article class="session-card">
+              <figure class="session-image">
+                <img src="/images/ulic-logo.jpg" alt="Placeholder Session" loading="lazy" />
+                <div class="session-date">
+                  <span class="month">TBD</span>
+                  <span class="day">TBD</span>
+                  <span class="year">TBD</span>
+                </div>
+              </figure>
+              <div class="session-content">
+                <h3 class="session-title">Coming Soon</h3>
+                <p>Stay tuned for our next session!</p>
+                <a href="#" class="details-btn">
+                  Details <span class="sr-only">about Placeholder Session</span>
+                  <i data-feather="info" class="icon"></i>
+                </a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <script src="/js/include-footer.js" defer></script>
+
+    <!-- Initialize Feather Icons -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        if (typeof feather !== "undefined") {
+          feather.replace({
+            "aria-hidden": "true",
+          });
+        } else {
+          console.warn("Feather Icons script not loaded.");
+        }
+      });
+    </script>
+  </body>
+</html>

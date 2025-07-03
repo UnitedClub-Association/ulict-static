@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MYXGNCY7V1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-MYXGNCY7V1");
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Explore the mini events organized by University Laboratory ICT Club (ULIC)."
+    />
+    <meta name="keywords" content="ULIC, mini events, ICT BUDDY, technology, Bangladesh" />
+    <meta name="author" content="University Laboratory ICT Club" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="ULIC Mini Events" />
+    <meta property="og:description" content="Explore the mini events organized by University Laboratory ICT Club (ULIC)." />
+    <meta property="og:image" content="/images/ulic-logo.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="University Laboratory ICT Club - ULIC" />
+    <meta property="og:url" content="https://ulic-bd.org/events/mini-events.html" />
+
+    <title>ULIC Mini Events | University Laboratory ICT Club</title>
+
+    <!-- Preload Critical Assets -->
+    <link href="https://fonts.googleapis.com/css2?family=Iceberg&display=swap" rel="stylesheet" />
+    <link rel="preload" href="/events-css/mini-events.css" as="style" />
+
+    <!-- Preconnect to Critical Origins -->
+    <link rel="preconnect" href="https://unpkg.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Include Fonts -->
+    <link rel="stylesheet" href="/components/font.html"
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/navbar.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+    <link rel="stylesheet" href="/events-css/mini-events.css" />
+    <link rel="stylesheet" href="/css/custom-cursor.css" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/images/ulic-logo.ico" />
+
+    <!-- Modern Icons -->
+    <script src="https://unpkg.com/feather-icons" defer></script>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <script src="/js/include-navbar.js" defer></script>
+
+    <main id="main-content">
+      <!-- Hero Section -->
+      <section class="hero" aria-labelledby="hero-heading">
+        <div class="hero-content">
+          <h1 id="hero-heading">Mini Events</h1>
+          <p class="hero-subtitle">Quick tech challenges and workshops at ULIC</p>
+        </div>
+        <div class="lightning-overlay"></div>
+      </section>
+
+      <!-- Mini Events Section -->
+      <section class="mini-events-section" aria-labelledby="mini-events-heading">
+        <div class="section-inner">
+          <div class="section-header">
+            <h2 id="mini-events-heading" class="section-title">Mini Events</h2>
+            <p class="section-description">Join us for bite-sized tech experiences!</p>
+          </div>
+          <div class="event-grid">
+            <article class="event-card">
+              <figure class="event-image">
+                <img src="/images/build-your-portfolio-banner.png" alt="Build Your Portfolio Mini Event" loading="lazy" />
+                <div class="event-date">
+                  <span class="month">June</span>
+                  <span class="day">2</span>
+                  <span class="year">2025</span>
+                </div>
+              </figure>
+              <div class="event-content">
+                <h3 class="event-title">Build Your Portfolio! (Ongoing)</h3>
+                <p>Join us today as our members showcase their skills and portfolios in this live event!</p>
+                <a href="/events/mini-events/build-your-portfolio.html" class="details-btn">
+                  Details <i data-feather="info" class="icon"></i>
+                </a>
+              </div>
+            </article>
+            <article class="event-card">
+              <figure class="event-image">
+                <img src="/images/ulic-logo.jpg" alt="Placeholder Mini Event" loading="lazy" />
+                <div class="event-date">
+                  <span class="month">TBD</span>
+                  <span class="day">TBD</span>
+                  <span class="year">TBD</span>
+                </div>
+              </figure>
+              <div class="event-content">
+                <h3 class="event-title">Coming Soon</h3>
+                <p>Stay tuned for our next exciting mini event!</p>
+                <a href="#" class="details-btn">
+                  Details <i data-feather="info" class="icon"></i>
+                </a>
+              </div>
+            </article>
+            <article class="event-card">
+              <figure class="event-image">
+                <img src="/images/ulic-logo.jpg" alt="Placeholder Mini Event" loading="lazy" />
+                <div class="event-date">
+                  <span class="month">TBD</span>
+                  <span class="day">TBD</span>
+                  <span class="year">TBD</span>
+                </div>
+              </figure>
+              <div class="event-content">
+                <h3 class="event-title">Coming Soon</h3>
+                <p>Stay tuned for our next exciting mini event!</p>
+                <a href="#" class="details-btn">
+                  Details <i data-feather="info" class="icon"></i>
+                </a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <script src="/js/include-footer.js" defer></script>
+
+    <!-- Initialize Feather Icons -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        if (typeof feather !== "undefined") {
+          feather.replace({
+            "aria-hidden": "true",
+          });
+        } else {
+          console.warn("Feather Icons script not loaded.");
+        }
+      });
+    </script>
+  </body>
+</html>

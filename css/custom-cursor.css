@@ -1,0 +1,66 @@
+/* Custom Cursor Styles */
+body {
+  cursor: url('../custom-cursors/cursor-default.png'), default;
+}
+
+/* Clickable elements (e.g., links, buttons) */
+a, button, [role="button"] {
+  cursor: url('../custom-cursors/cursor-pointer.png'), pointer;
+}
+
+/* Hover state for interactive elements */
+a:hover, button:hover, [role="button"]:hover {
+  cursor: url('../custom-cursors/cursor-hover.png'), pointer;
+}
+
+/* Text input fields */
+input[type="text"], input[type="email"], textarea {
+  cursor: url('../custom-cursors/cursor-textinput.png'), text;
+}
+
+/* Loading state */
+.loading, .spinner {
+  cursor: url('../custom-cursors/cursor-loading.png'), wait;
+}
+
+/* Unavailable or disabled elements */
+[disabled], .unavailable {
+  cursor: url('../custom-cursors/cursor-unavailable.png'), not-allowed;
+}
+
+/* Move/draggable elements */
+.draggable {
+  cursor: url('../custom-cursors/cursor-move.png'), move;
+}
+
+/* Help elements */
+.help, [data-help] {
+  cursor: url('../custom-cursors/cursor-help.png'), help;
+}
+
+/* Grab/grabbing states */
+.grabbable {
+  cursor: url('../custom-cursors/cursor-grab.png'), grab;
+}
+.grabbable:active {
+  cursor: url('../custom-cursors/cursor-grab.png'), grabbing;
+}
+
+/* Resize cursors */
+.resize-e { cursor: url('../custom-cursors/cursor-eresize.png'), e-resize; }
+.resize-n { cursor: url('../custom-cursors/cursor-nresize.png'), n-resize; }
+.resize-ne { cursor: url('../custom-cursors/cursor-neresize.png'), ne-resize; }
+.resize-nw { cursor: url('../custom-cursors/cursor-nwresize.png'), nw-resize; }
+.resize-s { cursor: url('../custom-cursors/cursor-sresize.png'), s-resize; }
+.resize-se { cursor: url('../custom-cursors/cursor-seresize.png'), se-resize; }
+.resize-sw { cursor: url('../custom-cursors/cursor-swresize.png'), sw-resize; }
+.resize-w { cursor: url('../custom-cursors/cursor-wresize.png'), w-resize; }
+
+/* Zoom cursors */
+.zoom-in { cursor: url('../custom-cursors/cursor-zoomin.png'), zoom-in; }
+.zoom-out { cursor: url('../custom-cursors/cursor-zoomout.png'), zoom-out; }
+
+/* Ensure cursor consistency across elements */
+* {
+  cursor: inherit;
+}
