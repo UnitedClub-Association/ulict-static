@@ -20,4 +20,34 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
+
+  // Initialize Feather Icons
+  if (typeof feather !== "undefined") {
+    feather.replace({
+      "aria-hidden": "true",
+      stroke: getComputedStyle(document.documentElement).getPropertyValue('--primary')
+    });
+  } else {
+    console.warn("Feather Icons script not loaded.");
+  }
+
+  // IntersectionObserver for lazy-loading animations
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.load-anim').forEach(element => {
+    observer.observe(element);
+  });
 });

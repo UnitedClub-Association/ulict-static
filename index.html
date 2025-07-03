@@ -36,10 +36,10 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     
-    <!-- Theme color for supported browsers (Chrome, Edge, Safari) -->
-    <meta name="theme-color" content="#1C2526" />
+    <!-- Theme color -->
+    <meta name="theme-color" content="#2E003E" />
 
-    <!-- Add Open Graph tags for better social sharing -->
+    <!-- Open Graph tags -->
     <meta property="og:title" content="University Laboratory ICT Club - ULIC" />
     <meta
       property="og:description"
@@ -56,7 +56,7 @@
     <link rel="preconnect" href="https://unpkg.com" />
     <link rel="preload" href="css/index.css" as="style" />
 
-    <!-- Preconnect to Critical Origins -->
+    <!-- Preconnect to Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -76,13 +76,13 @@
     <link rel="apple-touch-icon" sizes="152x152" href="/images/ulic-logo.jpg" />
     <link rel="apple-touch-icon" sizes="167x167" href="/images/ulic-logo.jpg" />
 
-    <!-- PWA/Mobile Manifest -->
+    <!-- PWA Manifest -->
     <link rel="manifest" href="/manifest.json" />
 
-    <!-- Modern Icons -->
+    <!-- Feather Icons -->
     <script src="https://unpkg.com/feather-icons" defer></script>
 
-    <!-- Progressive Enhancement - Load polyfills only if needed -->
+    <!-- IntersectionObserver Polyfill -->
     <script>
       if (!("IntersectionObserver" in window)) {
         const script = document.createElement("script");
@@ -96,26 +96,31 @@
     <!-- Navbar -->
     <script src="js/include-navbar.js" defer></script>
 
-    <main id="main-content">
+    <main id="main-content" class="content-wrapper">
       <!-- Hero Section -->
       <section class="hero" aria-labelledby="hero-heading">
         <div class="hero-overlay"></div>
         <div class="hero-content load-anim">
-          <h1 id="hero-heading">University Laboratory ICT Club - ULIC</h1>
-          <p class="hero-subtitle">Code | Connect | Create</p>
+          <h1 id="hero-heading" class="gradient-text">
+            University Laboratory ICT Club
+          </h1>
+          <p class="hero-subtitle gradient-text">Code | Connect | Create</p>
         </div>
       </section>
 
-      <!-- About Section -->
-      <section class="about" aria-labelledby="about-heading">
-        <div class="about-container">
-          <div class="about-content">
-            <div class="about-text load-anim">
-              <h2 id="about-heading">Explore ULIC</h2>
-              <p class="about-description">
-                Dive into a world of innovation with ULIC. We bring together passionate tech enthusiasts to collaborate, learn, and push the boundaries of what's possible in the digital realm.
-              </p>
-            </div>
+      <!-- Explore ULIC Section -->
+      <section class="explore-ulic content-wrapper" aria-labelledby="explore-heading">
+        <div class="explore-container">
+          <div class="explore-text-top load-anim">
+            <h2 id="explore-heading">Explore ULIC</h2>
+            <div class="speech-bubble">Innovate!</div>
+            <div class="speech-bubble">Collaborate!</div>
+            <div class="speech-bubble">Tech-Driven</div>
+          </div>
+          <div class="explore-text-bottom load-anim">
+            <p>
+              Dive into a world of innovation with ULIC. We bring together passionate tech enthusiasts to collaborate, learn, and push the boundaries of what's possible in the digital realm.
+            </p>
           </div>
         </div>
       </section>
@@ -123,117 +128,84 @@
       <!-- Featured Activities Section -->
       <section
         id="featured-activities"
-        class="activities"
+        class="activities content-wrapper"
         aria-labelledby="featured-activities-heading"
       >
-        <h2 id="featured-activities-heading" class="load-anim">Featured Activities</h2>
-        <div class="cards">
-          <article class="card load-anim" data-delay="0.1s">
-            <div>
-              <h2>Introdutory Event</h2>
-              <p>The official launch of ULIC under UCA, marking the beginning of a new era for tech enthusiasts at University Laboratory School and College.</p>
-              <a href="activities/uca-unveiled.html">Read more</a>
-            </div>
-          </article>
-
-          <article class="card load-anim" data-delay="0.2s">
-            <div>
-              <h2>First Offline Session</h2>
-              <p>Our first in-person gathering where members connected, shared ideas, and kicked off hands-on tech projects together.</p>
-              <a href="activities/offline-session1.html">Read more</a>
-            </div>
-          </article>
-
-          <article class="card load-anim" data-delay="0.3s">
-            <div>
-              <h2>First Online Session</h2>
-              <p>A virtual session to introduce ULIC’s vision and engage members in collaborative online activities and discussions.</p>
-              <a href="activities/online-session1.html">Read more</a>
-            </div>
-          </article>
+        <div class="activities-container">
+          <div class="activities-text load-anim">
+            <h2 id="featured-activities-heading">Featured Activities</h2>
+            <p>
+              Discover the exciting projects and initiatives that define ULIC’s vibrant community.
+            </p>
+          </div>
+          <div class="cards">
+            <a href="activities/uca-unveiled.html" class="card load-anim" data-delay="0.1s">
+              <div>
+                <h3>Introductory Event</h3>
+                <p>The official launch of ULIC under UCA, marking the beginning of a new era for tech enthusiasts at University Laboratory School and College.</p>
+              </div>
+            </a>
+            <a href="activities/offline-session1.html" class="card load-anim" data-delay="0.2s">
+              <div>
+                <h3>First Offline Session</h3>
+                <p>Our first in-person gathering where members connected, shared ideas, and kicked off hands-on tech projects together.</p>
+              </div>
+            </a>
+            <a href="activities/online-session1.html" class="card load-anim" data-delay="0.3s">
+              <div>
+                <h3>First Online Session</h3>
+                <p>A virtual session to introduce ULIC’s vision and engage members in collaborative online activities and discussions.</p>
+              </div>
+            </a>
+          </div>
         </div>
       </section>
 
       <!-- Featured Events Section -->
-      <section class="events" aria-labelledby="featured-events-heading">
-        <h2 id="featured-events-heading" class="load-anim">Featured Events</h2>
-        <div class="event-grid">
-          <!-- Event Card 1: UCA Unveiled -->
-          <article class="event-card load-anim" data-delay="0.3s">
-            <div class="event-image">
-              <img
-                src="images/uca_logo.png"
-                alt="ULIC Launch - Introduction Ceremony"
-                loading="lazy"
-              />
-              <h3 class="event-title">UCA Unveiled</h3>
-            </div>
-            <div class="event-content">
-              <div class="event-date">
-                <span class="month">May</span>
-                <span class="day">8</span>
-                <span class="year">2025</span>
+      <section
+        id="featured-events"
+        class="events content-wrapper"
+        aria-labelledby="featured-events-heading"
+      >
+        <div class="events-container">
+          <div class="event-grid">
+            <a href="events/uca-unveiled.html" class="event-card load-anim" data-delay="0.1s">
+              <div class="event-image">
+                <img
+                  src="images/uca_logo.png"
+                  alt="ULIC Launch - Introduction Ceremony"
+                  loading="lazy"
+                />
+                <h3 class="event-title">UCA Unveiled</h3>
               </div>
-              <p>
-                Join us in the official launch of ULIC under UCA.
-              </p>
-              <a href="events/uca-unveiled.html" class="read-more">
-                Read more <span class="sr-only"> about UCA Unveiled</span>
-                <i data-feather="arrow-right" class="icon"></i>
-              </a>
-            </div>
-          </article>
-          
-          <!-- Event Card 2: ULIC First Session -->
-          <article class="event-card load-anim" data-delay="0.3s">
-            <div class="event-image">
-              <img
-                src="images/ulic-logo.jpg"
-                alt="ULIC Launch - Introduction Ceremony"
-                loading="lazy"
-              />
-              <h3 class="event-title">First Session</h3>
-            </div>
-            <div class="event-content">
-              <div class="event-date">
-                <span class="month">May</span>
-                <span class="day">28</span>
-                <span class="year">2025</span>
+            </a>
+            <a href="events/ulic-launch.html" class="event-card load-anim" data-delay="0.2s">
+              <div class="event-image">
+                <img
+                  src="images/ulic-logo.jpg"
+                  alt="ULIC First Session"
+                  loading="lazy"
+                />
+                <h3 class="event-title">First Session</h3>
               </div>
-              <p>
-                Join us for our first session where we introduce ULIC and its vision.
-              </p>
-              <a href="events/ulic-launch.html" class="read-more">
-                Read more <span class="sr-only"> about ULIC Launch</span>
-                <i data-feather="arrow-right" class="icon"></i>
-              </a>
-            </div>
-          </article>
-          <!-- Event Card 3: Portfolio Build -->
-          <article class="event-card load-anim" data-delay="0.2s">
-            <div class="event-image">
-              <img
-                src="images/build-your-portfolio-banner.png"
-                alt="CodeBattle: A coding competition"
-                loading="lazy"
-              />
-              <h3 class="event-title">Build Your Portfolio!</h3>
-            </div>
-            <div class="event-content">
-              <div class="event-date">
-                <span class="month">June</span>
-                <span class="day">2</span>
-                <span class="year">2025</span>
+            </a>
+            <a href="events/portfolio1.html" class="event-card load-anim" data-delay="0.3s">
+              <div class="event-image">
+                <img
+                  src="images/build-your-portfolio-banner.png"
+                  alt="CodeBattle: A coding competition"
+                  loading="lazy"
+                />
+                <h3 class="event-title">Build Your Portfolio!</h3>
               </div>
-              <p> 
-                Join us as our members showcase their skills and their portfolios.
-              </p>
-              <a href="events/portfolio1.html" class="read-more">
-                Read more <span class="sr-only"> about Build Your Portfolio</span>
-                <i data-feather="arrow-right" class="icon"></i>
-              </a>
-            </div>
-          </article>
+            </a>
+          </div>
+          <div class="events-text load-anim">
+            <h2 id="featured-events-heading">Featured Events</h2>
+            <p>
+              Relive the best events and sessions hosted by ULIC, showcasing our most memorable moments of creativity and collaboration.
+            </p>
+          </div>
         </div>
       </section>
     </main>
@@ -241,50 +213,7 @@
     <!-- Footer -->
     <script src="js/include-footer.js" defer></script>
 
-    <!-- Initialize Feather Icons and Stats Animation -->
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // Initialize Feather Icons
-        if (typeof feather !== "undefined") {
-          feather.replace({
-            "aria-hidden": "true",
-          });
-        } else {
-          console.warn("Feather Icons script not loaded.");
-        }
-
-        // Animate statistics numbers
-        const stats = document.querySelectorAll(".stat-number");
-        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-        
-        stats.forEach((stat) => {
-          if (!prefersReducedMotion.matches) {
-            const target = parseInt(stat.getAttribute("data-count")) || 0;
-            let count = 0;
-            const duration = 2000;
-            const increment = target / (duration / 16);
-
-            const updateCount = () => {
-              if (count < target) {
-                count += increment;
-                stat.textContent = Math.ceil(count) + (target >= 20 ? "+" : "");
-                requestAnimationFrame(updateCount);
-              } else {
-                stat.textContent = target + (target >= 20 ? "+" : "");
-              }
-            };
-
-            // Start the animation
-            requestAnimationFrame(updateCount);
-          } else {
-            // Set to target value immediately if reduced motion is preferred
-            stat.textContent = stat.getAttribute("data-count") + (parseInt(stat.getAttribute("data-count")) >= 20 ? "+" : "");
-          }
-        });
-      });
-    </script>
-
-    <!-- Main JavaScript -->
+    <!-- JavaScript -->
     <script src="js/main.js" defer></script>
   </body>
 </html>
