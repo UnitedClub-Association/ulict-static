@@ -1,195 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MYXGNCY7V1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-MYXGNCY7V1");
-    </script>
-
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ULIC Navbar</title>
-    <link rel="stylesheet" href="/css/navbar.css" />
-    <link rel="stylesheet" href="/css/custom-cursor.css" />
+    <link rel="stylesheet" href="/css/navbar.css">
     <!-- Feather Icons -->
     <script src="https://unpkg.com/feather-icons"></script>
-  </head>
-  <body>
+    <!-- GSAP & Anime.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+</head>
+<body>
+
     <!-- Desktop Navbar -->
     <nav class="navbar navbar--desktop">
-      <a href="/index.html" class="logo-container">
-        <img src="/images/ulic-logo.jpg" alt="ULIC Logo" class="logo-img" />
-        <div class="logo-text">
-          <span class="logo-text-main">ULIC</span>
-          <span class="logo-text-sub">University Laboratory ICT Club</span>
-        </div>
-      </a>
+        <a href="/index.html" class="logo-container">
+            <img src="/images/ulic-favicon.jpg" alt="ULIC Logo" class="logo-img" />
+            <div class="logo-text">
+                <span class="logo-text-main">ULIC</span>
+                <span class="logo-text-sub">University Laboratory ICT Club</span>
+            </div>
+        </a>
 
-      <ul class="navbar__menu">
-        <li class="navbar__item">
-          <a href="/index.html" class="navbar__link">
-            <i data-feather="home"></i>
-            <span>Home</span>
-          </a>
-        </li>
-        <li class="navbar__item dropdown">
-          <a href="/events/events.html" class="navbar__link">
-            <i data-feather="calendar"></i>
-            <span>Events</span>
-          </a>
-          <ul class="dropdown__menu">
-            <li>
-              <a href="/events/events.html">
-                <i data-feather="calendar" class="dropdown__icon"></i>
-                <span class="dropdown__title">All Events</span>
-                <span class="dropdown__desc">Discover our upcoming and past events</span>
-              </a>
+        <ul class="navbar__menu">
+            <li class="navbar__item">
+                <a href="/index.html" class="navbar__link">
+                    <i data-feather="home"></i>
+                    <span>Home</span>
+                </a>
             </li>
-            <li>
-              <a href="/events/mini-events.html">
-                <i data-feather="zap" class="dropdown__icon"></i>
-                <span class="dropdown__title">Mini Events</span>
-                <span class="dropdown__desc">Explore our bite-sized tech challenges</span>
-              </a>
+            <li class="navbar__item dropdown">
+                <a href="/events/events.html" class="navbar__link">
+                    <i data-feather="calendar"></i>
+                    <span>Events</span>
+                </a>
+                <ul class="dropdown__menu">
+                    <li>
+                        <a href="/events/events.html">
+                            <i data-feather="calendar" class="dropdown__icon"></i>
+                            <div class="dropdown-text">
+                                <span class="dropdown__title">All Events</span>
+                                <span class="dropdown__desc">Discover our upcoming and past events</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/events/mini-events.html">
+                            <i data-feather="zap" class="dropdown__icon"></i>
+                             <div class="dropdown-text">
+                                <span class="dropdown__title">Mini Events</span>
+                                <span class="dropdown__desc">Explore our bite-sized tech challenges</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/events/sessions.html">
+                            <i data-feather="code" class="dropdown__icon"></i>
+                             <div class="dropdown-text">
+                                <span class="dropdown__title">Tech Sessions</span>
+                                <span class="dropdown__desc">Join our interactive tech workshops</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
             </li>
-            <li>
-              <a href="/events/sessions.html">
-                <i data-feather="code" class="dropdown__icon"></i>
-                <span class="dropdown__title">Tech Sessions</span>
-                <span class="dropdown__desc">Join our interactive tech workshops</span>
-              </a>
+            <li class="navbar__item dropdown">
+                <a href="/about/about-us.html" class="navbar__link">
+                    <i data-feather="info"></i>
+                    <span>About</span>
+                </a>
+                <ul class="dropdown__menu">
+                    <li>
+                        <a href="/about/about-us.html">
+                            <i data-feather="info" class="dropdown__icon"></i>
+                            <div class="dropdown-text">
+                                <span class="dropdown__title">About Us</span>
+                                <span class="dropdown__desc">Learn about our mission and team</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/about/gallery.html">
+                            <i data-feather="image" class="dropdown__icon"></i>
+                            <div class="dropdown-text">
+                                <span class="dropdown__title">Gallery</span>
+                                <span class="dropdown__desc">Browse our event photos</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/about/achievements.html">
+                            <i data-feather="award" class="dropdown__icon"></i>
+                            <div class="dropdown-text">
+                                <span class="dropdown__title">Achievements</span>
+                                <span class="dropdown__desc">Celebrate our milestones</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/about/contact.html">
+                            <i data-feather="mail" class="dropdown__icon"></i>
+                            <div class="dropdown-text">
+                                <span class="dropdown__title">Contact</span>
+                                <span class="dropdown__desc">Get in touch with us</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
             </li>
-          </ul>
-        </li>
-        <li class="navbar__item dropdown">
-          <a href="/about/about-us.html" class="navbar__link">
-            <i data-feather="info"></i>
-            <span>About</span>
-          </a>
-          <ul class="dropdown__menu">
-            <li>
-              <a href="/about/about-us.html">
-                <i data-feather="info" class="dropdown__icon"></i>
-                <span class="dropdown__title">About Us</span>
-                <span class="dropdown__desc">Learn about our mission and team</span>
-              </a>
+            <li class="navbar__item dropdown">
+                <a href="/executives/executives.html" class="navbar__link">
+                    <i data-feather="users"></i>
+                    <span>Executives</span>
+                </a>
+                <ul class="dropdown__menu">
+                    <li>
+                        <a href="/executives/2024-25.html">
+                            <i data-feather="users" class="dropdown__icon"></i>
+                            <div class="dropdown-text">
+                                <span class="dropdown__title">2024-25 Crew</span>
+                                <span class="dropdown__desc">Meet our current leaders</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/executives/2026.html">
+                            <i data-feather="star" class="dropdown__icon"></i>
+                            <div class="dropdown-text">
+                                <span class="dropdown__title">Future Leaders</span>
+                                <span class="dropdown__desc">Discover our next-gen leaders</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
             </li>
-            <li>
-              <a href="/about/gallery.html">
-                <i data-feather="image" class="dropdown__icon"></i>
-                <span class="dropdown__title">Gallery</span>
-                <span class="dropdown__desc">Browse our event photos</span>
-              </a>
+            <li class="navbar__item">
+                <a href="https://chat.whatsapp.com/C6Z1lB4RVhnFunBdml0eAV" class="navbar__link join-link">
+                    <i data-feather="user-plus"></i>
+                    <span>Join ULIC</span>
+                </a>
             </li>
-            <li>
-              <a href="/about/achievements.html">
-                <i data-feather="award" class="dropdown__icon"></i>
-                <span class="dropdown__title">Achievements</span>
-                <span class="dropdown__desc">Celebrate our milestones</span>
-              </a>
-            </li>
-            <li>
-              <a href="/about/contact.html">
-                <i data-feather="mail" class="dropdown__icon"></i>
-                <span class="dropdown__title">Contact</span>
-                <span class="dropdown__desc">Get in touch with us</span>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="navbar__item dropdown">
-          <a href="/executives/executives.html" class="navbar__link">
-            <i data-feather="users"></i>
-            <span>Executives</span>
-          </a>
-          <ul class="dropdown__menu">
-            <li>
-              <a href="/executives/2024-25.html">
-                <i data-feather="users" class="dropdown__icon"></i>
-                <span class="dropdown__title">2024-25 Crew</span>
-                <span class="dropdown__desc">Meet our current leaders</span>
-              </a>
-            </li>
-            <li>
-              <a href="/executives/2026.html">
-                <i data-feather="star" class="dropdown__icon"></i>
-                <span class="dropdown__title">Future Leaders</span>
-                <span class="dropdown__desc">Discover our next-gen leaders</span>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="navbar__item">
-          <a href="https://chat.whatsapp.com/C6Z1lB4RVhnFunBdml0eAV" class="navbar__link">
-            <i data-feather="user-plus"></i>
-            <span>Join ULIC</span>
-          </a>
-        </li>
-      </ul>
+        </ul>
     </nav>
 
     <!-- Mobile Navbar -->
     <nav class="navbar navbar--mobile">
-      <a href="/index.html" class="logo-container">
-        <img src="/images/ulic-logo.jpg" alt="ULIC Logo" class="logo-img" />
-        <div class="logo-text">
-          <span class="logo-text-main">ULIC</span>
-          <span class="logo-text-sub">University Laboratory ICT Club</span>
+        <a href="/index.html" class="logo-container">
+            <img src="/images/ulic-logo.jpg" alt="ULIC Logo" class="logo-img" />
+            <div class="logo-text">
+                <span class="logo-text-main">ULIC</span>
+            </div>
+        </a>
+        <button class="navbar__toggle" aria-label="Toggle menu">
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </button>
+        <div class="mobile-menu__container">
+            <ul class="navbar__menu--mobile">
+                 <li class="navbar__item--mobile"><a href="/index.html" class="navbar__link--mobile"><i data-feather="home"></i><span>Home</span></a></li>
+                <li class="navbar__item--mobile"><a href="/events/events.html" class="navbar__link--mobile"><i data-feather="calendar"></i><span>Events</span></a></li>
+                <li class="navbar__item--mobile"><a href="/about/about-us.html" class="navbar__link--mobile"><i data-feather="info"></i><span>About</span></a></li>
+                <li class="navbar__item--mobile"><a href="/executives/executives.html" class="navbar__link--mobile"><i data-feather="users"></i><span>Executives</span></a></li>
+                <li class="navbar__item--mobile"><a href="https://chat.whatsapp.com/C6Z1lB4RVhnFunBdml0eAV" class="navbar__link--mobile join-link"><i data-feather="user-plus"></i><span>Join ULIC</span></a></li>
+            </ul>
         </div>
-      </a>
-      <button class="navbar__toggle" aria-label="Toggle menu">
-        <span>X</span>
-        <span>X</span>
-        <span>X</span>
-      </button>
-      <ul class="navbar__menu">
-        <li class="navbar__item">
-          <a href="/index.html" class="navbar__link">
-            <i data-feather="home"></i>
-            <span>Home</span>
-          </a>
-        </li>
-        <br><br><br>
-        <li class="navbar__item">
-          <a href="/events/events.html" class="navbar__link">
-            <i data-feather="calendar"></i>
-            <span>Events</span>
-          </a>
-        </li>
-        <br><br><br>
-        <li class="navbar__item">
-          <a href="/about/about-us.html" class="navbar__link">
-            <i data-feather="info"></i>
-            <span>About</span>
-          </a>
-        </li>
-        <br><br><br>
-        <li class="navbar__item">
-          <a href="/executives/executives.html" class="navbar__link">
-            <i data-feather="users"></i>
-            <span>Executives</span>
-          </a>
-        </li>
-        <br><br><br>
-        <li class="navbar__item">
-          <a href="https://chat.whatsapp.com/C6Z1lB4RVhnFunBdml0eAV" class="navbar__link">
-            <i data-feather="user-plus"></i>
-            <span>Join ULIC</span>
-          </a>
-        </li>
-      </ul>
     </nav>
 
     <script src="/js/navbar.js"></script>
-    <!-- Initialize Feather Icons -->
     <script>
-      feather.replace({ 'stroke-width': 2, 'stroke': '#FFA500' });
+      feather.replace({ 'stroke-width': 1.5 });
     </script>
-  </body>
+</body>
 </html>

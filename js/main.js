@@ -1,53 +1,108 @@
-document.addEventListener("DOMContentLoaded", function () {
-  // Performance monitoring
-  if (window.performance) {
-    const timing = performance.timing;
-    window.addEventListener('load', () => {
-      console.log(`Page load time: ${timing.loadEventEnd - timing.navigationStart}ms`);
-    });
-  }
+document.addEventListener('DOMContentLoaded', () => {
+    // Ensure GSAP and ScrollTrigger are loaded before using them
+    const libsCheck = setInterval(() => {
+        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+            clearInterval(libsCheck);
+            initializeAnimations();
+        }
+    }, 100);
 
-  // Smooth scroll for anchor links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
+    // --- Particle Animation for Hero Section ---
+    const particlesContainer = document.getElementById('hero-particles');
+    if (particlesContainer) {
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+            particle.style.width = `${Math.random() * 3 + 1}px`;
+            particle.style.height = particle.style.width;
+            particle.style.animationDelay = `${Math.random() * 5}s`;
+            particle.style.animationDuration = `${Math.random() * 10 + 5}s`;
+            particlesContainer.appendChild(particle);
+        }
+        // Add particle styles dynamically to the head
+        const style = document.createElement('style');
+        style.innerHTML = `
+        .particle {
+            position: absolute;
+            background-color: var(--primary-glow);
+            border-radius: 50%;
+            opacity: 0;
+            animation: float 15s infinite linear;
+        }
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            25% { opacity: 0.7; }
+            50% { transform: translateY(-100px) translateX(20px); }
+            75% { opacity: 0.7; }
+            100% { transform: translateY(0) translateX(0); opacity: 0; }
+        }`;
+        document.head.appendChild(style);
+    }
+
+    // --- GSAP Scroll-Triggered Animations ---
+    function initializeAnimations() {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Fade-in animations
+        gsap.utils.toArray('.anim-fade-in').forEach(elem => {
+            gsap.from(elem, {
+                opacity: 0,
+                duration: 1,
+                scrollTrigger: {
+                    trigger: elem,
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                }
+            });
         });
-      }
-    });
-  });
 
-  // Initialize Feather Icons
-  if (typeof feather !== "undefined") {
-    feather.replace({
-      "aria-hidden": "true",
-      stroke: getComputedStyle(document.documentElement).getPropertyValue('--primary')
-    });
-  } else {
-    console.warn("Feather Icons script not loaded.");
-  }
+        // Slide-up animations
+        gsap.utils.toArray('.anim-slide-up').forEach(elem => {
+            gsap.from(elem, {
+                opacity: 0,
+                y: 50,
+                duration: 0.8,
+                stagger: 0.2,
+                scrollTrigger: {
+                    trigger: elem,
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                }
+            });
+        });
+        
+        // Card animations
+        gsap.from(".anim-card", {
+            scrollTrigger: {
+                trigger: ".cards-grid",
+                start: "top 80%",
+            },
+            opacity: 0,
+            y: 50,
+            stagger: 0.2,
+            duration: 0.8,
+            ease: "power3.out"
+        });
 
-  // IntersectionObserver for lazy-loading animations
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.1
-  };
+        // Bubble animations
+        gsap.from(".anim-bubble", {
+            scrollTrigger: {
+                trigger: ".speech-bubbles",
+                start: "top 80%",
+            },
+            opacity: 0,
+            scale: 0.5,
+            y: 30,
+            stagger: 0.2,
+            duration: 0.5,
+            ease: "back.out(1.7)"
+        });
+    }
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
-
-  document.querySelectorAll('.load-anim').forEach(element => {
-    observer.observe(element);
-  });
+    // --- Feather Icons ---
+    if (typeof feather !== "undefined") {
+        feather.replace();
+    }
 });

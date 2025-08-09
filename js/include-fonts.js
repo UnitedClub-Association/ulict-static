@@ -1,28 +1,32 @@
 // include-fonts.js
+
 document.addEventListener("DOMContentLoaded", function () {
-  // Create a placeholder element for the fonts
+  // Create a container in the <head> to hold the font links.
   const fontPlaceholder = document.createElement("div");
   fontPlaceholder.id = "font-placeholder";
-  document.head.appendChild(fontPlaceholder); // Insert into the <head>
+  document.head.appendChild(fontPlaceholder);
 
-  // Fetch the font HTML
-  fetch("/components/font.html") // Use relative path
+  // Fetch the contents of font.html.
+  fetch("/components/font.html") // Ensure this path is correct for your project structure.
     .then((response) => {
+      // If the response is not successful (e.g., 404 Not Found), throw an error.
       if (!response.ok) {
-        throw new Error(`Network response was not ok: ${response.status}`);
+        throw new Error(`Failed to fetch fonts. Status: ${response.status}`);
       }
       return response.text();
     })
-    .then((data) => {
-      // Insert the font HTML into the placeholder
-      fontPlaceholder.innerHTML = data;
+    .then((html) => {
+      // If successful, inject the font links into the placeholder.
+      fontPlaceholder.innerHTML = html;
     })
     .catch((error) => {
+      // Log the specific error to the console for easier debugging.
       console.error("Error loading fonts:", error);
-      // Add fallback font loading if needed
+
+      // As a fallback, load a reliable default font from Google Fonts.
       const fallbackLink = document.createElement("link");
       fallbackLink.rel = "stylesheet";
-      fallbackLink.href = "https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap";
+      fallbackLink.href = "https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap";
       document.head.appendChild(fallbackLink);
     });
 });
