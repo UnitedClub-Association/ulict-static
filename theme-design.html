@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="synthwave-sunset">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ULIC - Theme Showcase</title>
+
+    <!-- Google Fonts & External Libraries -->
+    <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
+    <link href="https://fonts.cdnfonts.com/css/molgan" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/azonix" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/xeroda" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/a-astro-space" rel="stylesheet">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        /* --- 1. THEME DEFINITIONS (50 PALETTES) --- */
+        :root {
+            --font-primary: 'Azonix', sans-serif;
+            --font-secondary: 'Molgan', sans-serif;
+            --font-body: 'Xeroda', sans-serif;
+            --font-astro: 'A Astro Space', sans-serif;
+            --transition-fast: 0.3s ease;
+            --transition-slow: 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        /* --- CATEGORY: NEON & CYBERPUNK --- */
+        [data-theme="synthwave-sunset"] { --bg-color: #21153C; --bg-secondary: #1a1030; --card-bg: rgba(49, 34, 84, 0.6); --border-color: rgba(90, 69, 140, 0.5); --text-color: #F5EFFF; --text-muted: #9A8EBF; --primary-glow: #FF00A8; --secondary-glow: #00E5FF; }
+        [data-theme="arcane-matrix"] { --bg-color: #021c13; --bg-secondary: #01140d; --card-bg: rgba(4, 43, 29, 0.6); --border-color: rgba(13, 87, 60, 0.5); --text-color: #E0F5E1; --text-muted: #64a281; --primary-glow: #00ff41; --secondary-glow: #a0f0c0; }
+        [data-theme="crimson-cyberspace"] { --bg-color: #300000; --bg-secondary: #210000; --card-bg: rgba(87, 0, 0, 0.6); --border-color: rgba(140, 29, 29, 0.5); --text-color: #ffdada; --text-muted: #d38989; --primary-glow: #ff1818; --secondary-glow: #ffffff; }
+        [data-theme="oceanic-depth"] { --bg-color: #0b2240; --bg-secondary: #06172e; --card-bg: rgba(11, 51, 92, 0.6); --border-color: rgba(33, 89, 147, 0.5); --text-color: #e6f7ff; --text-muted: #89b3d9; --primary-glow: #00ffff; --secondary-glow: #98ff98; }
+        [data-theme="tokyo-night"] { --bg-color: #1a1b26; --bg-secondary: #16161e; --card-bg: rgba(41, 42, 54, 0.6); --border-color: rgba(72, 73, 89, 0.5); --text-color: #a9b1d6; --text-muted: #565f89; --primary-glow: #7aa2f7; --secondary-glow: #bb9af7; }
+        [data-theme="hacker-green"] { --bg-color: #001a00; --bg-secondary: #000d00; --card-bg: rgba(0, 43, 0, 0.6); --border-color: rgba(0, 87, 0, 0.5); --text-color: #00ff00; --text-muted: #008f00; --primary-glow: #33ff33; --secondary-glow: #ffffff; }
+        [data-theme="laser-lemon"] { --bg-color: #282700; --bg-secondary: #1c1b00; --card-bg: rgba(69, 66, 0, 0.6); --border-color: rgba(112, 107, 0, 0.5); --text-color: #fffedd; --text-muted: #b1ad70; --primary-glow: #fffb00; --secondary-glow: #00e5ff; }
+        [data-theme="glitch-pop"] { --bg-color: #0c0032; --bg-secondary: #06001f; --card-bg: rgba(35, 0, 80, 0.6); --border-color: rgba(74, 29, 140, 0.5); --text-color: #e8dffc; --text-muted: #9c8db9; --primary-glow: #ff00c1; --secondary-glow: #00ffc8; }
+        [data-theme="cyber-orange"] { --bg-color: #331a00; --bg-secondary: #241200; --card-bg: rgba(87, 43, 0, 0.6); --border-color: rgba(140, 70, 0, 0.5); --text-color: #fff2e6; --text-muted: #d3a989; --primary-glow: #ff8c00; --secondary-glow: #ff1818; }
+        
+        /* --- CATEGORY: CORPORATE & MINIMALIST --- */
+        [data-theme="aetherium"] { --bg-color: #282c34; --bg-secondary: #1e2127; --card-bg: rgba(60, 66, 78, 0.6); --border-color: rgba(90, 99, 115, 0.5); --text-color: #abb2bf; --text-muted: #7f848e; --primary-glow: #61afef; --secondary-glow: #e06c75; }
+        [data-theme="quantum-core"] { --bg-color: #0D1321; --bg-secondary: #070a14; --card-bg: rgba(26, 37, 61, 0.6); --border-color: rgba(63, 83, 120, 0.5); --text-color: #F0F8FF; --text-muted: #8194B0; --primary-glow: #FFD700; --secondary-glow: #4682B4; }
+        [data-theme="graphite"] { --bg-color: #2d2d2d; --bg-secondary: #1f1f1f; --card-bg: rgba(71, 71, 71, 0.6); --border-color: rgba(100, 100, 100, 0.5); --text-color: #f5f5f5; --text-muted: #a0a0a0; --primary-glow: #ffffff; --secondary-glow: #007acc; }
+        [data-theme="slate"] { --bg-color: #334155; --bg-secondary: #1e293b; --card-bg: rgba(71, 85, 105, 0.6); --border-color: rgba(100, 116, 139, 0.5); --text-color: #f1f5f9; --text-muted: #94a3b8; --primary-glow: #38bdf8; --secondary-glow: #f472b6; }
+        [data-theme="midnight-blue"] { --bg-color: #191970; --bg-secondary: #0d0d52; --card-bg: rgba(43, 43, 138, 0.6); --border-color: rgba(70, 70, 163, 0.5); --text-color: #e6e6fa; --text-muted: #b3b3d9; --primary-glow: #add8e6; --secondary-glow: #ffffff; }
+        [data-theme="charcoal"] { --bg-color: #36454f; --bg-secondary: #242e36; --card-bg: rgba(78, 93, 104, 0.6); --border-color: rgba(107, 121, 131, 0.5); --text-color: #f0f8ff; --text-muted: #a4b0b9; --primary-glow: #e0e0e0; --secondary-glow: #ff6347; }
+        [data-theme="obsidian"] { --bg-color: #0b0c10; --bg-secondary: #000000; --card-bg: rgba(28, 32, 41, 0.6); --border-color: rgba(54, 59, 72, 0.5); --text-color: #c5c6c7; --text-muted: #66fcf1; --primary-glow: #45a29e; --secondary-glow: #c5c6c7; }
+        [data-theme="steel"] { --bg-color: #464a52; --bg-secondary: #313338; --card-bg: rgba(94, 99, 107, 0.6); --border-color: rgba(121, 125, 133, 0.5); --text-color: #ffffff; --text-muted: #b5bac1; --primary-glow: #5865f2; --secondary-glow: #eb459e; }
+        [data-theme="onyx"] { --bg-color: #353935; --bg-secondary: #242724; --card-bg: rgba(77, 81, 77, 0.6); --border-color: rgba(106, 109, 106, 0.5); --text-color: #f5f5f5; --text-muted: #c0c0c0; --primary-glow: #98ff98; --secondary-glow: #ffffff; }
+        
+        /* --- CATEGORY: NATURAL & ORGANIC --- */
+        [data-theme="solar-flare"] { --bg-color: #2b1d1d; --bg-secondary: #1f1515; --card-bg: rgba(71, 44, 44, 0.6); --border-color: rgba(122, 70, 70, 0.5); --text-color: #fff0e6; --text-muted: #d1a3a3; --primary-glow: #ff4d00; --secondary-glow: #ffab58; }
+        [data-theme="biomechanical-jade"] { --bg-color: #122c23; --bg-secondary: #0c1f18; --card-bg: rgba(26, 74, 56, 0.6); --border-color: rgba(56, 128, 99, 0.5); --text-color: #e8fff5; --text-muted: #82c5aa; --primary-glow: #33ff99; --secondary-glow: #ffc300; }
+        [data-theme="forest-floor"] { --bg-color: #1e2a21; --bg-secondary: #141d16; --card-bg: rgba(48, 66, 52, 0.6); --border-color: rgba(79, 99, 83, 0.5); --text-color: #e8f5e9; --text-muted: #a5d6a7; --primary-glow: #81c784; --secondary-glow: #fff59d; }
+        [data-theme="deep-earth"] { --bg-color: #3e2723; --bg-secondary: #2a1a18; --card-bg: rgba(84, 61, 55, 0.6); --border-color: rgba(111, 89, 84, 0.5); --text-color: #efebe9; --text-muted: #bcaaa4; --primary-glow: #ffab91; --secondary-glow: #a1887f; }
+        [data-theme="autumn-embers"] { --bg-color: #4e342e; --bg-secondary: #3e2723; --card-bg: rgba(109, 76, 65, 0.6); --border-color: rgba(141, 110, 99, 0.5); --text-color: #fff3e0; --text-muted: #ffccbc; --primary-glow: #ff8a65; --secondary-glow: #ffb74d; }
+        [data-theme="volcanic-ash"] { --bg-color: #263238; --bg-secondary: #1a2226; --card-bg: rgba(55, 71, 79, 0.6); --border-color: rgba(84, 110, 122, 0.5); --text-color: #eceff1; --text-muted: #b0bec5; --primary-glow: #ff7043; --secondary-glow: #ffca28; }
+        [data-theme="desert-night"] { --bg-color: #3e2723; --bg-secondary: #2a1a18; --card-bg: rgba(84, 61, 55, 0.6); --border-color: rgba(111, 89, 84, 0.5); --text-color: #efebe9; --text-muted: #bcaaa4; --primary-glow: #f06292; --secondary-glow: #4fc3f7; }
+        [data-theme="mossy-stone"] { --bg-color: #37474f; --bg-secondary: #263238; --card-bg: rgba(78, 93, 104, 0.6); --border-color: rgba(107, 121, 131, 0.5); --text-color: #cfd8dc; --text-muted: #90a4ae; --primary-glow: #a5d6a7; --secondary-glow: #b0bec5; }
+        
+        /* --- CATEGORY: MYSTICAL & FANTASY --- */
+        [data-theme="nebula-glow"] { --bg-color: #241838; --bg-secondary: #1e132d; --card-bg: rgba(61, 44, 90, 0.6); --border-color: rgba(106, 83, 155, 0.5); --text-color: #E9E4F7; --text-muted: #8A7FAD; --primary-glow: #50FAFA; --secondary-glow: #C67DFF; }
+        [data-theme="voidwood"] { --bg-color: #2c2233; --bg-secondary: #1e1824; --card-bg: rgba(72, 59, 84, 0.6); --border-color: rgba(111, 94, 128, 0.5); --text-color: #f3e8ff; --text-muted: #bdaecf; --primary-glow: #d8baff; --secondary-glow: #fff5b8; }
+        [data-theme="elven-silver"] { --bg-color: #2f4f4f; --bg-secondary: #203636; --card-bg: rgba(68, 107, 107, 0.6); --border-color: rgba(97, 134, 134, 0.5); --text-color: #e0ffff; --text-muted: #b0e0e6; --primary-glow: #afeeee; --secondary-glow: #ffffff; }
+        [data-theme="dragon-fire"] { --bg-color: #4a0e0e; --bg-secondary: #330a0a; --card-bg: rgba(105, 23, 23, 0.6); --border-color: rgba(133, 51, 51, 0.5); --text-color: #ffe5e5; --text-muted: #ffb3b3; --primary-glow: #ff4500; --secondary-glow: #ffd700; }
+        [data-theme="starlight"] { --bg-color: #000033; --bg-secondary: #00001f; --card-bg: rgba(25, 25, 112, 0.6); --border-color: rgba(51, 51, 138, 0.5); --text-color: #f0f8ff; --text-muted: #b0c4de; --primary-glow: #fafad2; --secondary-glow: #ffffff; }
+        [data-theme="ghostly"] { --bg-color: #3c4245; --bg-secondary: #2a2d30; --card-bg: rgba(82, 88, 92, 0.6); --border-color: rgba(110, 116, 120, 0.5); --text-color: #e6f2f2; --text-muted: #b3c2c2; --primary-glow: #7fffd4; --secondary-glow: #f5f5f5; }
+        [data-theme="phoenix-feather"] { --bg-color: #5d2b1c; --bg-secondary: #4a2216; --card-bg: rgba(125, 60, 42, 0.6); --border-color: rgba(158, 88, 69, 0.5); --text-color: #fff6e5; --text-muted: #ffcda9; --primary-glow: #ff5733; --secondary-glow: #ffc300; }
+        [data-theme="shadowfell"] { --bg-color: #242124; --bg-secondary: #1a171a; --card-bg: rgba(54, 50, 54, 0.6); --border-color: rgba(82, 78, 82, 0.5); --text-color: #e8e6e8; --text-muted: #a6a3a6; --primary-glow: #9370db; --secondary-glow: #c0c0c0; }
+        
+        /* --- CATEGORY: RETRO & VINTAGE --- */
+        [data-theme="vaporwave"] { --bg-color: #2c003e; --bg-secondary: #1e002a; --card-bg: rgba(72, 0, 100, 0.6); --border-color: rgba(108, 29, 140, 0.5); --text-color: #f3e8ff; --text-muted: #d8baff; --primary-glow: #00ffff; --secondary-glow: #ff00ff; }
+        [data-theme="8-bit-adventure"] { --bg-color: #2d2d2d; --bg-secondary: #1f1f1f; --card-bg: rgba(71, 71, 71, 0.6); --border-color: rgba(100, 100, 100, 0.5); --text-color: #ffffff; --text-muted: #a0a0a0; --primary-glow: #ff0000; --secondary-glow: #0000ff; }
+        [data-theme="sepia-tone"] { --bg-color: #4e423a; --bg-secondary: #3b312c; --card-bg: rgba(109, 93, 82, 0.6); --border-color: rgba(141, 121, 110, 0.5); --text-color: #f5eadd; --text-muted: #d3c5ba; --primary-glow: #d2b48c; --secondary-glow: #ffffff; }
+        [data-theme="groovy"] { --bg-color: #4a2e0a; --bg-secondary: #332007; --card-bg: rgba(105, 66, 14, 0.6); --border-color: rgba(133, 94, 42, 0.5); --text-color: #fff8e1; --text-muted: #ffcc80; --primary-glow: #ff9800; --secondary-glow: #e91e63; }
+        [data-theme="art-deco"] { --bg-color: #2c3e50; --bg-secondary: #1a2530; --card-bg: rgba(62, 84, 109, 0.6); --border-color: rgba(90, 112, 138, 0.5); --text-color: #ecf0f1; --text-muted: #bdc3c7; --primary-glow: #f1c40f; --secondary-glow: #e0e0e0; }
+        [data-theme="nautical"] { --bg-color: #000080; --bg-secondary: #00005a; --card-bg: rgba(0, 0, 179, 0.6); --border-color: rgba(29, 29, 204, 0.5); --text-color: #ffffff; --text-muted: #b0c4de; --primary-glow: #ff4500; --secondary-glow: #ffd700; }
+        [data-theme="cassette-tape"] { --bg-color: #3a3a3a; --bg-secondary: #292929; --card-bg: rgba(82, 82, 82, 0.6); --border-color: rgba(110, 110, 110, 0.5); --text-color: #f5f5f5; --text-muted: #c0c0c0; --primary-glow: #ff69b4; --secondary-glow: #00bfff; }
+        [data-theme="vintage-poster"] { --bg-color: #3e3e3e; --bg-secondary: #2b2b2b; --card-bg: rgba(87, 87, 87, 0.6); --border-color: rgba(115, 115, 115, 0.5); --text-color: #fff9e6; --text-muted: #ffe4b3; --primary-glow: #ff4c4c; --secondary-glow: #4c91ff; }
+        [data-theme="atomic-age"] { --bg-color: #3d4c41; --bg-secondary: #2a352c; --card-bg: rgba(84, 104, 89, 0.6); --border-color: rgba(111, 131, 117, 0.5); --text-color: #e0f2e9; --text-muted: #b3d9c7; --primary-glow: #ff6f61; --secondary-glow: #88b04b; }
+        [data-theme="pop-art"] { --bg-color: #004ba0; --bg-secondary: #00336e; --card-bg: rgba(0, 105, 179, 0.6); --border-color: rgba(29, 133, 204, 0.5); --text-color: #ffffff; --text-muted: #b3d9ff; --primary-glow: #ffd700; --secondary-glow: #ff0000; }
+
+        /* --- 2. BASE & LAYOUT STYLES --- */
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            background-color: var(--bg-color);
+            font-family: var(--font-body);
+            color: var(--text-color);
+            overflow-x: hidden;
+            transition: background-color var(--transition-fast);
+        }
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 8rem 0; }
+
+        /* --- 3. MEGA THEME SWITCHER --- */
+        .theme-switcher { position: fixed; top: 20px; right: 20px; z-index: 2000; }
+        .theme-toggle-button { width: 50px; height: 50px; background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid var(--border-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all var(--transition-fast); }
+        .theme-toggle-button:hover { transform: scale(1.1) rotate(45deg); }
+        .theme-toggle-button svg { color: var(--primary-glow); }
+        .theme-palette { position: absolute; top: 65px; right: 0; width: 220px; background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid var(--border-color); border-radius: 10px; padding: 10px; display: flex; flex-direction: column; gap: 8px; max-height: 70vh; overflow-y: auto; transform-origin: top right; transition: transform 0.3s ease, opacity 0.3s ease; opacity: 0; transform: scale(0.9); pointer-events: none; }
+        .theme-switcher.open .theme-palette { opacity: 1; transform: scale(1); pointer-events: auto; }
+        .theme-category { font-family: var(--font-astro); font-size: 0.8rem; color: var(--text-muted); padding: 8px 10px; margin-top: 10px; border-bottom: 1px solid var(--border-color); }
+        .theme-category:first-of-type { margin-top: 0; }
+        .theme-button { background: transparent; border: 1px solid var(--border-color); color: var(--text-muted); padding: 10px; font-family: var(--font-secondary); font-size: 1rem; border-radius: 8px; cursor: pointer; transition: all var(--transition-fast); text-align: left; }
+        .theme-button:hover { border-color: var(--primary-glow); color: var(--primary-glow); }
+        .theme-button.active { background: var(--primary-glow); color: var(--bg-color); font-weight: bold; }
+
+        /* --- 4. NEW COMPONENT DESIGNS --- */
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-header h2 { font-family: var(--font-primary); font-size: clamp(2rem, 6vw, 3.5rem); margin-bottom: 0.5rem; color: var(--text-color); text-shadow: 0 0 8px var(--primary-glow); }
+        .section-subtitle { font-family: var(--font-astro); font-size: clamp(0.9rem, 2vw, 1.1rem); color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+
+        /* HERO SECTION */
+        .hero { height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; background-color: var(--bg-secondary); }
+        .hero-bg-shapes { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; }
+        .shape { position: absolute; border: 1px solid var(--border-color); background: linear-gradient(45deg, rgba(255,255,255,0.05), rgba(255,255,255,0)); animation: spin linear infinite; }
+        .shape1 { width: 40vw; height: 40vw; top: -10vw; left: -10vw; animation-duration: 20s; }
+        .shape2 { width: 20vw; height: 20vw; bottom: 5vh; right: 5vw; border-radius: 30%; animation-duration: 15s; animation-direction: reverse; }
+        .shape3 { width: 10vw; height: 10vw; top: 10vh; right: 20vw; animation-duration: 10s; }
+        .shape4 { width: 5vw; height: 5vw; top: 50vh; left: 15vw; border-radius: 50%; animation-duration: 8s; }
+        .shape5 { width: 8vw; height: 8vw; top: 20vh; left: 45vw; animation-duration: 12s; animation-direction: reverse; }
+        .shape6 { width: 4vw; height: 4vw; bottom: 15vh; left: 25vw; animation-duration: 7s; }
+        .shape7 { width: 6vw; height: 6vw; bottom: 40vh; right: 10vw; border-radius: 10%; animation-duration: 18s; }
+        .hero-content { position: relative; z-index: 2; text-align: center; padding: 1rem; }
+        .hero-subtitle { font-family: var(--font-astro); font-size: clamp(1rem, 3vw, 1.5rem); color: var(--primary-glow); letter-spacing: 3px; text-transform: uppercase; }
+        .hero-title { font-family: var(--font-primary); font-size: clamp(2.5rem, 9vw, 6rem); color: var(--text-color); margin: 0.5rem 0 1.5rem; line-height: 1.1; }
+        .hero-tagline { font-family: var(--font-body); font-size: clamp(1rem, 2.5vw, 1.2rem); color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+
+        /* CORE MODULES SECTION (Vertical Tabs) */
+        .core-modules-section { display: flex; gap: 3rem; align-items: flex-start; min-height: 400px; }
+        .module-tabs { flex: 0 0 250px; display: flex; flex-direction: column; gap: 10px; position: relative; }
+        .module-tab { background: transparent; border: none; color: var(--text-muted); padding: 15px 20px; font-family: var(--font-secondary); font-size: 1.2rem; border-radius: 8px; cursor: pointer; text-align: left; transition: all var(--transition-fast); display: flex; align-items: center; gap: 15px; }
+        .module-tab:hover { color: var(--text-color); }
+        .module-tab.active { color: var(--primary-glow); }
+        .tab-highlighter { position: absolute; left: 0; width: 4px; height: 54px; background-color: var(--primary-glow); border-radius: 4px; transition: top var(--transition-fast) cubic-bezier(0.25, 1, 0.5, 1); }
+        .module-content-wrapper { flex: 1; position: relative; }
+        .module-content { position: absolute; width: 100%; opacity: 0; transition: opacity var(--transition-fast); pointer-events: none; }
+        .module-content.active { opacity: 1; pointer-events: auto; }
+        .module-content h3 { font-family: var(--font-primary); font-size: 2rem; color: var(--text-color); margin-bottom: 1rem; }
+        .module-content p { font-size: 1.1rem; line-height: 1.7; color: var(--text-muted); max-width: 600px; }
+        @media (max-width: 768px) { .core-modules-section { flex-direction: column; } .module-tabs { flex-direction: row; flex-wrap: wrap; justify-content: center; flex: 1; } .tab-highlighter { display: none; } }
+
+        /* PHILOSOPHY SECTION */
+        .philosophy-section { background-color: var(--bg-secondary); text-align: center; }
+        .philosophy-section blockquote { font-family: var(--font-secondary); font-size: clamp(1.5rem, 4vw, 2.5rem); color: var(--text-color); max-width: 800px; margin: 0 auto; line-height: 1.5; position: relative; padding: 2rem 0; }
+        .philosophy-section blockquote::before, .philosophy-section blockquote::after { font-family: var(--font-primary); color: var(--primary-glow); font-size: 4rem; position: absolute; opacity: 0.5; }
+        .philosophy-section blockquote::before { content: '"'; top: 0; left: -2rem; }
+        .philosophy-section blockquote::after { content: '"'; bottom: 0; right: -2rem; }
+
+        /* EVENT ARCHIVE (Timeline) */
+        .timeline { position: relative; max-width: 1000px; margin: 0 auto; }
+        .timeline::after { content: ''; position: absolute; width: 4px; background-color: var(--border-color); top: 0; bottom: 0; left: 50%; margin-left: -2px; }
+        .timeline-item { padding: 10px 40px; position: relative; background-color: inherit; width: 50%; }
+        .timeline-item.left { left: 0; }
+        .timeline-item.right { left: 50%; }
+        .timeline-item::after { content: ''; position: absolute; width: 25px; height: 25px; right: -12.5px; background-color: var(--bg-secondary); border: 4px solid var(--primary-glow); top: 25px; border-radius: 50%; z-index: 1; }
+        .timeline-item.right::after { left: -12.5px; }
+        .timeline-content { padding: 20px 30px; background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid var(--border-color); position: relative; border-radius: 10px; }
+        .timeline-content h3 { font-family: var(--font-primary); color: var(--text-color); margin-bottom: 0.5rem; }
+        .timeline-content p { font-family: var(--font-body); color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+        .timeline-content time { font-family: var(--font-astro); color: var(--primary-glow); font-size: 0.8rem; display: block; margin-bottom: 10px; }
+        @media (max-width: 768px) { .timeline::after { left: 31px; } .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; } .timeline-item.left, .timeline-item.right { left: 0%; } .timeline-item.left::after, .timeline-item.right::after { left: 18px; } }
+    </style>
+</head>
+<body>
+
+    <!-- Mega Theme Switcher -->
+    <div class="theme-switcher">
+        <button class="theme-toggle-button" aria-label="Toggle Theme Palette"><i data-feather="settings"></i></button>
+        <div class="theme-palette">
+            <div class="theme-category">Neon & Cyberpunk</div>
+            <button class="theme-button active" data-theme="synthwave-sunset">Synthwave Sunset</button>
+            <button class="theme-button" data-theme="arcane-matrix">Arcane Matrix</button>
+            <button class="theme-button" data-theme="crimson-cyberspace">Crimson Cyberspace</button>
+            <button class="theme-button" data-theme="oceanic-depth">Oceanic Depth</button>
+            <button class="theme-button" data-theme="tokyo-night">Tokyo Night</button>
+            <button class="theme-button" data-theme="hacker-green">Hacker Green</button>
+            <button class="theme-button" data-theme="laser-lemon">Laser Lemon</button>
+            <button class="theme-button" data-theme="glitch-pop">Glitch Pop</button>
+            <button class="theme-button" data-theme="cyber-orange">Cyber Orange</button>
+            
+            <div class="theme-category">Corporate & Minimalist</div>
+            <button class="theme-button" data-theme="aetherium">Aetherium</button>
+            <button class="theme-button" data-theme="quantum-core">Quantum Core</button>
+            <button class="theme-button" data-theme="graphite">Graphite</button>
+            <button class="theme-button" data-theme="slate">Slate</button>
+            <button class="theme-button" data-theme="midnight-blue">Midnight Blue</button>
+            <button class="theme-button" data-theme="charcoal">Charcoal</button>
+            <button class="theme-button" data-theme="obsidian">Obsidian</button>
+            <button class="theme-button" data-theme="steel">Steel</button>
+            <button class="theme-button" data-theme="onyx">Onyx</button>
+
+            <div class="theme-category">Natural & Organic</div>
+            <button class="theme-button" data-theme="solar-flare">Solar Flare</button>
+            <button class="theme-button" data-theme="biomechanical-jade">Biomechanical Jade</button>
+            <button class="theme-button" data-theme="forest-floor">Forest Floor</button>
+            <button class="theme-button" data-theme="deep-earth">Deep Earth</button>
+            <button class="theme-button" data-theme="autumn-embers">Autumn Embers</button>
+            <button class="theme-button" data-theme="volcanic-ash">Volcanic Ash</button>
+            <button class="theme-button" data-theme="desert-night">Desert Night</button>
+            <button class="theme-button" data-theme="mossy-stone">Mossy Stone</button>
+
+            <div class="theme-category">Mystical & Fantasy</div>
+            <button class="theme-button" data-theme="nebula-glow">Nebula Glow</button>
+            <button class="theme-button" data-theme="voidwood">Voidwood</button>
+            <button class="theme-button" data-theme="elven-silver">Elven Silver</button>
+            <button class="theme-button" data-theme="dragon-fire">Dragon Fire</button>
+            <button class="theme-button" data-theme="starlight">Starlight</button>
+            <button class="theme-button" data-theme="ghostly">Ghostly</button>
+            <button class="theme-button" data-theme="phoenix-feather">Phoenix Feather</button>
+            <button class="theme-button" data-theme="shadowfell">Shadowfell</button>
+
+            <div class="theme-category">Retro & Vintage</div>
+            <button class="theme-button" data-theme="vaporwave">Vaporwave</button>
+            <button class="theme-button" data-theme="8-bit-adventure">8-Bit Adventure</button>
+            <button class="theme-button" data-theme="sepia-tone">Sepia Tone</button>
+            <button class="theme-button" data-theme="groovy">Groovy</button>
+            <button class="theme-button" data-theme="art-deco">Art Deco</button>
+            <button class="theme-button" data-theme="nautical">Nautical</button>
+            <button class="theme-button" data-theme="cassette-tape">Cassette Tape</button>
+            <button class="theme-button" data-theme="vintage-poster">Vintage Poster</button>
+            <button class="theme-button" data-theme="atomic-age">Atomic Age</button>
+            <button class="theme-button" data-theme="pop-art">Pop Art</button>
+        </div>
+    </div>
+
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-bg-shapes">
+                <div class="shape shape1"></div><div class="shape shape2"></div><div class="shape shape3"></div>
+                <div class="shape shape4"></div><div class="shape shape5"></div><div class="shape shape6"></div><div class="shape shape7"></div>
+            </div>
+            <div class="hero-content">
+                <p class="hero-subtitle">Welcome to the Grid</p>
+                <h1 class="hero-title">University Laboratory ICT Club</h1>
+                <p class="hero-tagline">A nexus for innovators, creators, and pioneers dedicated to shaping the future of technology.</p>
+            </div>
+        </section>
+        
+        <!-- Core Modules Section -->
+        <section class="container">
+            <div class="section-header">
+                <h2>Our Core Modules</h2>
+                <p class="section-subtitle">We focus on three pillars of technological mastery.</p>
+            </div>
+            <div class="core-modules-section">
+                <div class="module-tabs">
+                    <div class="tab-highlighter"></div>
+                    <button class="module-tab active" data-tab="1"><i data-feather="code"></i>Development</button>
+                    <button class="module-tab" data-tab="2"><i data-feather="cpu"></i>Problem-Solving</button>
+                    <button class="module-tab" data-tab="3"><i data-feather="pen-tool"></i>Design</button>
+                </div>
+                <div class="module-content-wrapper">
+                    <div class="module-content active" id="tab-1">
+                        <h3>Creative Development</h3>
+                        <p>From dynamic web applications to interactive mobile experiences, we build the interfaces of tomorrow. Our workshops cover the full stack, ensuring you can bring any idea to life.</p>
+                    </div>
+                    <div class="module-content" id="tab-2">
+                        <h3>Algorithmic Problem-Solving</h3>
+                        <p>Dive deep into competitive programming, mastering data structures and algorithms to solve complex challenges. We train for national and international contests, honing your logical thinking.</p>
+                    </div>
+                    <div class="module-content" id="tab-3">
+                        <h3>Digital Design & UI/UX</h3>
+                        <p>We believe great technology needs great design. Learn the principles of user experience, interface design, and visual communication to create products that are not only functional but also beautiful.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Philosophy Section -->
+        <section class="philosophy-section">
+            <div class="container">
+                <blockquote>Code is not just syntax; it's the architecture of ideas and the language of creation.</blockquote>
+            </div>
+        </section>
+
+        <!-- Event Archive Section -->
+        <section class="container">
+             <div class="section-header">
+                <h2>Event Archives</h2>
+                <p class="section-subtitle">A journey through our most impactful gatherings and workshops.</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <time>October 2023</time>
+                        <h3>UCA Unveiled</h3>
+                        <p>The grand launch of our parent organization, setting the stage for a new era of student-led initiatives.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <time>November 2023</time>
+                        <h3>Inaugural Session</h3>
+                        <p>Our very first gathering where members connected, shared ideas, and kicked off our journey with a workshop on Git & GitHub.</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <time>January 2024</time>
+                        <h3>Portfolio Workshop</h3>
+                        <p>A hands-on workshop dedicated to helping members create stunning personal portfolios to showcase their skills using modern web tech.</p>
+                    </div>
+                </div>
+                 <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <time>March 2024</time>
+                        <h3>Annual Code Jam</h3>
+                        <p>24 hours of intense coding, collaboration, and innovation, resulting in several exciting new projects.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- THEME SWITCHER ---
+            const switcher = document.querySelector('.theme-switcher');
+            const toggleButton = document.querySelector('.theme-toggle-button');
+            const themeButtons = document.querySelectorAll('.theme-button');
+            const htmlEl = document.documentElement;
+            toggleButton.addEventListener('click', () => switcher.classList.toggle('open'));
+            document.addEventListener('click', (e) => { if (!switcher.contains(e.target)) switcher.classList.remove('open'); });
+            const savedTheme = localStorage.getItem('ulic-theme-v2') || 'synthwave-sunset';
+            htmlEl.setAttribute('data-theme', savedTheme);
+            document.querySelector(`.theme-button.active`)?.classList.remove('active');
+            document.querySelector(`.theme-button[data-theme="${savedTheme}"]`).classList.add('active');
+            themeButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const theme = button.dataset.theme;
+                    htmlEl.setAttribute('data-theme', theme);
+                    localStorage.setItem('ulic-theme-v2', theme);
+                    themeButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    switcher.classList.remove('open');
+                });
+            });
+
+            // --- VERTICAL TABS ---
+            const tabs = document.querySelectorAll('.module-tab');
+            const tabContents = document.querySelectorAll('.module-content');
+            const highlighter = document.querySelector('.tab-highlighter');
+            tabs.forEach((tab, index) => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    if (highlighter) highlighter.style.top = `${index * 64}px`;
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    document.getElementById(`tab-${index + 1}`).classList.add('active');
+                });
+            });
+            if (highlighter) highlighter.style.top = '0px';
+
+            // --- GSAP SCROLL ANIMATIONS ---
+            gsap.registerPlugin(ScrollTrigger);
+            gsap.utils.toArray('.section-header, .philosophy-section blockquote').forEach(el => {
+                gsap.from(el, { y: 50, opacity: 0, duration: 0.8, scrollTrigger: { trigger: el, start: 'top 85%' } });
+            });
+            gsap.utils.toArray('.timeline-item').forEach(item => {
+                gsap.from(item, {
+                    opacity: 0,
+                    x: item.classList.contains('left') ? -100 : 100,
+                    duration: 0.8,
+                    scrollTrigger: { trigger: item, start: 'top 85%' }
+                });
+            });
+
+            // --- FEATHER ICONS ---
+            feather.replace();
+        });
+    </script>
+</body>
+</html>

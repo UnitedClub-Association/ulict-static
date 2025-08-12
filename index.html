@@ -48,8 +48,66 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
 
+    <!-- Temporary Inline Styles for Announcement Bar -->
+    <style>
+        .announcement-bar {
+            background: linear-gradient(90deg, var(--primary-glow), var(--secondary-glow));
+            color: var(--bg-color);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            text-align: center;
+            font-family: var(--font-body);
+        }
+
+        .announcement-bar p {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .announcement-button {
+            display: inline-block;
+            padding: 6px 16px;
+            border: 2px solid var(--bg-color);
+            border-radius: 50px;
+            color: var(--bg-color);
+            text-decoration: none;
+            font-family: var(--font-secondary);
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all var(--transition-fast);
+            white-space: nowrap; /* Prevents button text from wrapping */
+        }
+
+        .announcement-button:hover {
+            background-color: var(--bg-color);
+            color: var(--primary-glow);
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .announcement-bar {
+                flex-direction: column;
+                gap: 10px;
+                padding: 15px;
+            }
+
+            .announcement-bar p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Announcement Bar -->
+    <div class="announcement-bar">
+        <p>We've launched 50 new themes! Explore the collection and vote for your favorite.</p>
+        <a href="theme-design.html" class="announcement-button">Vote Now</a>
+    </div>
+
     <!-- Navbar Placeholder -->
     <div id="navbar-placeholder"></div>
 
