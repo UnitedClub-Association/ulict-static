@@ -1,51 +1,54 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Ensure GSAP and ScrollTrigger are loaded before using them
     const libsCheck = setInterval(() => {
-        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && typeof feather !== 'undefined') {
             clearInterval(libsCheck);
-            initializeAnimations();
+            initializePage();
         }
     }, 100);
 
-    // --- Particle Animation for Hero Section ---
-    const particlesContainer = document.getElementById('hero-particles');
-    if (particlesContainer) {
-        for (let i = 0; i < 50; i++) {
-            const particle = document.createElement('div');
-            particle.classList.add('particle');
-            particle.style.left = `${Math.random() * 100}%`;
-            particle.style.top = `${Math.random() * 100}%`;
-            particle.style.width = `${Math.random() * 3 + 1}px`;
-            particle.style.height = particle.style.width;
-            particle.style.animationDelay = `${Math.random() * 5}s`;
-            particle.style.animationDuration = `${Math.random() * 10 + 5}s`;
-            particlesContainer.appendChild(particle);
-        }
-        // Add particle styles dynamically to the head
-        const style = document.createElement('style');
-        style.innerHTML = `
-        .particle {
-            position: absolute;
-            background-color: var(--primary-glow);
-            border-radius: 50%;
-            opacity: 0;
-            animation: float 15s infinite linear;
-        }
-        @keyframes float {
-            0% { transform: translateY(0) translateX(0); opacity: 0; }
-            25% { opacity: 0.7; }
-            50% { transform: translateY(-100px) translateX(20px); }
-            75% { opacity: 0.7; }
-            100% { transform: translateY(0) translateX(0); opacity: 0; }
-        }`;
-        document.head.appendChild(style);
-    }
+    function initializePage() {
+        // --- Feather Icons ---
+        feather.replace();
 
-    // --- GSAP Scroll-Triggered Animations ---
-    function initializeAnimations() {
+        // --- Vertical Tabs Logic for Featured Highlights ---
+        const tabs = document.querySelectorAll('.highlight-tab');
+        const tabContents = document.querySelectorAll('.highlight-content');
+        const highlighter = document.querySelector('.tab-highlighter');
+
+        if (tabs.length > 0 && tabContents.length > 0) {
+            tabs.forEach((tab, index) => {
+                tab.addEventListener('click', () => {
+                    // Update tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+
+                    // Move highlighter
+                    if (highlighter) {
+                        highlighter.style.top = `${index * tab.offsetHeight + index * 10}px`; // 10 is the gap
+                    }
+
+                    // Update content
+                    const targetId = `tab-content-${tab.dataset.tab}`;
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                        if (content.id === targetId) {
+                            content.classList.add('active');
+                        }
+                    });
+                });
+            });
+             // Set initial highlighter position
+            if (highlighter) {
+                highlighter.style.top = '0px';
+            }
+        }
+
+
+        // --- GSAP Scroll-Triggered Animations ---
         gsap.registerPlugin(ScrollTrigger);
 
-        // Fade-in animations
+        // General fade-in animations
         gsap.utils.toArray('.anim-fade-in').forEach(elem => {
             gsap.from(elem, {
                 opacity: 0,
@@ -58,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Slide-up animations
+        // General slide-up animations
         gsap.utils.toArray('.anim-slide-up').forEach(elem => {
             gsap.from(elem, {
                 opacity: 0,
@@ -72,8 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         });
-        
-        // Card animations
+
+        // Card grid animations
         gsap.from(".anim-card", {
             scrollTrigger: {
                 trigger: ".cards-grid",
@@ -85,24 +88,17 @@ document.addEventListener('DOMContentLoaded', () => {
             duration: 0.8,
             ease: "power3.out"
         });
-
-        // Bubble animations
-        gsap.from(".anim-bubble", {
-            scrollTrigger: {
-                trigger: ".speech-bubbles",
+        
+        // Animate quote section
+        gsap.from(".philosophy-section blockquote", {
+             scrollTrigger: {
+                trigger: ".philosophy-section",
                 start: "top 80%",
             },
             opacity: 0,
-            scale: 0.5,
-            y: 30,
-            stagger: 0.2,
-            duration: 0.5,
-            ease: "back.out(1.7)"
+            x: -50,
+            duration: 1,
+            ease: "power3.out"
         });
-    }
-
-    // --- Feather Icons ---
-    if (typeof feather !== "undefined") {
-        feather.replace();
     }
 });

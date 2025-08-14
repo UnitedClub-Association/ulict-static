@@ -1,12 +1,16 @@
-/* --- Global Styles & Variables --- */
+/* --- Global Styles & Tokyo Night Theme --- */
 :root {
-    --bg-color: #01010c;
-    --primary-glow: #00f2ea;
-    --secondary-glow: #d900ff;
-    --text-color: #e0e0e0;
-    --text-muted: #a0a0a0;
-    --border-color: rgba(0, 242, 234, 0.2);
-    --card-bg: rgba(3, 3, 26, 0.7); /* Slightly more opaque */
+    /* Tokyo Night Theme Variables */
+    --bg-color: #1a1b26;
+    --bg-secondary: #16161e;
+    --card-bg: rgba(41, 42, 54, 0.7);
+    --border-color: rgba(72, 73, 89, 0.5);
+    --text-color: #a9b1d6;
+    --text-muted: #565f89;
+    --primary-glow: #7aa2f7;
+    --secondary-glow: #bb9af7;
+
+    /* Font & Transition Variables */
     --font-primary: 'Azonix', sans-serif;
     --font-secondary: 'Molgan', sans-serif;
     --font-body: 'Xeroda', sans-serif;
@@ -25,22 +29,11 @@ html {
     scroll-behavior: smooth;
 }
 
-/* NEW: Upgraded Body Background */
 body {
     background-color: var(--bg-color);
     font-family: var(--font-body);
     color: var(--text-color);
     overflow-x: hidden;
-    /* Static starfield background */
-    background-image:
-        radial-gradient(1px 1px at 20px 30px, #eee, transparent),
-        radial-gradient(1px 1px at 40px 70px, #fff, transparent),
-        radial-gradient(1px 1px at 50px 160px, #ddd, transparent),
-        radial-gradient(1.5px 1.5px at 100px 40px, #fff, transparent),
-        radial-gradient(2px 2px at 150px 120px, #ddd, transparent),
-        radial-gradient(1.5px 1.5px at 110px 80px, #fff, transparent);
-    background-repeat: repeat;
-    background-size: 200px 200px;
 }
 
 .container {
@@ -50,53 +43,77 @@ body {
     padding: 6rem 0;
 }
 
-/* --- Hero Section (No Changes) --- */
+/* --- Hero Section --- */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
 .hero {
     min-height: 100vh;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    position: relative;
     overflow: hidden;
-    background-color: var(--bg-color); /* Hero has its own solid bg for particles */
+    background-color: var(--bg-secondary);
+    padding-top: 0; /* Remove body padding from hero */
 }
 
-#hero-particles {
+.hero-bg-shapes {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
+    overflow: hidden;
 }
+
+.shape {
+    position: absolute;
+    border: 1px solid var(--border-color);
+    background: linear-gradient(45deg, rgba(255,255,255,0.05), rgba(255,255,255,0));
+    animation: spin linear infinite;
+}
+
+.shape1 { width: 40vw; height: 40vw; max-width: 400px; max-height: 400px; top: -10vw; left: -10vw; animation-duration: 20s; }
+.shape2 { width: 20vw; height: 20vw; max-width: 200px; max-height: 200px; bottom: 5vh; right: 5vw; border-radius: 30%; animation-duration: 15s; animation-direction: reverse; }
+.shape3 { width: 10vw; height: 10vw; max-width: 100px; max-height: 100px; top: 10vh; right: 20vw; animation-duration: 10s; }
+.shape4 { width: 5vw; height: 5vw; max-width: 50px; max-height: 50px; top: 50vh; left: 15vw; border-radius: 50%; animation-duration: 8s; }
+.shape5 { width: 8vw; height: 8vw; max-width: 80px; max-height: 80px; top: 20vh; left: 45vw; animation-duration: 12s; animation-direction: reverse; }
+.shape6 { width: 4vw; height: 4vw; max-width: 40px; max-height: 40px; bottom: 15vh; left: 25vw; animation-duration: 7s; }
+.shape7 { width: 6vw; height: 6vw; max-width: 60px; max-height: 60px; bottom: 40vh; right: 10vw; border-radius: 10%; animation-duration: 18s; }
 
 .hero-content {
     position: relative;
     z-index: 2;
+    text-align: center;
     padding: 1rem;
-}
-
-.hero-title {
-    font-family: var(--font-primary);
-    font-size: clamp(2.5rem, 8vw, 5rem);
-    color: var(--primary-glow);
-    text-shadow: 0 0 10px var(--primary-glow), 0 0 20px var(--secondary-glow);
-    margin-bottom: 1rem;
-    line-height: 1.2;
 }
 
 .hero-subtitle {
     font-family: var(--font-astro);
     font-size: clamp(1rem, 3vw, 1.5rem);
-    color: var(--text-muted);
+    color: var(--primary-glow);
     letter-spacing: 3px;
     text-transform: uppercase;
 }
 
-.hero-separator {
-    color: var(--primary-glow);
-    margin: 0 0.5rem;
+.hero-title {
+    font-family: var(--font-primary);
+    font-size: clamp(2.5rem, 9vw, 6rem);
+    color: var(--text-color);
+    margin: 0.5rem 0 1.5rem;
+    line-height: 1.1;
+    text-shadow: 0 0 10px var(--secondary-glow);
+}
+
+.hero-tagline {
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 /* --- General Section Styling --- */
@@ -109,7 +126,8 @@ body {
     font-family: var(--font-primary);
     font-size: clamp(2rem, 6vw, 3.5rem);
     margin-bottom: 0.5rem;
-    color: var(--primary-glow);
+    color: var(--text-color);
+    text-shadow: 0 0 8px var(--primary-glow);
 }
 
 .section-subtitle {
@@ -120,12 +138,8 @@ body {
     margin: 0 auto;
 }
 
-/* --- Explore ULIC Section (No Changes) --- */
+/* --- Explore ULIC Section --- */
 .explore-content {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 3rem;
-    align-items: center;
     text-align: center;
 }
 
@@ -133,39 +147,153 @@ body {
     font-size: clamp(1rem, 2.5vw, 1.2rem);
     line-height: 1.8;
     max-width: 800px;
-    margin: 0 auto;
+    margin: 0 auto 2rem; /* Add margin-bottom */
 }
 
-.speech-bubbles {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-    margin-top: 2rem;
-}
-
-.speech-bubble {
-    background: linear-gradient(135deg, var(--primary-glow), var(--secondary-glow));
-    color: var(--bg-color);
-    font-family: var(--font-secondary);
-    font-size: clamp(1rem, 3vw, 1.5rem);
-    padding: 0.8rem 1.5rem;
+.btn {
+    display: inline-block;
+    padding: 12px 25px;
     border-radius: 50px;
-    box-shadow: 0 0 20px rgba(0, 242, 234, 0.4);
+    text-decoration: none;
+    font-family: var(--font-secondary);
+    font-size: 1.1rem;
+    border: 2px solid transparent;
+    transition: all var(--transition-fast);
 }
 
-/* --- Featured Activities Section --- */
+.btn-primary {
+    background-color: var(--primary-glow);
+    color: var(--bg-color);
+    box-shadow: 0 0 15px var(--primary-glow);
+}
+
+.btn-primary:hover {
+    background-color: transparent;
+    border-color: var(--primary-glow);
+    color: var(--primary-glow);
+    transform: translateY(-3px);
+}
+
+/* --- Philosophy/Quote Section --- */
+.philosophy-section {
+    background-color: var(--bg-secondary);
+    text-align: center;
+}
+
+.philosophy-section .container {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+.philosophy-section blockquote {
+    font-family: var(--font-secondary);
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    color: var(--text-color);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.5;
+    position: relative;
+    padding: 2rem 0;
+    border-left: 3px solid var(--primary-glow);
+    padding-left: 2rem;
+}
+
+.philosophy-section blockquote::before {
+    content: '"';
+    font-family: var(--font-primary);
+    color: var(--primary-glow);
+    font-size: 4rem;
+    position: absolute;
+    opacity: 0.3;
+    top: -1rem;
+    left: -0.5rem;
+}
+
+
+/* --- Featured Highlights Section (Vertical Tabs) --- */
+.highlights-container {
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start;
+    min-height: 400px;
+}
+
+.highlight-tabs {
+    flex: 0 0 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+}
+
+.highlight-tab {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    padding: 15px 20px;
+    font-family: var(--font-secondary);
+    font-size: 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: left;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.highlight-tab:hover {
+    color: var(--text-color);
+    background-color: rgba(122, 162, 247, 0.1);
+}
+
+.highlight-tab.active {
+    color: var(--primary-glow);
+    font-weight: bold;
+}
+
+.tab-highlighter {
+    position: absolute;
+    left: 0;
+    width: 4px;
+    height: 54px; /* Matches tab height */
+    background-color: var(--primary-glow);
+    border-radius: 4px;
+    transition: top var(--transition-fast) cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.highlight-content-wrapper {
+    flex: 1;
+    position: relative;
+    min-height: 400px;
+}
+
+.highlight-content {
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+    pointer-events: none;
+}
+
+.highlight-content.active {
+    opacity: 1;
+    pointer-events: auto;
+    position: relative;
+}
+
+/* Card Styles (for Activities) */
 .cards-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
 }
 
 .card {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: 12px;
-    padding: 1.5rem; /* Adjusted padding */
+    padding: 1.5rem;
     position: relative;
     overflow: hidden;
     text-decoration: none;
@@ -175,25 +303,10 @@ body {
     backdrop-filter: blur(5px);
 }
 
-/* UPDATED: Card hover glow effect */
 .card:hover {
     transform: translateY(-10px);
-    box-shadow:
-        0 0 15px var(--primary-glow),
-        0 0 30px var(--secondary-glow);
+    box-shadow: 0 0 15px var(--primary-glow);
     border-color: var(--primary-glow);
-}
-
-/* REMOVED: Spinning border animation is gone */
-.card-border { display: none; }
-
-.card-content {
-    position: relative;
-    z-index: 2;
-    background: transparent; /* No inner background needed now */
-    padding: 0; /* No padding needed */
-    border-radius: 10px;
-    height: 100%;
 }
 
 .card h3 {
@@ -209,19 +322,13 @@ body {
     color: var(--text-muted);
 }
 
-/* --- Featured Events Section --- */
-/* NEW: Added padding-bottom for more space */
-.featured-events .container {
-    padding-bottom: 4rem;
-}
-
+/* Event Card Styles */
 .events-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
 }
 
-/* UPDATED: Event Card Design */
 .event-card {
     position: relative;
     border-radius: 12px;
@@ -229,6 +336,8 @@ body {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
     transition: transform var(--transition-fast), box-shadow var(--transition-fast);
     border: 1px solid var(--border-color);
+    aspect-ratio: 4 / 3;
+    text-decoration: none;
 }
 
 .event-card:hover {
@@ -252,7 +361,7 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(to top, rgba(1, 1, 12, 0.95), transparent);
+    background: linear-gradient(to top, rgba(26, 27, 38, 0.95), transparent);
     padding: 1.5rem;
     text-align: center;
     display: flex;
@@ -263,9 +372,8 @@ body {
     transition: background var(--transition-fast);
 }
 
-/* NEW: Overlay hover effect */
 .event-card:hover .event-card-overlay {
-    background: linear-gradient(to top, rgba(1, 1, 12, 0.8), rgba(0,0,0,0.2));
+    background: linear-gradient(to top, rgba(26, 27, 38, 0.8), rgba(0,0,0,0.2));
 }
 
 .event-card-overlay h3 {
@@ -274,33 +382,61 @@ body {
     color: var(--text-color);
     text-shadow: 0 0 5px var(--bg-color);
     transition: transform 0.4s var(--transition-slow);
-    transform: translateY(0);
+    transform: translateY(10px);
 }
 
-/* NEW: Title animation on hover */
-.event-card:hover .event-card-overlay h3 {
-    transform: translateY(-15px);
-}
-
-/* NEW: Hidden descriptive text for events */
 .event-card-overlay .event-desc {
     font-family: var(--font-body);
     font-size: 0.9rem;
     color: var(--text-muted);
     opacity: 0;
     transition: opacity 0.4s var(--transition-slow);
-    margin-top: 0.5rem;
     transform: translateY(10px);
+}
+
+.event-card:hover .event-card-overlay h3 {
+    transform: translateY(-5px);
 }
 
 .event-card:hover .event-card-overlay .event-desc {
     opacity: 1;
-    transform: translateY(-10px);
+    transform: translateY(0);
 }
 
 
-/* --- Animation Classes --- */
-.anim-fade-in {}
-.anim-slide-up {}
-.anim-bubble {}
-.anim-card {}
+/* --- Responsive Design --- */
+@media (max-width: 992px) {
+    .highlights-container {
+        flex-direction: column;
+    }
+    .highlight-tabs {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        flex: 1;
+        width: 100%;
+    }
+    .tab-highlighter {
+        display: none;
+    }
+    .highlight-tab {
+        border-bottom: 2px solid transparent;
+        border-radius: 0;
+    }
+    .highlight-tab.active {
+        border-bottom-color: var(--primary-glow);
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: clamp(2.5rem, 12vw, 6rem);
+    }
+    .shape1, .shape5 { display: none; } /* Hide larger shapes on small screens */
+}
+
+
+/* --- Animation Classes (for JS) --- */
+.anim-fade-in, .anim-slide-up, .anim-card {
+    opacity: 0; /* Start hidden for GSAP */
+}

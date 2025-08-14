@@ -1,49 +1,13 @@
-@import url('https://fonts.cdnfonts.com/css/molgan');
-@import url('https://fonts.cdnfonts.com/css/azonix');
-@import url('https://fonts.cdnfonts.com/css/xeroda');
-@import url('https://fonts.cdnfonts.com/css/a-astro-space');
-
-:root {
-    --bg-color: #01010c;
-    --primary-glow: #00f2ea;
-    --secondary-glow: #d900ff;
-    --text-color: #e0e0e0;
-    --text-muted: #a0a0a0;
-    --border-color: rgba(0, 242, 234, 0.2);
-    --navbar-height: 70px;
-    --font-primary: 'Azonix', sans-serif;
-    --font-secondary: 'Molgan', sans-serif;
-    --font-body: 'Xeroda', sans-serif;
-    --font-astro: 'A Astro Space', sans-serif;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background-color: var(--bg-color);
-    font-family: var(--font-body);
-    color: var(--text-color);
-    /* Adjust padding-top based on which navbar is visible */
-}
-
-body.mobile-menu-active {
-    overflow: hidden;
-}
-
-/* --- Base Navbar Styles --- */
+/* --- Base Navbar Styles using Tokyo Night Theme Variables --- */
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1000;
-    background-color: rgba(1, 1, 12, 0.8);
+    background-color: rgba(22, 22, 30, 0.8); /* from --bg-secondary */
+    -webkit-backdrop-filter: blur(10);
     backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border-color);
     transition: top 0.3s;
 }
@@ -77,11 +41,11 @@ body.mobile-menu-active {
 
 /* --- Desktop Navbar --- */
 .navbar--desktop {
-    display: flex; /* Hidden by default on mobile, shown on desktop */
+    display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 4%;
-    height: var(--navbar-height);
+    height: 70px; /* --navbar-height */
 }
 
 .logo-text-sub {
@@ -155,7 +119,7 @@ body.mobile-menu-active {
     left: 50%;
     transform: translateX(-50%);
     width: 320px;
-    background: rgba(10, 2, 20, 0.9);
+    background: rgba(22, 22, 30, 0.9); /* from --bg-secondary */
     -webkit-backdrop-filter: blur(15px);
     backdrop-filter: blur(15px);
     border: 1px solid var(--border-color);
@@ -175,23 +139,6 @@ body.mobile-menu-active {
     top: 100%;
 }
 
-.dropdown__menu::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 200%;
-    height: 100%;
-    background: radial-gradient(circle at var(--x) var(--y), var(--primary-glow), transparent 40%);
-    opacity: 0;
-    transition: opacity 0.5s;
-    pointer-events: none;
-}
-
-.dropdown__menu:hover::before {
-    opacity: 0.1;
-}
-
 .dropdown__menu li a {
     display: flex;
     align-items: center;
@@ -204,7 +151,7 @@ body.mobile-menu-active {
 }
 
 .dropdown__menu li a:hover {
-    background-color: rgba(0, 242, 234, 0.1);
+    background-color: rgba(122, 162, 247, 0.1); /* primary-glow with alpha */
     color: var(--primary-glow);
 }
 
@@ -248,25 +195,9 @@ body.mobile-menu-active {
 .join-link::before { display: none; }
 .join-link:hover::before { transform: scaleX(0); }
 
-.join-link::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(120deg, rgba(255,255,255,0) 20%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 80%);
-    transform: translateX(-100%);
-    transition: transform 0.6s;
-}
-
-.join-link:hover::after {
-    transform: translateX(100%);
-}
-
 /* --- Mobile Navbar --- */
 .navbar--mobile {
-    display: none; /* Hidden by default on desktop */
+    display: none;
     justify-content: space-between;
     align-items: center;
     padding: 0 5%;
@@ -299,16 +230,9 @@ body.mobile-menu-active {
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease;
 }
 
-/* Hamburger to X animation */
-.navbar__toggle.active .hamburger span:nth-child(1) {
-    transform: translateY(8.5px) rotate(45deg);
-}
-.navbar__toggle.active .hamburger span:nth-child(2) {
-    opacity: 0;
-}
-.navbar__toggle.active .hamburger span:nth-child(3) {
-    transform: translateY(-8.5px) rotate(-45deg);
-}
+.navbar__toggle.active .hamburger span:nth-child(1) { transform: translateY(8.5px) rotate(45deg); }
+.navbar__toggle.active .hamburger span:nth-child(2) { opacity: 0; }
+.navbar__toggle.active .hamburger span:nth-child(3) { transform: translateY(-8.5px) rotate(-45deg); }
 
 .mobile-menu__container {
     position: fixed;
@@ -316,7 +240,7 @@ body.mobile-menu-active {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(1, 1, 12, 0.95);
+    background: rgba(22, 22, 30, 0.98); /* from --bg-secondary */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -337,7 +261,7 @@ body.mobile-menu-active {
 
 .navbar__item--mobile {
     margin: 15px 0;
-    opacity: 0; /* Handled by JS */
+    opacity: 0;
 }
 
 .navbar__link--mobile {
@@ -368,30 +292,18 @@ body.mobile-menu-active {
     border-width: 2px;
     padding: 12px 25px;
     margin-top: 20px;
-    display: inline-flex; /* To make it behave like a block for margin */
+    display: inline-flex;
 }
 
 /* --- Responsive Breakpoint --- */
 @media (max-width: 992px) {
-    body {
-        padding-top: 60px; /* Mobile navbar height */
-    }
-    .navbar--desktop {
-        display: none;
-    }
-    .navbar--mobile {
-        display: flex;
-    }
+    body { padding-top: 60px; }
+    .navbar--desktop { display: none; }
+    .navbar--mobile { display: flex; }
 }
 
 @media (min-width: 993px) {
-    body {
-        padding-top: var(--navbar-height); /* Desktop navbar height */
-    }
-    .navbar--desktop {
-        display: flex;
-    }
-    .navbar--mobile {
-        display: none;
-    }
+    body { padding-top: 70px; }
+    .navbar--desktop { display: flex; }
+    .navbar--mobile { display: none; }
 }

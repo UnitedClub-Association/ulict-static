@@ -1,10 +1,6 @@
-/* --- Footer Styles --- */
-:root {
-    --footer-bg: #03031a;
-}
-
+/* --- Footer Styles using Tokyo Night Theme Variables --- */
 .site-footer {
-    background-color: var(--footer-bg);
+    background-color: var(--bg-secondary);
     color: var(--text-muted);
     padding: 4rem 0 2rem;
     position: relative;
@@ -28,7 +24,7 @@
 .footer-section h4 {
     font-family: var(--font-secondary);
     font-size: 1.5rem;
-    color: var(--primary-glow);
+    color: var(--text-color);
     margin-bottom: 1.5rem;
     position: relative;
 }
