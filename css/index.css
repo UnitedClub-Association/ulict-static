@@ -438,5 +438,5 @@ body {
 
 /* --- Animation Classes (for JS) --- */
 .anim-fade-in, .anim-slide-up, .anim-card {
-    opacity: 0; /* Start hidden for GSAP */
+    /* Start hidden for GSAP */
 }
