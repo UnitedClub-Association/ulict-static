@@ -1,0 +1,347 @@
+/* --- Global Styles & Tokyo Night Theme --- */
+:root {
+    /* Tokyo Night Theme Variables from index.css */
+    --bg-color: #1a1b26;
+    --bg-secondary: #16161e;
+    --card-bg: #292a36; 
+    --border-color: rgba(122, 162, 247, 0.2);
+    --text-color: #a9b1d6;
+    --text-muted: #565f89;
+    --primary-glow: #7aa2f7;
+    --secondary-glow: #bb9af7;
+
+    /* Font & Transition Variables */
+    --font-primary: 'Azonix', sans-serif;
+    --font-body: 'Xeroda', sans-serif;
+    --transition-fast: 0.3s ease;
+    --transition-slow: 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* --- Basic Setup --- */
+body {
+    background-color: var(--bg-color);
+    font-family: var(--font-body);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 6rem 0;
+    position: relative;
+    z-index: 2;
+}
+
+/* --- Hero Section with Text Carousel --- */
+.hero {
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--bg-secondary);
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.text-carousel {
+    height: 7rem; /* Adjust based on font size */
+    overflow: hidden;
+    font-size: clamp(2.5rem, 9vw, 6rem);
+    font-family: var(--font-primary);
+    color: var(--primary-glow);
+    text-shadow: 0 0 15px var(--primary-glow);
+}
+
+.carousel-item {
+    height: 7rem; /* Match the container's height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+
+@keyframes fadeIn {
+    to { opacity: 0.7; }
+}
+
+/* --- General Section Styling --- */
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-header h2 {
+    font-family: var(--font-primary);
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+    text-shadow: 0 0 8px var(--primary-glow);
+}
+
+.section-subtitle {
+    font-family: var(--font-body);
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* --- Journey/Timeline Section --- */
+.journey-section {
+    background-color: var(--bg-secondary);
+}
+
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background-color: var(--border-color);
+    border-radius: 3px;
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 50px;
+    margin-bottom: 3rem;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: 0;
+    top: 5px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: var(--bg-secondary);
+    border: 3px solid var(--primary-glow);
+}
+
+.timeline-content h3 {
+    font-family: var(--font-primary);
+    color: var(--primary-glow);
+    margin-bottom: 0.5rem;
+}
+
+.timeline-content p {
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* --- Events Section --- */
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.event-card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    transition: var(--transition-fast);
+    text-decoration: none;
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 400px;
+}
+
+.event-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 20px var(--primary-glow);
+    border-color: var(--primary-glow);
+}
+
+.event-card.featured {
+    grid-column: 1 / -1; /* Span full width on larger screens */
+    min-height: 450px;
+}
+
+.event-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    z-index: 1;
+    transition: transform 0.4s ease;
+}
+
+.event-card:hover .event-card-img {
+    transform: scale(1.05);
+}
+
+.event-card-overlay {
+    position: relative;
+    z-index: 2;
+    padding: 1.5rem;
+    margin-top: auto; /* Push content to the bottom */
+    background: linear-gradient(to top, rgba(26, 27, 38, 0.95) 20%, transparent);
+}
+
+.event-card-tag {
+    display: inline-block;
+    background-color: var(--primary-glow);
+    color: var(--bg-color);
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.event-card-title {
+    font-family: var(--font-primary);
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    margin-bottom: 0.5rem;
+}
+
+.event-card-desc {
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.event-card-date {
+    font-family: var(--font-body);
+    font-weight: bold;
+    color: var(--primary-glow);
+}
+
+/* --- Mini Events & Sessions --- */
+.sub-events-section {
+    background-color: var(--bg-secondary);
+}
+
+.sub-events-section h3 {
+    font-family: var(--font-primary);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.sub-events-section .sessions-title {
+    margin-top: 4rem;
+}
+
+.horizontal-scroll-wrapper {
+    overflow-x: auto;
+    padding-bottom: 1.5rem; /* Space for scrollbar */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+.horizontal-scroll-wrapper::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+.card-grid {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(300px, 1fr);
+    gap: 1.5rem;
+}
+
+.activity-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: var(--transition-fast);
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.activity-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--secondary-glow);
+}
+
+.activity-card.placeholder {
+    opacity: 0.7;
+}
+
+.card-icon {
+    color: var(--secondary-glow);
+    margin-bottom: 1rem;
+}
+
+.card-icon svg {
+    width: 32px;
+    height: 32px;
+}
+
+.activity-card h4 {
+    font-family: var(--font-primary);
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-color);
+}
+
+.activity-card p {
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.activity-card span {
+    font-weight: bold;
+    color: var(--secondary-glow);
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    .container {
+        padding: 4rem 0;
+    }
+    .text-carousel, .carousel-item {
+        height: 5rem;
+    }
+    .timeline::before {
+        left: 10px;
+    }
+    .timeline-item {
+        padding-left: 40px;
+    }
+    .timeline-dot {
+        width: 20px;
+        height: 20px;
+        left: 0;
+    }
+    .event-card.featured {
+        min-height: 350px;
+    }
+}
+
+@media (min-width: 769px) {
+    .event-card.featured {
+        grid-template-columns: 1fr 1fr;
+    }
+}

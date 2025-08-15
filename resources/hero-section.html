@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ULIC - 20 Advanced Hero Sections</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
+    <link href="https://fonts.cdnfonts.com/css/molgan" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/azonix" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/xeroda" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/a-astro-space" rel="stylesheet">
+
+    <!-- GSAP Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <style>
+        :root {
+            --bg-color: #1a1b26;
+            --bg-secondary: #16161e;
+            --card-bg: rgba(41, 42, 54, 0.7);
+            --border-color: rgba(72, 73, 89, 0.5);
+            --text-color: #a9b1d6;
+            --text-muted: #565f89;
+            --primary-glow: #7aa2f7;
+            --secondary-glow: #bb9af7;
+            --font-primary: 'Azonix', sans-serif;
+            --font-secondary: 'Molgan', sans-serif;
+            --font-body: 'Xeroda', sans-serif;
+            --font-astro: 'A Astro Space', sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--bg-color); color: var(--text-color); font-family: var(--font-body); overflow-x: hidden; }
+
+        /* Floating Go Back Button */
+        .go-back-link {
+            position: fixed; top: 30px; left: 30px; width: 50px; height: 50px;
+            background-color: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            z-index: 1001; transition: transform 0.3s ease;
+        }
+        .go-back-link:hover { transform: scale(1.1) rotate(90deg); border-color: var(--primary-glow); }
+        .go-back-link svg { width: 24px; height: 24px; stroke: var(--text-color); }
+
+        /* Intro Card (Formerly Divider) */
+        .intro-card {
+            min-height: 40vh; display: flex; flex-direction: column; justify-content: center;
+            align-items: center; background-color: var(--bg-secondary);
+            border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);
+        }
+        .intro-card h2 { font-family: var(--font-primary); font-size: 2rem; color: var(--text-muted); }
+        .intro-card p { font-family: var(--font-astro); margin-top: 0.5rem; color: var(--primary-glow); }
+        .refresh-btn {
+            background: var(--primary-glow); color: var(--bg-color); border: none;
+            padding: 10px 20px; margin-top: 1.5rem; border-radius: 5px; cursor: pointer;
+            font-family: var(--font-body); transition: transform 0.2s ease;
+        }
+        .refresh-btn:hover { transform: scale(1.05); }
+
+        /* Base Hero Styles */
+        .hero {
+            min-height: 100vh; display: flex; justify-content: center; align-items: center;
+            text-align: center; position: relative; overflow: hidden; padding: 2rem;
+        }
+        .hero-content { z-index: 2; }
+
+        /* --- STYLES FOR ALL 20 HERO SECTIONS --- */
+        .hero-1 .grid-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(var(--border-color) 1px, transparent 1px), linear-gradient(to right, var(--border-color) 1px, transparent 1px); background-size: 60px 60px; animation: move-grid 20s linear infinite; } @keyframes move-grid { from { transform: translate(0, 0); } to { transform: translate(-60px, -60px); } } .hero-1 .hero-title { font-family: var(--font-primary); font-size: 6rem; text-shadow: 0 0 15px var(--secondary-glow); }
+        .hero-2 .glitch-title { font-family: var(--font-primary); font-size: 10rem; position: relative; } .hero-2 .glitch-title.glitch-active::before { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; left: 2px; text-shadow: -2px 0 var(--primary-glow); clip: rect(44px, 450px, 56px, 0); animation: glitch-anim-1 2s infinite linear reverse; } .hero-2 .glitch-title.glitch-active::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; left: -2px; text-shadow: -2px 0 var(--secondary-glow); clip: rect(85px, 450px, 90px, 0); animation: glitch-anim-2 3s infinite linear reverse; } @keyframes glitch-anim-1 { 0% { clip: rect(42px, 9999px, 44px, 0); } 100% { clip: rect(42px, 9999px, 44px, 0); } } @keyframes glitch-anim-2 { 0% { clip: rect(6px, 9999px, 93px, 0); } 100% { clip: rect(6px, 9999px, 93px, 0); } }
+        #particle-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; } .hero-3 .hero-title { font-family: var(--font-secondary); font-size: 5rem; }
+        .hero-4 .perspective-box { perspective: 1500px; } .hero-4 .card-3d { width: 70vw; max-width: 600px; transform-style: preserve-3d; transition: transform 0.1s linear; } .hero-4 .card-3d-content { padding: 3rem; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 15px; backdrop-filter: blur(10px); transform: translateZ(50px); } .hero-4 .card-3d-glow { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, var(--primary-glow), transparent 70%); border-radius: 15px; transform: translateZ(20px); opacity: 0; transition: opacity 0.3s ease; } .card-3d:hover .card-3d-glow { opacity: 0.3; }
+        .hero-5 .reveal-title { font-family: var(--font-primary); font-size: 5rem; } .hero-5 .char { display: inline-block; opacity: 0; }
+        .hero-6 { background-image: linear-gradient(rgba(26, 27, 38, 0.8), rgba(26, 27, 38, 0.9)), url('https://images.unsplash.com/photo-1549887552-cb136ddd2de9?q=80&w=2070&auto=format&fit=crop'); background-size: cover; background-position: center; } .hero-6 .neon-title { font-family: var(--font-secondary); font-size: 7rem; color: #fff; text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px var(--primary-glow), 0 0 30px var(--primary-glow), 0 0 40px var(--primary-glow); animation: flicker 1.5s infinite alternate; } @keyframes flicker { 0%, 18%, 22%, 25%, 53%, 57%, 100% { text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px var(--primary-glow), 0 0 40px var(--primary-glow), 0 0 80px var(--primary-glow); } 20%, 24%, 55% { text-shadow: none; } }
+        .hero-7 .svg-container { width: 80%; max-width: 800px; } .hero-7 svg path { stroke: var(--primary-glow); stroke-width: 2; fill: none; stroke-dasharray: 2000; stroke-dashoffset: 2000; }
+        .hero-8 { background-color: var(--bg-secondary); } .hero-8 .terminal { width: 90vw; max-width: 800px; background: #000; border: 1px solid var(--border-color); text-align: left; padding: 1rem; font-family: monospace; } .hero-8 .terminal-header { color: var(--text-muted); margin-bottom: 1rem; }
+        .hero-9 .spotlight { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, transparent 100px, var(--bg-color) 250px); } .hero-9 h1 { font-size: 8rem; font-family: var(--font-primary); }
+        .hero-10 .masked-title { font-size: 12rem; font-family: var(--font-primary); background-image: url('https://media.giphy.com/media/l41lI4bY4R2w9I02A/giphy.gif'); background-size: cover; -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .hero-11 .bouncing-word { display: flex; font-size: 6rem; font-family: var(--font-secondary); } .hero-11 .bouncing-word span { position: relative; }
+        .hero-12 { display: block; padding-top: 100px; } .hero-12 h1 { font-family: var(--font-astro); font-size: 5rem; } .hero-12 .line { overflow: hidden; }
+        .hero-13 .abstract-shapes { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; } .hero-13 .shape { position: absolute; border: 1px solid var(--border-color); background: linear-gradient(45deg, var(--card-bg), transparent); }
+        .hero-14 .broken-text { font-family: var(--font-primary); font-size: 8rem; } .hero-14 .char { display: inline-block; }
+        .hero-15 video { position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; width: auto; height: auto; z-index: 0; transform: translateX(-50%) translateY(-50%); opacity: 0.3; } .hero-15 h1 { font-size: 7rem; font-family: var(--font-secondary); }
+        .hero-16 { background-color: #fff; color: var(--bg-color); } .hero-16 h1 { font-family: var(--font-primary); font-size: 8rem; mix-blend-mode: difference; color: white; }
+        .hero-17 { flex-direction: column; } .hero-17 .text-carousel { font-size: 5rem; font-family: var(--font-primary); overflow: hidden; height: 7rem; } .hero-17 .carousel-item { height: 100%; }
+        .hero-18 .grid-container { display: grid; grid-template-columns: repeat(20, 1fr); width: 100%; height: 100vh; } .hero-18 .grid-item { background: var(--bg-secondary); transition: background 0.3s ease; } .hero-18 .grid-item:hover { background: var(--primary-glow); }
+        .hero-19 .parallax-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('https://images.unsplash.com/photo-1506703190231-3796PA4_8_8?q=80&w=2070&auto=format&fit=crop'); background-size: 120%; background-position: center; }
+        .hero-20 .liquid-text { font-family: var(--font-secondary); font-size: 8rem; filter: url(#liquid-effect); } .hero-20 .hidden-svg { position: absolute; width: 0; height: 0; }
+    </style>
+</head>
+<body>
+    <a href="/index.html" class="go-back-link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+    </a>
+
+    <div class="intro-card"><h2>Hero Design 1</h2><p>Kinetic Grid</p><button class="refresh-btn" data-target="hero-1">Refresh Animation</button></div>
+    <section class="hero hero-1" id="hero-1"><div class="grid-bg"></div><div class="hero-content"><h1 class="hero-title">Welcome to the Grid</h1></div></section>
+
+    <div class="intro-card"><h2>Hero Design 2</h2><p>Classic Glitch</p><button class="refresh-btn" data-target="hero-2">Refresh Animation</button></div>
+    <section class="hero hero-2" id="hero-2"><div class="hero-content"><h1 class="glitch-title" data-text="ULICT">ULICT</h1></div></section>
+    
+    <div class="intro-card"><h2>Hero Design 3</h2><p>Particle Connections</p><button class="refresh-btn" data-target="hero-3">Refresh Animation</button></div>
+    <section class="hero hero-3" id="hero-3"><canvas id="particle-canvas"></canvas><div class="hero-content"><h1 class="hero-title">Shape the Future</h1></div></section>
+
+    <div class="intro-card"><h2>Hero Design 4</h2><p>Layered 3D Card</p><button class="refresh-btn" data-target="hero-4">Refresh Animation</button></div>
+    <section class="hero hero-4" id="hero-4"><div class="perspective-box"><div class="card-3d"><div class="card-3d-content"><h1>Code. Connect. Create.</h1></div><div class="card-3d-glow"></div></div></div></section>
+
+    <div class="intro-card"><h2>Hero Design 5</h2><p>Enhanced Text Reveal</p><button class="refresh-btn" data-target="hero-5">Refresh Animation</button></div>
+    <section class="hero hero-5" id="hero-5"><div class="hero-content"><h1 class="reveal-title">Innovate</h1></div></section>
+
+    <div class="intro-card"><h2>Hero Design 6</h2><p>Neon Flicker</p><button class="refresh-btn" data-target="hero-6">Refresh Animation</button></div>
+    <section class="hero hero-6" id="hero-6"><div class="hero-content"><h1 class="neon-title">ULIC</h1></div></section>
+
+    <div class="intro-card"><h2>Hero Design 7</h2><p>SVG Path Drawing</p><button class="refresh-btn" data-target="hero-7">Refresh Animation</button></div>
+    <section class="hero hero-7" id="hero-7"><div class="svg-container"><svg viewBox="0 0 800 200"><path d="M50,100 C150,20 250,180 350,100 S550,20 650,100 S750,180 850,100"></path></svg></div></section>
+
+    <div class="intro-card"><h2>Hero Design 8</h2><p>Hacker Terminal Typing</p><button class="refresh-btn" data-target="hero-8">Refresh Animation</button></div>
+    <section class="hero hero-8" id="hero-8"><div class="terminal"><p class="terminal-header">> Executing ULIC.init...</p><p id="terminal-text"></p></div></section>
+
+    <div class="intro-card"><h2>Hero Design 9</h2><p>Cursor Spotlight</p><button class="refresh-btn" data-target="hero-9">Refresh Animation</button></div>
+    <section class="hero hero-9" id="hero-9"><div class="spotlight"></div><div class="hero-content"><h1>Discover</h1></div></section>
+
+    <div class="intro-card"><h2>Hero Design 10</h2><p>Masked Text (Video)</p><button class="refresh-btn" data-target="hero-10">Refresh Animation</button></div>
+    <section class="hero hero-10" id="hero-10"><h1 class="masked-title">CREATE</h1></section>
+    
+    <div class="intro-card"><h2>Hero Design 11</h2><p>Bouncing Text</p><button class="refresh-btn" data-target="hero-11">Refresh Animation</button></div>
+    <section class="hero hero-11" id="hero-11"><h1 class="bouncing-word">BOUNCE</h1></section>
+
+    <div class="intro-card"><h2>Hero Design 12</h2><p>Staggered Line Reveal</p><button class="refresh-btn" data-target="hero-12">Refresh Animation</button></div>
+    <section class="hero hero-12" id="hero-12"><div class="hero-content"><h1><div class="line">University</div></h1><h1><div class="line">Laboratory</div></h1><h1><div class="line">ICT Club</div></h1></div></section>
+    
+    <div class="intro-card"><h2>Hero Design 13</h2><p>Floating Abstract Shapes</p><button class="refresh-btn" data-target="hero-13">Refresh Animation</button></div>
+    <section class="hero hero-13" id="hero-13"><div class="abstract-shapes"></div><div class="hero-content"><h1>Design</h1></div></section>
+
+    <div class="intro-card"><h2>Hero Design 14</h2><p>Breaking Text</p><button class="refresh-btn" data-target="hero-14">Refresh Animation</button></div>
+    <section class="hero hero-14" id="hero-14"><h1 class="broken-text">BREAK</h1></section>
+
+    <div class="intro-card"><h2>Hero Design 15</h2><p>Video Background</p><button class="refresh-btn" data-target="hero-15">Refresh Animation</button></div>
+    <section class="hero hero-15" id="hero-15"><video playsinline autoplay muted loop><source src="https://www.w3schools.com/howto/videos/matrix.mp4" type="video/mp4"></video><div class="hero-content"><h1>Immerse</h1></div></section>
+
+    <div class="intro-card"><h2>Hero Design 16</h2><p>Inverted Blend Mode</p><button class="refresh-btn" data-target="hero-16">Refresh Animation</button></div>
+    <section class="hero hero-16" id="hero-16"><h1>INVERT</h1></section>
+    
+    <div class="intro-card"><h2>Hero Design 17</h2><p>Text Carousel</p><button class="refresh-btn" data-target="hero-17">Refresh Animation</button></div>
+    <section class="hero hero-17" id="hero-17"><h2>We</h2><div class="text-carousel"><div class="carousel-item">Innovate</div><div class="carousel-item">Create</div><div class="carousel-item">Collaborate</div><div class="carousel-item">Lead</div></div></section>
+    
+    <div class="intro-card"><h2>Hero Design 18</h2><p>Interactive Grid</p><button class="refresh-btn" data-target="hero-18">Refresh Animation</button></div>
+    <section class="hero hero-18" id="hero-18"><div class="grid-container"></div><div class="hero-content" style="position: absolute;"><h1>Engage</h1></div></section>
+
+    <div class="intro-card"><h2>Hero Design 19</h2><p>Mouse Parallax</p><button class="refresh-btn" data-target="hero-19">Refresh Animation</button></div>
+    <section class="hero hero-19" id="hero-19"><div class="parallax-bg"></div><div class="hero-content"><h1>Explore</h1></div></section>
+
+    <div class="intro-card"><h2>Hero Design 20</h2><p>Liquid Text Effect</p><button class="refresh-btn" data-target="hero-20">Refresh Animation</button></div>
+    <section class="hero hero-20" id="hero-20"><h1 class="liquid-text">FLOW</h1><svg class="hidden-svg"><defs><filter id="liquid-effect"><feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" /><feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="contrast" /><feBlend in="SourceGraphic" in2="contrast" /></filter></defs></svg></section>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // This master object will hold all animation functions.
+        const animations = {};
+
+        // --- HERO 1: Kinetic Grid ---
+        animations['hero-1'] = () => {
+            const hero = document.querySelector('#hero-1');
+            gsap.fromTo(hero.querySelector('.hero-title'), 
+                { opacity: 0, y: 50 }, 
+                { opacity: 1, y: 0, duration: 1, ease: 'power2.out' }
+            );
+        };
+
+        // --- HERO 2: Classic Glitch ---
+        animations['hero-2'] = () => {
+            const title = document.querySelector('#hero-2 .glitch-title');
+            title.classList.add('glitch-active');
+            setTimeout(() => {
+                title.classList.remove('glitch-active');
+            }, 7000); // Glitch for 7 seconds
+        };
+
+        // --- HERO 3: Particle Connections ---
+        animations['hero-3'] = () => {
+            const canvas = document.getElementById('particle-canvas');
+            if (!canvas.init) { // Prevent re-initialization
+                canvas.init = true;
+                const ctx = canvas.getContext('2d');
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                let particlesArray = [];
+                
+                class Particle { /* ... particle logic ... */ }
+                function initParticles() { /* ... init logic ... */ }
+                function connectParticles() { /* ... connect logic ... */ }
+                function animateParticles() { requestAnimationFrame(animateParticles); ctx.clearRect(0,0,innerWidth,innerHeight); particlesArray.forEach(p => p.update()); connectParticles(); }
+                
+                initParticles();
+                animateParticles();
+                window.addEventListener('resize', () => { canvas.width = innerWidth; canvas.height = innerHeight; initParticles(); });
+            }
+            gsap.fromTo('#hero-3 .hero-content', {opacity: 0}, {opacity: 1, duration: 1});
+        };
+
+        // --- HERO 4: Layered 3D Card ---
+        animations['hero-4'] = () => {
+            const card = document.querySelector('#hero-4 .card-3d');
+            const box = document.querySelector('#hero-4 .perspective-box');
+            box.addEventListener('mousemove', e => {
+                const { left, top, width, height } = box.getBoundingClientRect();
+                const x = e.clientX - left;
+                const y = e.clientY - top;
+                const rotateX = gsap.utils.mapRange(0, height, 15, -15, y);
+                const rotateY = gsap.utils.mapRange(0, width, -15, 15, x);
+                gsap.to(card, { rotateX, rotateY, scale: 1.05, duration: 0.5, ease: 'power2.out' });
+            });
+            box.addEventListener('mouseleave', () => {
+                gsap.to(card, { rotateX: 0, rotateY: 0, scale: 1, duration: 0.5, ease: 'power2.out' });
+            });
+        };
+
+        // --- HERO 5: Enhanced Text Reveal ---
+        animations['hero-5'] = () => {
+            const title = document.querySelector('.reveal-title');
+            if (!title.spans) {
+                const text = title.textContent;
+                title.innerHTML = '';
+                text.split('').forEach(char => {
+                    const span = document.createElement('span');
+                    span.className = 'char';
+                    span.textContent = char;
+                    title.appendChild(span);
+                });
+                title.spans = true;
+            }
+            const tl = gsap.timeline();
+            tl.fromTo('.reveal-title .char', 
+                { opacity: 0, y: 50, scale: 0.5, rotate: 90 },
+                { opacity: 1, y: 0, scale: 1, rotate: 0, stagger: 0.05, duration: 0.5, ease: 'power2.out' }
+            ).to('.reveal-title .char', { scale: 1.05, stagger: 0.05, yoyo: true, repeat: 1, duration: 0.1 }, "-=0.2");
+        };
+
+        // --- HERO 6: Neon Flicker ---
+        animations['hero-6'] = () => {
+             gsap.fromTo('#hero-6 .neon-title', {opacity: 0}, {opacity: 1, duration: 1.5});
+        };
+        
+        // --- HERO 7: SVG Path Drawing ---
+        animations['hero-7'] = () => {
+            gsap.fromTo('#hero-7 svg path', {strokeDashoffset: 2000}, {strokeDashoffset: 0, duration: 3, ease: 'power2.inOut'});
+        };
+
+        // --- HERO 8: Hacker Terminal ---
+        animations['hero-8'] = () => {
+            const textEl = document.getElementById('terminal-text');
+            const text = "Booting system... ULIC protocol initialized. Accessing mainframe... Connection established. Welcome, agent.";
+            gsap.to(textEl, { text: { value: text, delimiter: "" }, duration: 4, ease: 'none' });
+        };
+
+        // --- HERO 9: Cursor Spotlight ---
+        animations['hero-9'] = () => {
+            const hero = document.querySelector('#hero-9');
+            const spotlight = hero.querySelector('.spotlight');
+            hero.addEventListener('mousemove', e => {
+                gsap.to(spotlight, {
+                    background: `radial-gradient(circle at ${e.clientX}px ${e.clientY}px, transparent 100px, var(--bg-color) 250px)`,
+                    duration: 0.3
+                });
+            });
+        };
+        
+        // --- HERO 10: Masked Text ---
+        animations['hero-10'] = () => {
+             gsap.fromTo('#hero-10 .masked-title', {opacity: 0, scale: 0.8}, {opacity: 1, scale: 1, duration: 1});
+        };
+
+        // --- HERO 11: Bouncing Text ---
+        animations['hero-11'] = () => {
+            const title = document.querySelector('.bouncing-word');
+            if (!title.spans) {
+                title.innerHTML = title.textContent.split('').map(char => `<span>${char}</span>`).join('');
+                title.spans = true;
+            }
+            gsap.fromTo('.bouncing-word span', { y: -100, opacity: 0 }, { y: 0, opacity: 1, ease: 'bounce.out', duration: 1.5, stagger: 0.1 });
+        };
+        
+        // --- HERO 12: Staggered Line Reveal ---
+        animations['hero-12'] = () => {
+            gsap.fromTo('#hero-12 .line', { y: '100%' }, { y: '0%', duration: 1, ease: 'power4.out', stagger: 0.2 });
+        };
+        
+        // --- HERO 13: Floating Shapes ---
+        animations['hero-13'] = () => {
+            const container = document.querySelector('#hero-13 .abstract-shapes');
+            if(container.children.length === 0) {
+                for(let i = 0; i < 15; i++) {
+                    const shape = document.createElement('div');
+                    shape.className = 'shape';
+                    container.appendChild(shape);
+                    gsap.set(shape, {
+                        left: `${Math.random() * 100}%`,
+                        top: `${Math.random() * 100}%`,
+                        width: `${Math.random() * 150 + 50}px`,
+                        height: `${Math.random() * 150 + 50}px`,
+                        borderRadius: `${Math.random() * 50}%`
+                    });
+                    gsap.to(shape, {
+                        x: `${Math.random() * 400 - 200}px`,
+                        y: `${Math.random() * 400 - 200}px`,
+                        rotation: Math.random() * 360,
+                        duration: Math.random() * 20 + 10,
+                        repeat: -1,
+                        yoyo: true,
+                        ease: 'sine.inOut'
+                    });
+                }
+            }
+        };
+
+        // --- HERO 14: Breaking Text ---
+        animations['hero-14'] = () => {
+            const title = document.querySelector('.broken-text');
+            if (!title.spans) {
+                title.innerHTML = title.textContent.split('').map(char => `<span class="char">${char}</span>`).join('');
+                title.spans = true;
+            }
+            gsap.fromTo('.broken-text .char', 
+                { opacity: 1, x: 0, y: 0, rotate: 0 },
+                { 
+                    opacity: 0, 
+                    x: () => Math.random() * 400 - 200,
+                    y: () => Math.random() * 400 - 200,
+                    rotate: () => Math.random() * 720 - 360,
+                    duration: 2, 
+                    stagger: 0.02, 
+                    ease: 'power2.out'
+                }
+            );
+        };
+
+        // --- HERO 15: Video Background ---
+        animations['hero-15'] = () => {
+             gsap.fromTo('#hero-15 h1', {opacity: 0}, {opacity: 1, duration: 1.5});
+        };
+
+        // --- HERO 16: Inverted Blend Mode ---
+        animations['hero-16'] = () => {
+             gsap.fromTo('#hero-16 h1', {scale: 3, opacity: 0}, {scale: 1, opacity: 1, duration: 1, ease: 'power3.out'});
+        };
+
+        // --- HERO 17: Text Carousel ---
+        animations['hero-17'] = () => {
+            const items = gsap.utils.toArray('.carousel-item');
+            if (gsap.getTweensOf(items).length > 0) return; // Prevent multiple animations
+            gsap.to(items, {
+                yPercent: -100 * (items.length -1),
+                ease: 'power2.inOut',
+                duration: items.length * 1,
+                repeat: -1,
+                yoyo: true
+            });
+        };
+
+        // --- HERO 18: Interactive Grid ---
+        animations['hero-18'] = () => {
+            const container = document.querySelector('#hero-18 .grid-container');
+            if (container.children.length === 0) {
+                 for (let i = 0; i < 400; i++) {
+                    const item = document.createElement('div');
+                    item.className = 'grid-item';
+                    container.appendChild(item);
+                }
+            }
+        };
+
+        // --- HERO 19: Mouse Parallax ---
+        animations['hero-19'] = () => {
+            const hero = document.querySelector('#hero-19');
+            const bg = hero.querySelector('.parallax-bg');
+            const content = hero.querySelector('.hero-content');
+            hero.addEventListener('mousemove', (e) => {
+                const x = (e.clientX / window.innerWidth - 0.5) * 50;
+                const y = (e.clientY / window.innerHeight - 0.5) * 50;
+                gsap.to(bg, { x: -x, y: -y, duration: 0.5, ease: 'power1.out' });
+                gsap.to(content, { x: x, y: y, duration: 0.5, ease: 'power1.out' });
+            });
+        };
+
+        // --- HERO 20: Liquid Text Effect ---
+        animations['hero-20'] = () => {
+             gsap.fromTo('#hero-20 h1', {opacity: 0, scale: 1.2}, {opacity: 1, scale: 1, duration: 1});
+        };
+
+
+        // --- Initialize all animations on load ---
+        Object.values(animations).forEach(animFunc => animFunc());
+
+        // --- Setup Refresh Buttons ---
+        document.querySelectorAll('.refresh-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const targetId = button.dataset.target;
+                if (animations[targetId]) {
+                    animations[targetId]();
+                }
+            });
+        });
+
+    });
+    </script>
+</body>
+</html>

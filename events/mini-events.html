@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-MYXGNCY7V1"></script>
     <script>
@@ -12,139 +12,119 @@
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Explore the mini events organized by University Laboratory ICT Club (ULIC)."
-    />
-    <meta name="keywords" content="ULIC, mini events, ICT BUDDY, technology, Bangladesh" />
-    <meta name="author" content="University Laboratory ICT Club" />
-    <meta name="robots" content="index, follow" />
-
-    <!-- Open Graph Tags -->
-    <meta property="og:title" content="ULIC Mini Events" />
-    <meta property="og:description" content="Explore the mini events organized by University Laboratory ICT Club (ULIC)." />
-    <meta property="og:image" content="/images/ulic-logo.jpg" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="University Laboratory ICT Club - ULIC" />
-    <meta property="og:url" content="https://ulic-bd.org/events/mini-events.html" />
-
+    <meta name="description" content="Explore focused workshops, challenges, and tech talks from the University Laboratory ICT Club (ULIC)." />
     <title>ULIC Mini Events | University Laboratory ICT Club</title>
 
-    <!-- Preload Critical Assets -->
-    <link href="https://fonts.googleapis.com/css2?family=Iceberg&display=swap" rel="stylesheet" />
-    <link rel="preload" href="/events-css/mini-events.css" as="style" />
-
-    <!-- Preconnect to Critical Origins -->
-    <link rel="preconnect" href="https://unpkg.com" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-    <!-- Include Fonts -->
-    <link rel="stylesheet" href="/components/font.html"
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="/css/navbar.css" />
-    <link rel="stylesheet" href="/css/footer.css" />
-    <link rel="stylesheet" href="/events-css/mini-events.css" />
-    <link rel="stylesheet" href="/css/custom-cursor.css" />
+    <!-- Preconnect and Preload for Performance -->
+    <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
+    <link rel="preload" href="/css/mini-events.css" as="style" />
+    <link rel="preload" href="/js/mini-events.js" as="script" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/images/ulic-logo.ico" />
 
-    <!-- Modern Icons -->
-    <script src="https://unpkg.com/feather-icons" defer></script>
-  </head>
-  <body>
-    <!-- Navbar -->
-    <script src="/js/include-navbar.js" defer></script>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/navbar.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+    <link rel="stylesheet" href="/css/mini-events.css" />
+
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+    <!-- Navbar Placeholder -->
+    <div id="navbar-placeholder"></div>
 
     <main id="main-content">
-      <!-- Hero Section -->
-      <section class="hero" aria-labelledby="hero-heading">
-        <div class="hero-content">
-          <h1 id="hero-heading">Mini Events</h1>
-          <p class="hero-subtitle">Quick tech challenges and workshops at ULIC</p>
-        </div>
-        <div class="lightning-overlay"></div>
-      </section>
+        <!-- Hero Section with Decoding Text Effect -->
+        <section class="hero">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1 id="hero-title">Mini_Events</h1>
+                <p class="hero-subtitle">Focused Workshops, Skill Challenges, and Tech Talks</p>
+            </div>
+        </section>
 
-      <!-- Mini Events Section -->
-      <section class="mini-events-section" aria-labelledby="mini-events-heading">
-        <div class="section-inner">
-          <div class="section-header">
-            <h2 id="mini-events-heading" class="section-title">Mini Events</h2>
-            <p class="section-description">Join us for bite-sized tech experiences!</p>
-          </div>
-          <div class="event-grid">
-            <article class="event-card">
-              <figure class="event-image">
-                <img src="/images/build-your-portfolio-banner.png" alt="Build Your Portfolio Mini Event" loading="lazy" />
-                <div class="event-date">
-                  <span class="month">June</span>
-                  <span class="day">2</span>
-                  <span class="year">2025</span>
+        <!-- Mini Events Grid Section -->
+        <section class="mini-events-section" aria-labelledby="mini-events-heading">
+            <div class="container">
+                <div class="section-header">
+                    <h2 id="mini-events-heading">Our Mini Events</h2>
+                    <p class="section-subtitle">Bite-sized learning experiences designed to sharpen your skills.</p>
                 </div>
-              </figure>
-              <div class="event-content">
-                <h3 class="event-title">Build Your Portfolio! (Ongoing)</h3>
-                <p>Join us today as our members showcase their skills and portfolios in this live event!</p>
-                <a href="/events/mini-events/build-your-portfolio.html" class="details-btn">
-                  Details <i data-feather="info" class="icon"></i>
-                </a>
-              </div>
-            </article>
-            <article class="event-card">
-              <figure class="event-image">
-                <img src="/images/ulic-logo.jpg" alt="Placeholder Mini Event" loading="lazy" />
-                <div class="event-date">
-                  <span class="month">TBD</span>
-                  <span class="day">TBD</span>
-                  <span class="year">TBD</span>
+
+                <!-- Filter Buttons -->
+                <div class="filter-bar">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="workshop">Workshops</button>
+                    <button class="filter-btn" data-filter="challenge">Challenges</button>
+                    <button class="filter-btn" data-filter="talk">Talks</button>
                 </div>
-              </figure>
-              <div class="event-content">
-                <h3 class="event-title">Coming Soon</h3>
-                <p>Stay tuned for our next exciting mini event!</p>
-                <a href="#" class="details-btn">
-                  Details <i data-feather="info" class="icon"></i>
-                </a>
-              </div>
-            </article>
-            <article class="event-card">
-              <figure class="event-image">
-                <img src="/images/ulic-logo.jpg" alt="Placeholder Mini Event" loading="lazy" />
-                <div class="event-date">
-                  <span class="month">TBD</span>
-                  <span class="day">TBD</span>
-                  <span class="year">TBD</span>
+
+                <!-- Events Grid -->
+                <div class="event-grid">
+                    <a href="/events/mini-events/build-your-portfolio.html" class="event-card" data-category="workshop">
+                        <div class="card-banner">
+                            <img src="/images/build-your-portfolio-banner.png" alt="Portfolio Workshop Banner" />
+                            <span class="card-tag">Workshop</span>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Build Your Portfolio!</h3>
+                            <p class="card-desc">A hands-on workshop where members showcase their skills and build impressive portfolios.</p>
+                            <div class="card-footer">
+                                <span class="card-date"><i data-feather="calendar"></i> June 2, 2025</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <div class="event-card placeholder" data-category="challenge">
+                        <div class="card-banner">
+                             <img src="https://placehold.co/600x400/16161e/bb9af7?text=Code+Challenge" alt="Placeholder" />
+                            <span class="card-tag">Challenge</span>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Coding Challenge</h3>
+                            <p class="card-desc">A friendly competition to test your problem-solving skills. Coming soon!</p>
+                             <div class="card-footer">
+                                <span class="card-date"><i data-feather="calendar"></i> TBD</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="event-card placeholder" data-category="talk">
+                        <div class="card-banner">
+                            <img src="https://placehold.co/600x400/16161e/bb9af7?text=Tech+Talk" alt="Placeholder" />
+                            <span class="card-tag">Tech Talk</span>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Tech Talk: AI Trends</h3>
+                            <p class="card-desc">An informal session to discuss the latest trends in Artificial Intelligence.</p>
+                             <div class="card-footer">
+                                <span class="card-date"><i data-feather="calendar"></i> TBD</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </figure>
-              <div class="event-content">
-                <h3 class="event-title">Coming Soon</h3>
-                <p>Stay tuned for our next exciting mini event!</p>
-                <a href="#" class="details-btn">
-                  Details <i data-feather="info" class="icon"></i>
-                </a>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
+            </div>
+        </section>
     </main>
 
-    <!-- Footer -->
-    <script src="/js/include-footer.js" defer></script>
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
 
-    <!-- Initialize Feather Icons -->
+    <!-- Scripts -->
+    <script src="/js/include-fonts.js" defer></script> 
+    <script src="/js/include-navbar.js" defer></script>
+    <script src="/js/include-footer.js" defer></script>
+    <script src="/js/mini-events.js" defer></script>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        if (typeof feather !== "undefined") {
-          feather.replace({
-            "aria-hidden": "true",
-          });
-        } else {
-          console.warn("Feather Icons script not loaded.");
-        }
-      });
+        // Feather Icons Initialization
+        document.addEventListener("DOMContentLoaded", () => {
+            if (typeof feather !== 'undefined') {
+                feather.replace();
+            }
+        });
     </script>
-  </body>
+</body>
 </html>

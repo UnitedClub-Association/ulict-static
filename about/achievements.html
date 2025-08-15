@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MYXGNCY7V1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-MYXGNCY7V1");
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Explore the pioneering achievements and records set by the University Laboratory ICT Club (ULIC)." />
+    <title>Achievements | University Laboratory ICT Club</title>
+
+    <!-- Preconnect and Preload for Performance -->
+    <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
+    <link rel="preload" href="/css/achievements.css" as="style" />
+    <link rel="preload" href="/js/achievements.js" as="script" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/images/ulic-logo.ico" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/navbar.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+    <link rel="stylesheet" href="/css/achievements.css" />
+
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+    <!-- Navbar Placeholder -->
+    <div id="navbar-placeholder"></div>
+
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Our Milestones</h1>
+                <p>Redefining the standards of excellence, one achievement at a time.</p>
+            </div>
+        </section>
+
+        <!-- Achievements Section -->
+        <section class="achievements-section">
+            <div class="container">
+                <div class="achievement-item">
+                    <div class="achievement-icon"><i data-feather="server"></i></div>
+                    <div class="achievement-text">
+                        <h3>Digital Infrastructure Leadership</h3>
+                        <p>ULIC proudly architects and manages the entire online infrastructure for the United Club Association (UCA). From robust websites to integrated internal systems, we provide the digital backbone that ensures a seamless and efficient experience for all associated clubs, demonstrating our capability in real-world project management and deployment.</p>
+                    </div>
+                </div>
+                <div class="achievement-item">
+                    <div class="achievement-icon"><i data-feather="smartphone"></i></div>
+                    <div class="achievement-text">
+                        <h3>Pioneers in Software Development</h3>
+                        <p>We hold the unique distinction of being the first club at our institution to design, develop, and launch a comprehensive suite of software. Our portfolio includes custom web applications, cross-platform desktop software, and intuitive mobile apps, setting a new benchmark for technical innovation and practical achievement within a student-led organization.</p>
+                    </div>
+                </div>
+                <div class="achievement-item">
+                    <div class="achievement-icon"><i data-feather="award"></i></div>
+                    <div class="achievement-text">
+                        <h3>A Unique Identity in Bangladesh</h3>
+                        <p>ULIC has carved a niche as one of the most distinctive ICT clubs in Bangladesh. We are recognized not just for our technical skills but for our ambitious vision, our commitment to pushing creative boundaries, and our unwavering dedication to fostering a culture of relentless innovation and excellence.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="/js/include-fonts.js" defer></script>
+    <script src="/js/include-navbar.js" defer></script>
+    <script src="/js/include-footer.js" defer></script>
+    <script src="/js/achievements.js" defer></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            if (typeof feather !== 'undefined') {
+                feather.replace();
+            }
+        });
+    </script>
+</body>
+</html>

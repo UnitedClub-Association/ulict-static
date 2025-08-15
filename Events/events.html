@@ -1,292 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
+    <!-- Meta Tags, SEO, etc. -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Explore the events, mini events, and sessions organized by University Laboratory ICT Club (ULIC)." />
+    <meta name="keywords" content="ULIC, University Laboratory ICT Club, events, mini events, sessions, ICT BUDDY, technology, Bangladesh" />
+    <title>ULIC Events | University Laboratory ICT Club</title>
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-MYXGNCY7V1"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
+      function gtag() { dataLayer.push(arguments); }
       gtag("js", new Date());
       gtag("config", "G-MYXGNCY7V1");
     </script>
 
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Explore the events, mini events, and sessions organized by University Laboratory ICT Club (ULIC)."
-    />
-    <meta name="keywords" content="ULIC, University Laboratory ICT Club, events, mini events, sessions, ICT BUDDY, technology, Bangladesh" />
-    <meta name="author" content="University Laboratory ICT Club" />
-    <meta name="robots" content="index, follow" />
-
-    <!-- Open Graph Tags -->
-    <meta property="og:title" content="ULIC Events" />
-    <meta property="og:description" content="Explore the events, mini events, and sessions organized by University Laboratory ICT Club (ULIC)." />
-    <meta property="og:image" content="/images/ulic-logo.jpg" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="University Laboratory ICT Club - ULIC" />
-    <meta property="og:url" content="https://ulic-bd.org/events/events.html" />
-
-    <title>ULIC Events | University Laboratory ICT Club</title>
-
-    <!-- Preload Critical Assets -->
-    <link rel="preload" href="/js/include-fonts.js" as="script" />
-    <link rel="preload" href="/events-css/events.css" as="style" />
-
-    <!-- Preconnect to Critical Origins -->
-    <link rel="preconnect" href="https://unpkg.com" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-    <!-- Include Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Iceberg&display=swap" rel="stylesheet" />
-    <script src="/js/include-fonts.js" defer></script>
-
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="/css/navbar.css" />
-    <link rel="stylesheet" href="/css/footer.css" />
-    <link rel="stylesheet" href="/events-css/events.css" />
-    <link rel="stylesheet" href="/css/custom-cursor.css" />
+    <!-- Preconnect and Preload for Performance -->
+    <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
+    <link rel="preload" href="/css/events.css" as="style" />
+    <link rel="preload" href="/js/events.js" as="script" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/images/ulic-logo.ico" />
 
-    <!-- Modern Icons -->
-    <script src="https://unpkg.com/feather-icons" defer></script>
-  </head>
-  <body>
-    <!-- Navbar -->
-    <script src="/js/include-navbar.js" defer></script>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/navbar.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+    <link rel="stylesheet" href="/css/events.css" />
+
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+    <!-- Navbar Placeholder -->
+    <div id="navbar-placeholder"></div>
 
     <main id="main-content">
-      <!-- Hero Section -->
-      <section class="hero" aria-labelledby="hero-heading">
-        <div class="hero-overlay"></div>
-        <div class="hero-content load-anim">
-          <h1 id="hero-heading">Events</h1>
-          <p class="hero-subtitle">Discover the exciting events, mini events, and sessions at ULIC</p>
-        </div>
-      </section>
+        <!-- Hero Section with Text Carousel -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="text-carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item">Innovation</div>
+                        <div class="carousel-item">Code</div>
+                        <div class="carousel-item">Connect</div>
+                        <div class="carousel-item">Create</div>
+                        <div class="carousel-item">Synergy</div>
+                        <div class="carousel-item">Future</div>
+                        <div class="carousel-item">Events</div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      <!-- Events Section -->
-      <section class="events-section" aria-labelledby="events-heading">
-        <h2 id="events-heading" class="load-anim">Events</h2>
-        <div class="event-grid">
-          <article class="event-card load-anim" data-delay="0.1s">
-            <div class="event-image">
-              <img src="/images/uca_logo.png" alt="UCA Unveiled Event" loading="lazy" />
-              <h3 class="event-title">UCA Unveiled</h3>
+        <!-- Filler Section: Our Journey -->
+        <section class="journey-section" aria-labelledby="journey-heading">
+            <div class="container">
+                <div class="section-header">
+                    <h2 id="journey-heading">Our Journey So Far</h2>
+                    <p class="section-subtitle">From foundational sessions to major milestones, this is our story.</p>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>Club Inception</h3>
+                            <p>The idea of ULIC was born, laying the groundwork for a new tech community.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>First Session</h3>
+                            <p>Our inaugural meeting, where we shared our vision and welcomed our first members.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>UCA Unveiled</h3>
+                            <p>The official launch event, marking our public debut and the start of our journey.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>Future Milestones</h3>
+                            <p>Stay tuned as we continue to innovate, host new events, and grow our community.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="event-content">
-              <div class="event-date">
-                <span class="month">May</span>
-                <span class="day">8</span>
-                <span class="year">2025</span>
-              </div>
-              <p>Join us in the official launch of ULIC under UCA.</p>
-              <div class="button">
-                <a href="/events/events/uca-unveiled.html" class="read-more">
-                  Read more <span class="sr-only">about UCA Unveiled</span>
-                  <i data-feather="arrow-right" class="icon"></i>
-                </a>
-              </div>
-            </div>
-          </article>
-          <article class="event-card load-anim" data-delay="0.2s">
-            <div class="event-image">
-              <img src="/images/ulic-logo.jpg" alt="Placeholder Event" loading="lazy" />
-              <h3 class="event-title">Coming Soon</h3>
-            </div>
-            <div class="event-content">
-              <div class="event-date">
-                <span class="month">TBD</span>
-                <span class="day">TBD</span>
-                <span class="year">TBD</span>
-              </div>
-              <p>Stay tuned for our next exciting event!</p>
-              <div class="button">
-                <a href="#" class="read-more">
-                  Read more <span class="sr-only">about Placeholder Event</span>
-                  <i data-feather="arrow-right" class="icon"></i>
-                </a>
-              </div>
-            </div>
-          </article>
-          <article class="event-card load-anim" data-delay="0.3s">
-            <div class="event-image">
-              <img src="/images/ulic-logo.jpg" alt="Placeholder Event" loading="lazy" />
-              <h3 class="event-title">Coming Soon</h3>
-            </div>
-            <div class="event-content">
-              <div class="event-date">
-                <span class="month">TBD</span>
-                <span class="day">TBD</span>
-                <span class="year">TBD</span>
-              </div>
-              <p>Stay tuned for our next exciting event!</p>
-              <div class="button">
-                <a href="#" class="read-more">
-                  Read more <span class="sr-only">about Placeholder Event</span>
-                  <i data-feather="arrow-right" class="icon"></i>
-                </a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
+        </section>
 
-      <!-- Mini Events Section -->
-      <section class="mini-events-section" aria-labelledby="mini-events-heading">
-        <h2 id="mini-events-heading" class="load-anim">Mini Events</h2>
-        <div class="event-grid">
-          <article class="event-card load-anim" data-delay="0.1s">
-            <div class="event-image">
-              <img src="/images/build-your-portfolio-banner.png" alt="Build Your Portfolio Mini Event" loading="lazy" />
-              <h3 class="event-title">Build Your Portfolio!</h3>
+        <!-- Upcoming Events Section -->
+        <section class="events-section" aria-labelledby="events-heading">
+            <div class="container">
+                <div class="section-header">
+                    <h2 id="events-heading">Upcoming Events</h2>
+                    <p class="section-subtitle">The next big things on our calendar. Don't miss out.</p>
+                </div>
+                <div class="events-grid">
+                    <!-- Main Featured Event -->
+                    <a href="/events/events/uca-unveiled.html" class="event-card featured">
+                        <img src="/images/uca_logo.png" alt="UCA Unveiled Event" class="event-card-img" />
+                        <div class="event-card-overlay">
+                            <div class="event-card-content">
+                                <span class="event-card-tag">Main Event</span>
+                                <h3 class="event-card-title">UCA Unveiled</h3>
+                                <p class="event-card-desc">Join us in the official launch of ULIC under UCA, a milestone event for our community.</p>
+                                <div class="event-card-date">May 8, 2025</div>
+                            </div>
+                        </div>
+                    </a>
+                    <!-- Other Events -->
+                    <a href="#" class="event-card">
+                        <img src="/images/ulic-logo.jpg" alt="Placeholder Event" class="event-card-img" />
+                        <div class="event-card-overlay">
+                            <div class="event-card-content">
+                                <h3 class="event-card-title">Coming Soon</h3>
+                                <p class="event-card-desc">Our next major event is in the planning stages. Details will be announced shortly!</p>
+                                <div class="event-card-date">To Be Determined</div>
+                            </div>
+                        </div>
+                    </a>
+                     <a href="#" class="event-card">
+                        <img src="https://placehold.co/600x400/1a1b26/a9b1d6?text=Future+Event" alt="Placeholder Event" class="event-card-img" />
+                        <div class="event-card-overlay">
+                            <div class="event-card-content">
+                                <h3 class="event-card-title">Future Event</h3>
+                                <p class="event-card-desc">Get ready for another exciting event from ULIC. More information is on the way.</p>
+                                <div class="event-card-date">To Be Determined</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
             </div>
-            <div class="event-content">
-              <div class="event-date">
-                <span class="month">June</span>
-                <span class="day">2</span>
-                <span class="year">2025</span>
-              </div>
-              <p>Join us as our members showcase their skills and portfolios.</p>
-              <div class="button">
-                <a href="/events/mini-events/build-your-portfolio.html" class="read-more">
-                  Read more <span class="sr-only">about Build Your Portfolio</span>
-                  <i data-feather="arrow-right" class="icon"></i>
-                </a>
-              </div>
-            </div>
-          </article>
-          <article class="event-card load-anim" data-delay="0.2s">
-            <div class="event-image">
-              <img src="/images/ulic-logo.jpg" alt="Placeholder Mini Event" loading="lazy" />
-              <h3 class="event-title">Coming Soon</h3>
-            </div>
-            <div class="event-content">
-              <div class="event-date">
-                <span class="month">TBD</span>
-                <span class="day">TBD</span>
-                <span class="year">TBD</span>
-              </div>
-              <p>Stay tuned for our next mini event!</p>
-              <div class="button">
-                <a href="#" class="read-more">
-                  Read more <span class="sr-only">about Placeholder Mini Event</span>
-                  <i data-feather="arrow-right" class="icon"></i>
-                </a>
-              </div>
-            </div>
-          </article>
-          <article class="event-card load-anim" data-delay="0.3s">
-            <div class="event-image">
-              <img src="/images/ulic-logo.jpg" alt="Placeholder Mini Event" loading="lazy" />
-              <h3 class="event-title">Coming Soon</h3>
-            </div>
-            <div class="event-content">
-              <div class="event-date">
-                <span class="month">TBD</span>
-                <span class="day">TBD</span>
-                <span class="year">TBD</span>
-              </div>
-              <p>Stay tuned for our next mini event!</p>
-              <div class="button">
-                <a href="#" class="read-more">
-                  Read more <span class="sr-only">about Placeholder Mini Event</span>
-                  <i data-feather="arrow-right" class="icon"></i>
-                </a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
+        </section>
 
-      <!-- Sessions Section -->
-      <section class="sessions-section" aria-labelledby="sessions-heading">
-        <h2 id="sessions-heading" class="load-anim">Sessions</h2>
-        <div class="event-grid">
-          <article class="event-card load-anim" data-delay="0.1s">
-            <div class="event-image">
-              <img src="/images/ulic-logo.jpg" alt="ULIC First Session" loading="lazy" />
-              <h3 class="event-title">First Session</h3>
+        <!-- Mini Events & Sessions Section -->
+        <section class="sub-events-section" aria-labelledby="sub-events-heading">
+            <div class="container">
+                <div class="section-header">
+                    <h2 id="sub-events-heading">Mini Events & Sessions</h2>
+                    <p class="section-subtitle">Focused workshops, skill-building sessions, and community gatherings.</p>
+                </div>
+
+                <!-- Mini Events Carousel -->
+                <h3>Mini Events</h3>
+                <div class="horizontal-scroll-wrapper">
+                    <div class="card-grid">
+                        <a href="/events/mini-events/build-your-portfolio.html" class="activity-card">
+                            <div class="card-icon"><i data-feather="briefcase"></i></div>
+                            <h4>Build Your Portfolio!</h4>
+                            <p>A hands-on workshop where members showcase their skills and build impressive portfolios.</p>
+                            <span>June 2, 2025</span>
+                        </a>
+                        <div class="activity-card placeholder">
+                            <div class="card-icon"><i data-feather="code"></i></div>
+                            <h4>Coding Challenge</h4>
+                            <p>A friendly competition to test your problem-solving skills. Coming soon!</p>
+                            <span>TBD</span>
+                        </div>
+                        <div class="activity-card placeholder">
+                            <div class="card-icon"><i data-feather="share-2"></i></div>
+                            <h4>Tech Talk</h4>
+                            <p>An informal session to discuss the latest trends in the tech industry. Stay tuned!</p>
+                            <span>TBD</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sessions Carousel -->
+                <h3 class="sessions-title">Sessions</h3>
+                 <div class="horizontal-scroll-wrapper">
+                    <div class="card-grid">
+                        <a href="/events/sessions/offline-session1.html" class="activity-card">
+                            <div class="card-icon"><i data-feather="users"></i></div>
+                            <h4>First Session</h4>
+                            <p>Our inaugural session where we introduced ULIC, its vision, and future plans.</p>
+                            <span>May 28, 2025</span>
+                        </a>
+                        <div class="activity-card placeholder">
+                            <div class="card-icon"><i data-feather="git-branch"></i></div>
+                            <h4>Git & GitHub Workshop</h4>
+                            <p>A beginner-friendly introduction to version control. Details coming soon.</p>
+                            <span>TBD</span>
+                        </div>
+                         <div class="activity-card placeholder">
+                            <div class="card-icon"><i data-feather="layout"></i></div>
+                            <h4>UI/UX Design Basics</h4>
+                            <p>Learn the fundamentals of creating intuitive and beautiful user interfaces.</p>
+                            <span>TBD</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="event-content">
-              <div class="event-date">
-                <span class="month">May</span>
-                <span class="day">28</span>
-                <span class="year">2025</span>
-              </div>
-              <p>Join us for our first session where we introduce ULIC and its vision.</p>
-              <div class="button">
-                <a href="/events/sessions/offline-session1.html" class="read-more">
-                  Read more <span class="sr-only">about ULIC First Session</span>
-                  <i data-feather="arrow-right" class="icon"></i>
-                </a>
-              </div>
-            </div>
-          </article>
-          <article class="event-card load-anim" data-delay="0.2s">
-            <div class="event-image">
-              <img src="/images/ulic-logo.jpg" alt="Placeholder Session" loading="lazy" />
-              <h3 class="event-title">Coming Soon</h3>
-            </div>
-            <div class="event-content">
-              <div class="event-date">
-                <span class="month">TBD</span>
-                <span class="day">TBD</span>
-                <span class="year">TBD</span>
-              </div>
-              <p>Stay tuned for our next session!</p>
-              <div class="button">
-                <a href="#" class="read-more">
-                  Read more <span class="sr-only">about Placeholder Session</span>
-                  <i data-feather="arrow-right" class="icon"></i>
-                </a>
-              </div>
-            </div>
-          </article>
-          <article class="event-card load-anim" data-delay="0.3s">
-            <div class="event-image">
-              <img src="/images/ulic-logo.jpg" alt="Placeholder Session" loading="lazy" />
-              <h3 class="event-title">Coming Soon</h3>
-            </div>
-            <div class="event-content">
-              <div class="event-date">
-                <span class="month">TBD</span>
-                <span class="day">TBD</span>
-                <span class="year">TBD</span>
-              </div>
-              <p>Stay tuned for our next session!</p>
-              <div class="button">
-                <a href="#" class="read-more">
-                  Read more <span class="sr-only">about Placeholder Session</span>
-                  <i data-feather="arrow-right" class="icon"></i>
-                </a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
+        </section>
     </main>
 
-    <!-- Footer -->
-    <script src="/js/include-footer.js" defer></script>
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
 
-    <!-- Initialize Feather Icons -->
+    <!-- Scripts -->
+    <script src="/js/include-fonts.js" defer></script> 
+    <script src="/js/include-navbar.js" defer></script>
+    <script src="/js/include-footer.js" defer></script>
+    <script src="/js/events.js" defer></script>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        if (typeof feather !== "undefined") {
-          feather.replace({
-            "aria-hidden": "true",
-          });
-        } else {
-          console.warn("Feather Icons script not loaded.");
-        }
-      });
+        // Feather Icons Initialization
+        document.addEventListener("DOMContentLoaded", () => {
+            if (typeof feather !== 'undefined') {
+                feather.replace();
+            }
+        });
     </script>
-  </body>
+</body>
 </html>

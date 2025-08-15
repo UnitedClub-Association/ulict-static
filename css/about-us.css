@@ -1,0 +1,232 @@
+/* --- Global Styles & Tokyo Night Theme --- */
+:root {
+    --bg-color: #1a1b26;
+    --bg-secondary: #16161e;
+    --card-bg: #292a36;
+    --border-color: rgba(122, 162, 247, 0.2);
+    --text-color: #a9b1d6;
+    --text-muted: #565f89;
+    --primary-glow: #7aa2f7;
+    --secondary-glow: #bb9af7;
+    --font-primary: 'Azonix', sans-serif;
+    --font-body: 'Xeroda', sans-serif;
+    --transition-fast: 0.3s ease;
+    --transition-slow: 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* --- Basic Setup --- */
+body {
+    background-color: var(--bg-color);
+    font-family: var(--font-body);
+    color: var(--text-color);
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 6rem 0;
+}
+
+/* --- Hero Section --- */
+.hero {
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    background: linear-gradient(rgba(26, 27, 38, 0.8), rgba(26, 27, 38, 0.8)), url('https://placehold.co/1920x1080/1a1b26/1a1b26?text=') no-repeat center center/cover;
+    background-color: var(--bg-secondary);
+}
+
+.hero-content h1 {
+    font-family: var(--font-primary);
+    font-size: clamp(2.5rem, 9vw, 5rem);
+    color: var(--text-color);
+    text-shadow: 0 0 15px var(--primary-glow);
+    margin: 0;
+    font-weight: normal;
+}
+
+.hero-subtitle {
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    color: var(--text-muted);
+    margin-top: 1rem;
+}
+
+/* --- General Section Styling --- */
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-header h2 {
+    font-family: var(--font-primary);
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+    text-shadow: 0 0 8px var(--primary-glow);
+}
+
+.section-subtitle {
+    font-family: var(--font-body);
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* --- Story Section --- */
+.story-section {
+    background-color: var(--bg-secondary);
+}
+
+.story-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+.story-text p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+}
+
+.story-text p:last-child {
+    margin-bottom: 0;
+}
+
+.story-text strong {
+    color: var(--primary-glow);
+    font-weight: normal;
+}
+
+.story-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+/* --- Mission Section --- */
+.mission-section {
+    background-color: var(--bg-color);
+}
+
+.mission-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.mission-item {
+    background-color: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    text-align: center;
+    transition: var(--transition-slow);
+}
+
+.mission-item:hover {
+    transform: translateY(-10px);
+    border-color: var(--secondary-glow);
+}
+
+.mission-icon {
+    color: var(--secondary-glow);
+    margin-bottom: 1.5rem;
+}
+
+.mission-icon svg {
+    width: 40px;
+    height: 40px;
+}
+
+.mission-item h3 {
+    font-family: var(--font-primary);
+    font-size: 1.8rem;
+    margin: 0 0 1rem 0;
+}
+
+.mission-item p {
+    color: var(--text-muted);
+    line-height: 1.7;
+}
+
+/* --- Achievements Section --- */
+.achievements-section {
+    background-color: var(--bg-secondary);
+}
+
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.achievement-card {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    transition: var(--transition-slow);
+}
+
+.achievement-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-glow);
+}
+
+.achievement-icon {
+    color: var(--primary-glow);
+    margin-bottom: 1.5rem;
+}
+
+.achievement-icon svg {
+    width: 32px;
+    height: 32px;
+}
+
+.achievement-card h4 {
+    font-family: var(--font-primary);
+    font-size: 1.5rem;
+    margin: 0 0 1rem 0;
+}
+
+.achievement-card p {
+    color: var(--text-muted);
+    line-height: 1.7;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 900px) {
+    .story-content {
+        grid-template-columns: 1fr;
+    }
+    .story-image {
+        order: -1; /* Move image to top on smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 4rem 0;
+    }
+    .mission-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- Animation Start States (for JS) --- */
+/* This ensures elements are hidden before GSAP animates them, preventing a flash of content */
+.anim-fade-in, .anim-slide-up, .anim-card {
+    opacity: 0;
+}
