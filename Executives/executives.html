@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MYXGNCY7V1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-MYXGNCY7V1");
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Meet the executive panels of the University Laboratory ICT Club (ULIC)." />
+    <title>Executives | University Laboratory ICT Club</title>
+
+    <!-- Preconnect and Preload for Performance -->
+    <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
+    <link rel="preload" href="/css/executives.css" as="style" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/images/ulic-logo.ico" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/navbar.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+    <link rel="stylesheet" href="/css/executives.css" />
+
+    <!-- Libraries -->
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+    <!-- Navbar Placeholder -->
+    <div id="navbar-placeholder"></div>
+
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Our Leadership</h1>
+                <p>The driving force behind our club's vision and success.</p>
+            </div>
+        </section>
+
+        <!-- Year Selection Section -->
+        <section class="year-selection">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Executive Panels</h2>
+                    <p class="section-subtitle">Select a year to view the executive panel for that term.</p>
+                </div>
+                <div class="year-grid">
+                    <a href="/executives/2024-25.html" class="year-card">
+                        <div class="year-card-content">
+                            <h3>2024-2025</h3>
+                            <p>View the inaugural executive panel.</p>
+                            <span class="view-btn">View Panel <i data-feather="arrow-right"></i></span>
+                        </div>
+                    </a>
+                    <a href="/executives/2026.html" class="year-card">
+                        <div class="year-card-content">
+                            <h3>2026</h3>
+                            <p>The future leaders of ULIC.</p>
+                            <span class="view-btn">View Panel <i data-feather="arrow-right"></i></span>
+                        </div>
+                    </a>
+                    <!-- Add more year cards here as needed -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="/js/include-fonts.js" defer></script>
+    <script src="/js/include-navbar.js" defer></script>
+    <script src="/js/include-footer.js" defer></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            if (typeof feather !== 'undefined') {
+                feather.replace();
+            }
+        });
+    </script>
+</body>
+</html>

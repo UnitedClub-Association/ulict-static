@@ -1,0 +1,49 @@
+/* --- Global Styles & Tokyo Night Theme --- */
+:root {
+    --bg-color: #1a1b26;
+    --bg-secondary: #16161e;
+    --text-color: #a9b1d6;
+    --text-muted: #565f89;
+    --primary-glow: #7aa2f7;
+    --font-primary: 'Azonix', sans-serif;
+    --font-body: 'Xeroda', sans-serif;
+}
+
+/* --- Basic Setup --- */
+body {
+    background-color: var(--bg-secondary);
+    font-family: var(--font-body);
+    color: var(--text-color);
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* --- Coming Soon Section --- */
+.coming-soon {
+    min-height: calc(100vh - 120px); /* Adjust based on navbar/footer height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    background: radial-gradient(ellipse at center, rgba(26, 27, 38, 0.5), var(--bg-secondary) 70%);
+}
+
+.content {
+    max-width: 700px;
+}
+
+.content h1 {
+    font-family: var(--font-primary);
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    color: var(--primary-glow);
+    text-shadow: 0 0 15px var(--primary-glow);
+    margin: 0 0 1.5rem 0;
+    font-weight: normal;
+}
+
+.content p {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    line-height: 1.8;
+}
