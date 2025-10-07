@@ -15,9 +15,9 @@ document.addEventListener("DOMContentLoaded", function () {
     .then((data) => {
       footerPlaceholder.innerHTML = data;
 
-      // Initialize Feather Icons
+      // Initialize Feather Icons (color is now controlled by CSS)
       if (typeof feather !== 'undefined') {
-        feather.replace({ 'stroke-width': 2, 'stroke': '#FFA500', 'aria-hidden': 'true' });
+        feather.replace({ 'stroke-width': 1.5, 'aria-hidden': 'true' });
       }
 
       // Add current year to copyright text
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch((error) => {
       console.error("Error loading footer:", error);
       footerPlaceholder.innerHTML = `
-        <footer style="background: #2E003E; color: #ffbd59; padding: 2rem; text-align: center;">
+        <footer style="background: #0A192F; color: #CCD6F6; padding: 2rem; text-align: center;">
           <p>© ${new Date().getFullYear()} ULIC. All rights reserved.</p>
         </footer>
       `;

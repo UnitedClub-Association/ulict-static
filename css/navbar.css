@@ -37,33 +37,33 @@ body {
 
 /* --- Header & Navbar Container --- */
 .navbar-header {
-  /* === IMPORTANT: All custom variables are now scoped here === */
-  /* Tokyo Night Theme Variables */
-  --nav-bg-color: #1a1b26;
-  --nav-bg-secondary: #16161e;
-  --nav-card-bg: #292a36;
-  --nav-border-color: rgba(122, 162, 247, 0.2);
-  --nav-text-color: #a9b1d6;
-  --nav-text-muted: #565f89;
-  --nav-primary-glow: #7aa2f7;
-  --nav-secondary-glow: #bb9af7;
-  --nav-shadow-color: rgba(0, 0, 0, 0.25);
+  /* === NEW THEME: "Cyber Core" === */
+  /* Inspired by digital interfaces, circuit boards, and the ULIC logo */
+  --nav-bg-color: #0A192F;          /* Deep navy slate background */
+  --nav-bg-secondary: #0D203A;      /* Slightly lighter slate for variation */
+  --nav-card-bg: #162C46;           /* Dropdown and card background */
+  --nav-border-color: rgba(255, 152, 0, 0.2); /* Orange accent for borders */
+  --nav-text-color: #CCD6F6;        /* Light, readable text color */
+  --nav-text-muted: #8892B0;        /* Muted slate for secondary text */
+  --nav-primary-glow: #FF9800;      /* Vibrant orange from your logo */
+  --nav-secondary-glow: #00CFDE;    /* Bright contrasting cyan */
+  --nav-shadow-color: rgba(0, 0, 0, 0.35);
 
-  /* === UPDATED: Unified Font Hierarchy === */
+  /* === UPDATED: Font Hierarchy === */
   --nav-font-title: 'Qood', sans-serif;
   --nav-font-subtitle: 'Strenx', sans-serif;
   --nav-font-header: 'Raligo', sans-serif;
   --nav-font-body: 'Xeroda', sans-serif; /* Unified font for body & descriptions */
   
-  /* Icon Color Palette for Dropdowns */
-  --nav-icon-pink-bg: #ff79c6;
-  --nav-icon-blue-bg: var(--nav-primary-glow);
-  --nav-icon-green-bg: #50fa7b;
-  --nav-icon-yellow-bg: #f1fa8c;
-  --nav-icon-purple-bg: var(--nav-secondary-glow);
-  --nav-icon-orange-bg: #ffb86c;
-  --nav-icon-text-dark: #282a36;
-
+  /* === UPDATED: Icon Color Palette for Dropdowns === */
+  --nav-icon-pink-bg: #E91E63;       /* A vibrant magenta as a tertiary accent */
+  --nav-icon-blue-bg: var(--nav-secondary-glow); /* Now uses the new cyan */
+  --nav-icon-green-bg: #33FFB5;     /* A minty/tech green */
+  --nav-icon-yellow-bg: #FFEB3B;     /* A sharp, electric yellow */
+  --nav-icon-purple-bg: #9747FF;     /* A vibrant purple */
+  --nav-icon-orange-bg: var(--nav-primary-glow); /* Now uses the new orange */
+  --nav-icon-text-dark: #0A192F;     /* Dark text for on top of icons, matches bg */
+  
   /* Animation variables */
   --nav-transition-fast: 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
   --nav-transition-fluid: 0.5s cubic-bezier(0.16, 1, 0.3, 1);

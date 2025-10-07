@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Meta Tags, SEO, and Preloads -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="University Laboratory ICT Club - ULIC - A vibrant community of ICT enthusiasts at University Laboratory School and College" />
@@ -10,7 +9,6 @@
     <meta name="robots" content="index, follow">
     <title>University Laboratory ICT Club - ULIC | University Laboratory School and College</title>
 
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-MYXGNCY7V1"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -19,31 +17,25 @@
       gtag("config", "G-MYXGNCY7V1");
     </script>
 
-    <!-- Preconnect and Preload for Performance -->
     <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
     <link rel="preload" href="/css/index.css" as="style" />
     <link rel="preload" href="/js/main.js" as="script" />
 
-    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/images/ulic-logo.ico" />
     <link rel="apple-touch-icon" href="/images/ulic-logo.jpg" />
 
-    <!-- Stylesheets -->
     <link rel="stylesheet" href="./css/navbar.css" />
     <link rel="stylesheet" href="./css/footer.css" />
     <link rel="stylesheet" href="./css/index.css" />
 
-    <!-- Libraries -->
     <script src="https://unpkg.com/feather-icons"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
 <body>
-    <!-- Navbar Placeholder -->
     <div id="navbar-placeholder"></div>
 
     <main id="main-content">
-        <!-- Hero Section from Theme Design -->
         <section class="hero" aria-labelledby="hero-heading">
             <div class="hero-bg-shapes">
                 <div class="shape shape1"></div><div class="shape shape2"></div><div class="shape shape3"></div>
@@ -53,10 +45,13 @@
                 <p id="hero-heading" class="hero-subtitle">Welcome to the Grid</p>
                 <h1 class="hero-title">University Laboratory ICT Club</h1>
                 <p class="hero-tagline">A nexus for innovators, creators, and pioneers dedicated to shaping the future of technology.</p>
+                <div class="hero-actions">
+                    <a href="https://ulicapp.vercel.app" target="_blank" class="btn btn-primary">Join ULIC</a>
+                    <a href="/about/about-us.html" class="btn btn-secondary">Learn More</a>
+                </div>
             </div>
         </section>
 
-        <!-- Explore ULIC Section -->
         <section class="explore-ulic" aria-labelledby="explore-heading">
             <div class="container">
                 <div class="section-header anim-fade-in">
@@ -66,20 +61,21 @@
                 <div class="explore-content">
                     <div class="explore-text anim-slide-up">
                         <p>Dive into a world of innovation with ULIC. We bring together passionate tech enthusiasts to collaborate, learn, and create amazing things in the digital realm.</p>
-                        <a href="/about/about-us.html" class="btn btn-primary">Learn More About Us</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Philosophy/Quote Section -->
         <section class="philosophy-section">
             <div class="container">
-                <blockquote>Code is not just syntax; it's the architecture of ideas and the language of creation.</blockquote>
+                <div class="quote-container">
+                    <span class="quote-icon top-left"></span>
+                    <blockquote>Code is not just syntax; it's the architecture of ideas and the language of creation.</blockquote>
+                    <span class="quote-icon bottom-right"></span>
+                </div>
             </div>
         </section>
 
-        <!-- Featured Highlights Section (Merged Activities & Events) -->
         <section class="featured-highlights" aria-labelledby="highlights-heading">
             <div class="container">
                 <div class="section-header anim-fade-in">
@@ -93,7 +89,6 @@
                         <button class="highlight-tab" data-tab="events"><i data-feather="calendar"></i>Events</button>
                     </div>
                     <div class="highlight-content-wrapper">
-                        <!-- Activities Content -->
                         <div class="highlight-content active" id="tab-content-activities">
                             <div class="cards-grid">
                                 <a href="activities/uca-unveiled.html" class="card anim-card">
@@ -116,7 +111,6 @@
                                 </a>
                             </div>
                         </div>
-                        <!-- Events Content -->
                         <div class="highlight-content" id="tab-content-events">
                            <div class="events-grid">
                                 <a href="events/uca-unveiled.html" class="event-card anim-slide-up">
@@ -149,10 +143,8 @@
 
     </main>
 
-    <!-- Footer Placeholder -->
     <div id="footer-placeholder"></div>
 
-    <!-- Scripts -->
     <script src="./js/include-fonts.js" defer></script>
     <script src="./js/include-navbar.js" defer></script>
     <script src="./js/include-footer.js" defer></script>
