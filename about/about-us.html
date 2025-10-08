@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MYXGNCY7V1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      gtag("js", new Date());
-      gtag("config", "G-MYXGNCY7V1");
-    </script>
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Learn about the history, mission, and achievements of the University Laboratory ICT Club (ULIC), a pioneer in technology and innovation." />
@@ -31,6 +22,7 @@
     <!-- Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://unpkg.com/feather-icons"></script>
 </head>
 <body>
@@ -38,78 +30,108 @@
     <div id="navbar-placeholder"></div>
 
     <main id="main-content">
-        <!-- Hero Section -->
+        <!-- Hero Section with Interactive 3D Canvas -->
         <section class="hero">
+            <div id="hero-canvas-container"></div>
             <div class="hero-content">
-                <h1 class="anim-fade-in">About ULIC</h1>
-                <p class="hero-subtitle anim-slide-up">Pioneers of Innovation, Architects of the Future</p>
+                <h1 data-anim="hero-title">About ULIC</h1>
+                <p class="hero-subtitle" data-anim="hero-subtitle">Pioneers of Innovation, Architects of the Future</p>
             </div>
         </section>
 
-        <!-- Our Story Section -->
-        <section class="story-section">
-            <div class="container">
-                <div class="section-header anim-fade-in">
-                    <h2>Our Genesis</h2>
-                    <p class="section-subtitle">From a foundational idea to a force of change.</p>
-                </div>
-                <div class="story-content">
-                    <div class="story-text anim-slide-up">
-                        <p>The University Laboratory ICT Club (ULIC) was born from a vision to create a hub for tech enthusiasts. Founded in <strong>October 2024</strong>, we began as one of the nine founding clubs of University Laboratory School and College, driven by a passion for digital creation and problem-solving.</p>
-                        <p>Our commitment to collaboration and structure led us to a pivotal moment in our history. In <strong>January 2025</strong>, ULIC took the initiative to establish the <strong>United Club Association (UCA)</strong>, an organization designed to manage and unify all clubs within the institution. This not only streamlined club activities but also positioned ULIC as a leader in governance and innovation.</p>
+        <!-- Main content wrapper -->
+        <div class="content-wrapper">
+            <!-- Our Story Section -->
+            <section class="genesis-section" id="genesis">
+                <div class="container">
+                    <div class="section-header" data-anim="fade-up">
+                        <h2>Our Genesis</h2>
+                        <p class="section-subtitle">From a foundational idea to a force of change.</p>
                     </div>
-                    <div class="story-image anim-fade-in">
-                        <img src="https://placehold.co/600x400/16161e/7aa2f7?text=ULIC+Founding" alt="ULIC Founding Concept Image">
+                    <div class="genesis-timeline">
+                        <div class="timeline-item" data-anim="fade-up">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h3 class="timeline-date">October 2024</h3>
+                                <p>The University Laboratory ICT Club (ULIC) was born from a vision to create a hub for tech enthusiasts. Founded as one of the nine founding clubs of University Laboratory School and College, we were driven by a passion for digital creation and problem-solving.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item" data-anim="fade-up">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h3 class="timeline-date">January 2025</h3>
+                                <p>Our commitment to collaboration and structure led us to a pivotal moment. ULIC took the initiative to establish the <strong>United Club Association (UCA)</strong>, an organization designed to manage and unify all clubs within the institution, positioning ULIC as a leader in governance and innovation.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Mission & Vision Section -->
-        <section class="mission-section">
-            <div class="container">
-                <div class="mission-content">
-                    <div class="mission-item anim-card">
-                        <div class="mission-icon"><i data-feather="globe"></i></div>
-                        <h3>Our Vision</h3>
-                        <p>We see a future where technology is a universal language for creation. Our dream is not confined to Dhaka or even Bangladesh; we believe the entire world is our stage, and we are preparing our members to shine on it.</p>
-                    </div>
-                    <div class="mission-item anim-card">
-                        <div class="mission-icon"><i data-feather="code"></i></div>
-                        <h3>Our Mission</h3>
-                        <p>To cultivate a dynamic environment where students can explore, learn, and master technology. We are dedicated to pushing boundaries, fostering innovation, and empowering the next generation of tech leaders and creators.</p>
+            <!-- Mission & Vision Section -->
+            <section class="mission-section" id="mission">
+                <div class="container">
+                     <div class="data-card-grid">
+                        <div class="data-card" data-anim="fade-up">
+                            <div class="card-header">
+                                <i data-feather="globe"></i>
+                                <h3>Our Vision</h3>
+                            </div>
+                            <div class="card-body">
+                                <p>We see a future where technology is a universal language for creation. Our dream is not confined to Dhaka or even Bangladesh; we believe the entire world is our stage, and we are preparing our members to shine on it.</p>
+                            </div>
+                        </div>
+                        <div class="data-card" data-anim="fade-up">
+                            <div class="card-header">
+                                <i data-feather="code"></i>
+                                <h3>Our Mission</h3>
+                            </div>
+                            <div class="card-body">
+                                <p>To cultivate a dynamic environment where students can explore, learn, and master technology. We are dedicated to pushing boundaries, fostering innovation, and empowering the next generation of tech leaders and creators.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Achievements Section -->
-        <section class="achievements-section">
-            <div class="container">
-                <div class="section-header anim-fade-in">
-                    <h2>Pioneering Accomplishments</h2>
-                    <p class="section-subtitle">Setting records and redefining what a club can achieve.</p>
+            <!-- Achievements Section -->
+            <section class="achievements-section" id="achievements">
+                <div class="container">
+                    <div class="section-header" data-anim="fade-up">
+                        <h2>Pioneering Accomplishments</h2>
+                        <p class="section-subtitle">Setting records and redefining what a club can achieve.</p>
+                    </div>
+                    <div class="data-card-grid three-col">
+                        <div class="data-card" data-anim="fade-up">
+                            <div class="card-header">
+                                <i data-feather="layout"></i>
+                                <h4>Digital Infrastructure</h4>
+                            </div>
+                            <div class="card-body">
+                                <p>ULIC proudly manages the entire online infrastructure for the UCA, from websites to internal systems, ensuring a seamless digital experience for all associated clubs.</p>
+                            </div>
+                        </div>
+                        <div class="data-card" data-anim="fade-up">
+                             <div class="card-header">
+                                <i data-feather="smartphone"></i>
+                                <h4>Software Firsts</h4>
+                            </div>
+                             <div class="card-body">
+                                <p>We hold the distinction of being the first club to develop and launch custom web applications, desktop software, and mobile apps, setting a new benchmark for technical achievement.</p>
+                            </div>
+                        </div>
+                        <div class="data-card" data-anim="fade-up">
+                            <div class="card-header">
+                                <i data-feather="award"></i>
+                                <h4>A Unique Identity</h4>
+                            </div>
+                            <div class="card-body">
+                                <p>ULIC stands as one of the most unique ICT clubs in Bangladesh, recognized for our ambitious projects, technical prowess, and unwavering commitment to innovation.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="achievements-grid">
-                    <div class="achievement-card anim-slide-up">
-                        <div class="achievement-icon"><i data-feather="layout"></i></div>
-                        <h4>Digital Infrastructure</h4>
-                        <p>ULIC proudly manages the entire online infrastructure for the UCA, from websites to internal systems, ensuring a seamless digital experience for all associated clubs.</p>
-                    </div>
-                    <div class="achievement-card anim-slide-up">
-                        <div class="achievement-icon"><i data-feather="smartphone"></i></div>
-                        <h4>Software Development Firsts</h4>
-                        <p>We hold the distinction of being the first club to develop and launch custom web applications, desktop software, and mobile apps, setting a new benchmark for technical achievement.</p>
-                    </div>
-                    <div class="achievement-card anim-slide-up">
-                        <div class="achievement-icon"><i data-feather="award"></i></div>
-                        <h4>A Unique Identity</h4>
-                        <p>ULIC stands as one of the most unique ICT clubs in Bangladesh, recognized for our ambitious projects, technical prowess, and unwavering commitment to innovation.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
+            </section>
+        </div>
     </main>
 
     <!-- Footer Placeholder -->
@@ -120,13 +142,5 @@
     <script src="/js/include-navbar.js" defer></script>
     <script src="/js/include-footer.js" defer></script>
     <script src="/js/about-us.js" defer></script>
-    <script>
-        // Feather Icons Initialization
-        document.addEventListener("DOMContentLoaded", () => {
-            if (typeof feather !== 'undefined') {
-                feather.replace();
-            }
-        });
-    </script>
 </body>
 </html>

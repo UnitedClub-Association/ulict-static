@@ -1,16 +1,16 @@
-/* --- Global Styles & Tokyo Night Theme --- */
+/* ---
+  * REVAMP: Achievements V2 - Cyber Core Vision
+--- */
+
+/* --- Cyber Core Theme --- */
 :root {
-    --bg-color: #1a1b26;
-    --bg-secondary: #16161e;
-    --card-bg: #292a36;
-    --border-color: rgba(122, 162, 247, 0.2);
-    --text-color: #a9b1d6;
-    --text-muted: #565f89;
-    --primary-glow: #7aa2f7;
-    --secondary-glow: #bb9af7;
-    --font-primary: 'Azonix', sans-serif;
-    --font-body: 'Xeroda', sans-serif;
-    --transition-slow: 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    --bg-color: #0A192F; --bg-secondary: #0D203A; --card-bg: #162C46;
+    --border-color: rgba(0, 207, 222, 0.2); --text-color: #CCD6F6;
+    --text-muted: #8892B0; --primary-glow: #FF9800; --secondary-glow: #00CFDE;
+    --font-title: 'Qood', sans-serif; --font-header: 'Raligo', sans-serif;
+    --font-subtitle: 'Strenx', sans-serif; --font-body: 'Xeroda', sans-serif;
+    --transition-fast: 0.3s ease;
+    --transition-smooth: 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 /* --- Basic Setup --- */
@@ -20,100 +20,194 @@ body {
     color: var(--text-color);
     margin: 0;
     overflow-x: hidden;
+    background-image: 
+        radial-gradient(var(--bg-secondary) 1px, transparent 1px),
+        radial-gradient(var(--bg-secondary) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: 0 0, 20px 20px;
 }
 
 .container {
     width: 90%;
-    max-width: 900px;
+    max-width: 1100px;
     margin: 0 auto;
     padding: 6rem 0;
 }
 
 /* --- Hero Section --- */
 .hero {
-    height: 50vh;
+    height: 70vh;
+    min-height: 400px;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-color: var(--bg-secondary);
-    padding: 2rem;
+    overflow: hidden;
+    padding: 0 1rem;
+    background: radial-gradient(ellipse at 50% 100%, var(--bg-secondary), transparent 70%);
 }
 
-.hero h1 {
-    font-family: var(--font-primary);
-    font-size: clamp(2.5rem, 9vw, 5rem);
+.hero-content h1 {
+    font-family: var(--font-header);
+    font-size: clamp(2.8rem, 9vw, 6rem);
     color: var(--text-color);
-    text-shadow: 0 0 15px var(--primary-glow);
-    margin: 0 0 1rem 0;
+    text-shadow: 0 0 20px var(--primary-glow);
+    margin: 0;
     font-weight: normal;
 }
 
-.hero p {
+.hero-subtitle {
+    font-family: var(--font-subtitle);
     font-size: clamp(1rem, 2.5vw, 1.2rem);
     color: var(--text-muted);
-    max-width: 600px;
-    margin: 0 auto;
+    margin-top: 1.5rem;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
 }
 
-/* --- Achievements Section --- */
-.achievements-section {
+.content-wrapper {
     background-color: var(--bg-color);
+    position: relative;
+    z-index: 5;
 }
 
-.achievement-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 2.5rem;
-    margin-bottom: 4rem;
-    padding: 2rem;
-    background-color: transparent;
-    border: 1px solid transparent;
-    border-radius: 12px;
-    transition: background-color 0.4s ease, border-color 0.4s ease;
-}
+/* --- General Section Styling --- */
+.section-header { text-align: center; margin-bottom: 4rem; }
+.section-header h2 { font-family: var(--font-header); font-size: clamp(2.2rem, 6vw, 3.8rem); margin-bottom: 1rem; color: var(--text-color); position: relative; display: inline-block; }
+.section-header h2::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 70%; height: 3px; background: var(--secondary-glow); border-radius: 2px; box-shadow: 0 0 10px var(--secondary-glow); }
+.section-subtitle { font-family: var(--font-body); font-size: clamp(1rem, 2.5vw, 1.1rem); color: var(--text-muted); max-width: 700px; margin: 1.5rem auto 0; line-height: 1.7; }
 
-.achievement-item:last-child {
-    margin-bottom: 0;
+/* --- Foundation Section --- */
+.foundation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
 }
-
-.achievement-item:hover {
+.foundation-card {
     background-color: var(--card-bg);
-    border-color: var(--border-color);
+    border: 1px solid var(--border-color);
+    padding: 2.5rem;
+    border-radius: 12px;
+    text-align: center;
+    transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+.foundation-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px -15px rgba(0,0,0,0.5);
+    border-color: var(--secondary-glow);
+}
+.card-icon { color: var(--secondary-glow); margin-bottom: 1.5rem; }
+.card-icon svg { width: 40px; height: 40px; }
+.card-title { font-family: var(--font-header); font-size: 1.8rem; margin: 0 0 1rem 0; }
+.card-desc { color: var(--text-muted); line-height: 1.7; }
+
+/* --- Roadmap Section --- */
+.roadmap-section { background-color: var(--bg-secondary); }
+.roadmap-timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 2rem auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+.roadmap-timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 20px;
+    height: 100%;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, var(--primary-glow) 20%, var(--primary-glow) 80%, transparent);
+    opacity: 0.5;
 }
 
-.achievement-icon {
-    flex-shrink: 0;
-    color: var(--primary-glow);
-    margin-top: 0.25rem;
+.roadmap-item { position: relative; padding-left: 60px; }
+.roadmap-marker {
+    position: absolute;
+    left: 0;
+    top: 5px;
+    width: 42px;
+    height: 42px;
+    background-color: var(--bg-secondary);
+    border: 2px solid var(--primary-glow);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.roadmap-marker::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background-color: var(--primary-glow);
+    border-radius: 50%;
+    box-shadow: 0 0 15px 5px var(--primary-glow);
+    animation: pulse-marker 2.5s infinite ease-in-out;
+}
+@keyframes pulse-marker {
+    0%, 100% { transform: scale(0.8); opacity: 0.7; }
+    50% { transform: scale(1.2); opacity: 1; }
 }
 
-.achievement-icon svg {
-    width: 40px;
-    height: 40px;
+.roadmap-status {
+    display: inline-block;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--secondary-glow);
+    margin-bottom: 1rem;
+    padding: 0.3rem 1rem;
+    border: 1px solid var(--secondary-glow);
+    border-radius: 50px;
+    background-color: rgba(0, 207, 222, 0.1);
 }
-
-.achievement-text h3 {
-    font-family: var(--font-primary);
+.roadmap-content h4 {
+    font-family: var(--font-header);
     font-size: 1.8rem;
-    margin: 0 0 1rem 0;
     color: var(--text-color);
+    margin: 0 0 0.75rem 0;
 }
+.roadmap-content p { font-size: 1.1rem; line-height: 1.8; color: var(--text-muted); max-width: 65ch; }
 
-.achievement-text p {
-    color: var(--text-muted);
-    line-height: 1.8;
+/* --- Partner / CTA Section --- */
+.partner-section .container {
+    background-color: var(--card-bg);
+    border: 1px solid var(--primary-glow);
+    border-radius: 16px;
+    text-align: center;
+    padding: 4rem 2rem;
+    box-shadow: 0 0 40px -10px var(--primary-glow);
+}
+.partner-section h2 { font-family: var(--font-header); font-size: clamp(2rem, 5vw, 3rem); margin: 0 0 1rem 0; }
+.partner-section p { color: var(--text-muted); max-width: 700px; margin: 0 auto 2.5rem auto; line-height: 1.7; }
+.cta-button {
+    display: inline-block;
+    background-color: var(--primary-glow);
+    color: var(--bg-color);
+    font-family: var(--font-subtitle);
     font-size: 1.1rem;
+    font-weight: bold;
+    padding: 1rem 2.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all var(--transition-fast);
+}
+.cta-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px -5px rgba(255, 152, 0, 0.4);
 }
 
+/* --- Responsive Design --- */
 @media (max-width: 768px) {
-    .achievement-item {
-        flex-direction: column;
-        gap: 1.5rem;
-        text-align: center;
-        align-items: center;
-    }
-    .achievement-icon {
-        margin-top: 0;
-    }
+    .container { padding: 4rem 1rem; }
+    .roadmap-timeline::before { left: 10px; }
+    .roadmap-item { padding-left: 45px; }
+    .roadmap-marker { width: 24px; height: 24px; left: 0; }
+    .roadmap-marker::before { width: 6px; height: 6px; }
 }
+
+/* --- Initial Animation States for GSAP --- */
+[data-anim] { opacity: 0; }

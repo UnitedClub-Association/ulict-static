@@ -1,86 +1,76 @@
 [
+  
   {
     "id": 7,
-    "title": "Season One: Origin",
-    "description": "First Season of the ULIC Monthly Event. Prizes for top 3 contestants. September-October 2025",
-    "type": "mini-event",
-    "date": "2025-09-30",
-    "endDate": "2025-10-31",
-    "image": "/images/seasononeorigin.png",
-    "link": "#",
-    "popularity": 2000,
-    "isPlaceholder": false,
-    "spotlight": true
-  },
-  {
-    "id": 6,
     "title": "Session 4: Deploying a Website",
     "description": "Learn the essentials of deploying a static website using modern tools like GitHub and Netlify. Go from local project to live on the web.",
     "type": "session",
     "date": "2025-09-25",
     "image": "/images/session4.jpeg",
-    "icon": "upload-cloud",
-    "link": "/events/sessions/offline-session1.html",
-    "popularity": 50,
-    "isPlaceholder": false
+    "link": "/events/sessions/session4.html",
+    "popularity": 450
   },
   {
-    "id": 5,
-    "title": "Session 3: Basics of Web Development",
-    "description": "Your journey into web development starts here. We'll cover the foundational blocks: HTML, CSS, and a touch of JavaScript.",
+    "id": 6,
+    "title": "Session 3: Web Dev Basics",
+    "description": "Your journey into web development starts here. We'll cover the foundational blocks: HTML for structure, CSS for style, and a touch of JavaScript for interactivity.",
     "type": "session",
     "date": "2025-09-18",
     "image": "/images/session3.jpg",
-    "icon": "code",
-    "link": "/events/sessions/offline-session1.html",
-    "popularity": 500,
-    "isPlaceholder": false
+    "link": "/events/sessions/session3.html",
+    "popularity": 500
   },
   {
-    "id": 3,
+    "id": 5,
     "title": "Build Your Portfolio!",
-    "description": "A hands-on workshop where members get expert advice on showcasing their skills and building an impressive online portfolio.",
+    "description": "A challenge featuring VSCode, Github, Netlify, Grok AI for building a online portfolio",
     "type": "mini-event",
+    "subType": "challenge",
     "date": "2025-06-02",
     "image": "/images/build-your-portfolio-banner.png",
     "link": "/events/mini-events/build-your-portfolio.html",
-    "popularity": 10,
-    "isPlaceholder": false
+    "popularity": 210
   },
   {
     "id": 4,
     "title": "First Online Session",
-    "description": "Our first online session, also dubbed as Session Two. We covered club logistics and planned future activities.",
+    "description": "Our first online session, also dubbed as Session Two. We covered club logistics and planned future activities in a virtual space.",
     "type": "session",
     "date": "2025-05-31",
     "image": "/images/ulic-logo.jpg",
-    "icon": "users",
     "link": "/events/sessions/online-session1.html",
-    "popularity": 200,
-    "isPlaceholder": false
+    "popularity": 200
   },
   {
-    "id": 2,
-    "title": "First Session",
+    "id": 3,
+    "title": "First Session: The Genesis",
     "description": "Our inaugural in-person session where we introduced ULIC, its vision, and welcomed our founding members.",
     "type": "session",
     "date": "2025-05-28",
     "image": "/images/ulic-logo.jpg",
-    "icon": "users",
     "link": "/events/sessions/offline-session1.html",
-    "popularity": 200,
-    "isPlaceholder": false
+    "popularity": 200
+  },
+  {
+    "id": 2,
+    "title": "Season One: Origin",
+    "description": "The first season of the ULIC Monthly Event. A series of challenges and workshops with prizes for the top 3 contestants.",
+    "type": "main-event",
+    "date": "2025-09-30",
+    "endDate": "2025-10-31",
+    "image": "/images/seasononeorigin.png",
+    "link": "/events/mini-events/seasononeorigin.html",
+    "popularity": 2000,
+    "spotlight": true
   },
   {
     "id": 1,
     "title": "UCA Unveiled",
-    "description": "The official launch of ULIC under the UCA banner, a milestone event for our entire community.",
+    "description": "The official launch of ULIC under the UCA banner, a milestone event for our entire community, setting the stage for future innovation.",
     "type": "main-event",
     "date": "2025-05-08",
     "image": "/images/uca_logo.png",
     "link": "/events/events/uca-unveiled.html",
-    "popularity": 1500,
-    "isPlaceholder": false
+    "popularity": 1500
   }
 ]
-

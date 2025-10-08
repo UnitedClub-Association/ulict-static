@@ -1,72 +1,93 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const canvas = document.getElementById('hero-canvas');
-    if (!canvas) return;
+    // Check for GSAP library
+    if (typeof gsap === 'undefined') {
+        console.error("GSAP not loaded. Animations will not work.");
+        return;
+    }
+    gsap.registerPlugin(ScrollTrigger);
 
-    const ctx = canvas.getContext('2d');
-    let width, height, shapes;
+    // --- 1. HERO ANIMATION ---
+    function animateHero() {
+        const heroTitle = document.getElementById('hero-title');
+        const heroSubtitle = document.querySelector('.hero-subtitle');
+        if (!heroTitle || !heroSubtitle) return;
 
-    const setSize = () => {
-        width = canvas.width = canvas.offsetWidth;
-        height = canvas.height = canvas.offsetHeight;
-    };
-
-    const createShapes = () => {
-        shapes = [];
-        const shapeCount = Math.floor((width * height) / 15000);
-        for (let i = 0; i < shapeCount; i++) {
-            shapes.push({
-                x: Math.random() * width,
-                y: Math.random() * height,
-                vx: (Math.random() - 0.5) * 0.5,
-                vy: (Math.random() - 0.5) * 0.5,
-                size: Math.random() * 3 + 1,
-                angle: Math.random() * Math.PI * 2,
-            });
-        }
-    };
-
-    const draw = () => {
-        ctx.clearRect(0, 0, width, height);
-        ctx.strokeStyle = 'rgba(122, 162, 247, 0.3)';
+        // Scramble Text Animation
+        const originalText = heroTitle.innerText;
+        heroTitle.innerText = '';
+        const chars = '!<>-_\\/[]{}—=+*^?#________';
         
-        shapes.forEach(shape => {
-            // Update position
-            shape.x += shape.vx;
-            shape.y += shape.vy;
+        const tl = gsap.timeline({ delay: 0.5 });
 
-            // Boundary check
-            if (shape.x < 0 || shape.x > width) shape.vx *= -1;
-            if (shape.y < 0 || shape.y > height) shape.vy *= -1;
+        for (let i = 0; i < originalText.length; i++) {
+            const letter = originalText[i];
+            const span = document.createElement('span');
+            span.innerText = letter;
+            heroTitle.appendChild(span);
 
-            // Draw shape (simple rotating line)
-            ctx.beginPath();
-            ctx.moveTo(shape.x + Math.cos(shape.angle) * shape.size * 5, shape.y + Math.sin(shape.angle) * shape.size * 5);
-            ctx.lineTo(shape.x - Math.cos(shape.angle) * shape.size * 5, shape.y - Math.sin(shape.angle) * shape.size * 5);
-            ctx.lineWidth = shape.size / 2;
-            ctx.stroke();
-            shape.angle += 0.005;
-        });
+            if (letter.trim() === '') continue; // Skip spaces
 
-        requestAnimationFrame(draw);
-    };
+            const randomDuration = Math.random() * 0.5 + 0.3;
+            tl.from(span, {
+                innerText: () => chars[Math.floor(Math.random() * chars.length)],
+                duration: randomDuration,
+                ease: "power2.inOut",
+                onUpdate: function() {
+                    const currentFrame = Math.round(this.progress() * 10);
+                    if (currentFrame % 2 === 0) {
+                        span.innerText = chars[Math.floor(Math.random() * chars.length)];
+                    }
+                },
+                onComplete: () => {
+                    span.innerText = letter;
+                }
+            }, i * 0.1);
+        }
 
-    window.addEventListener('resize', () => {
-        setSize();
-        createShapes();
-    });
+        // Fade in subtitle after title animation
+        tl.to(heroSubtitle, { 
+            opacity: 1, 
+            y: 0, 
+            duration: 1.2, 
+            ease: 'expo.out' 
+        }, "-=0.5");
+    }
 
-    setSize();
-    createShapes();
-    draw();
-
-    // Animate hero text
-    if (typeof gsap !== 'undefined') {
-        gsap.from('.hero-content > *', {
-            opacity: 0,
-            y: 20,
-            duration: 1,
-            stagger: 0.3,
-            delay: 0.5
+    // --- 2. SCROLL-TRIGGERED ANIMATIONS ---
+    function initScrollAnimations() {
+        // Staggered animation for placeholder cards
+        gsap.utils.toArray('.placeholder-card').forEach((card, index) => {
+             gsap.from(card, {
+                opacity: 0,
+                y: 60,
+                duration: 1,
+                delay: index * 0.15,
+                ease: 'expo.out',
+                scrollTrigger: {
+                    trigger: '.gallery-grid',
+                    start: 'top 80%',
+                    toggleActions: 'play none none none',
+                    once: true
+                }
+            });
         });
     }
+
+    // --- 3. INITIALIZATION ---
+    function init() {
+        // Set initial states for elements to be animated
+        gsap.set('.hero-subtitle', { opacity: 0, y: 20 });
+        
+        animateHero();
+        initScrollAnimations();
+        
+        // Feather Icons Replacement
+        if (typeof feather !== 'undefined') {
+            feather.replace();
+        } else {
+            console.warn("Feather icons not loaded.");
+        }
+    }
+    
+    init();
 });

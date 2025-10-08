@@ -1,15 +1,24 @@
-/* --- Global Styles & Tokyo Night Theme --- */
+/* ---
+  * REVAMP: Contact V4 - Interactive Particle Core
+--- */
+
+/* --- Cyber Core Theme --- */
 :root {
-    --bg-color: #1a1b26;
-    --bg-secondary: #16161e;
-    --card-bg: #292a36;
-    --border-color: rgba(122, 162, 247, 0.2);
-    --input-bg: #16161e;
-    --text-color: #a9b1d6;
-    --text-muted: #565f89;
-    --primary-glow: #7aa2f7;
-    --font-primary: 'Azonix', sans-serif;
+    --bg-color: #0A192F;
+    --bg-secondary: #0D203A;
+    --card-bg: #162C46;
+    --border-color: rgba(0, 207, 222, 0.2);
+    --text-color: #CCD6F6;
+    --text-muted: #8892B0;
+    --primary-glow: #FF9800; /* Orange */
+    --secondary-glow: #00CFDE; /* Cyan */
+    --font-title: 'Qood', sans-serif;
+    --font-header: 'Raligo', sans-serif;
+    --font-subtitle: 'Strenx', sans-serif;
     --font-body: 'Xeroda', sans-serif;
+    --font-mono: 'Courier New', Courier, monospace;
+    --transition-fast: 0.3s ease;
+    --transition-smooth: 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 /* --- Basic Setup --- */
@@ -23,136 +32,133 @@ body {
 
 .container {
     width: 90%;
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 6rem 0;
-    display: grid;
-    grid-template-columns: 1fr 1.5fr;
-    gap: 4rem;
-    align-items: flex-start;
 }
 
 /* --- Hero Section --- */
 .hero {
-    height: 50vh;
+    height: 60vh;
+    min-height: 400px;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
+    overflow: hidden;
+    padding: 0 1rem;
     background-color: var(--bg-color);
-    padding: 2rem;
 }
 
-.hero h1 {
-    font-family: var(--font-primary);
-    font-size: clamp(2.5rem, 9vw, 5rem);
+#particle-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.7;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 40%, var(--bg-color) 95%);
+}
+
+.hero-content {
+    z-index: 1;
+}
+#hero-title {
+    font-family: var(--font-header);
+    font-size: clamp(3.5rem, 10vw, 8rem);
     color: var(--text-color);
-    text-shadow: 0 0 15px var(--primary-glow);
-    margin: 0 0 1rem 0;
+    text-shadow: 0 0 25px var(--primary-glow); /* Changed to Orange Glow */
+    margin: 0;
     font-weight: normal;
 }
-
-.hero p {
+.hero-subtitle {
+    font-family: var(--font-subtitle);
     font-size: clamp(1rem, 2.5vw, 1.2rem);
     color: var(--text-muted);
+    margin: 1rem auto 0;
     max-width: 600px;
-    margin: 0 auto;
+    line-height: 1.7;
+    opacity: 0; /* Animated by GSAP */
 }
 
-/* --- Contact Section --- */
-.contact-info h3, .contact-form-wrapper h3 {
-    font-family: var(--font-primary);
-    font-size: 2rem;
-    margin: 0 0 1.5rem 0;
-    color: var(--text-color);
+/* --- Contact Layout --- */
+.contact-layout .container {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 3rem;
+    align-items: flex-start;
 }
 
-.contact-info p {
-    line-height: 1.8;
-    color: var(--text-muted);
-    margin-bottom: 2rem;
-}
-
-.social-icons {
-    display: flex;
-    gap: 1.5rem;
-}
-
-.social-icons a {
-    color: var(--text-muted);
-    transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.social-icons a:hover {
-    color: var(--primary-glow);
-    transform: translateY(-3px);
-}
-
-.social-icons svg {
-    width: 28px;
-    height: 28px;
-}
-
-/* --- Form Styles --- */
-.contact-form .form-group {
+.panel-title {
+    font-family: var(--font-header);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
     margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--primary-glow); /* Changed to Orange */
 }
-
-.contact-form label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-size: 0.9rem;
+.panel-desc {
     color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
 }
 
-.contact-form input,
-.contact-form textarea {
-    width: 100%;
-    padding: 0.8rem 1rem;
-    background-color: var(--input-bg);
-    border: 1px solid var(--border-color);
+/* Info Panel & Social Links */
+.social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.social-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
     border-radius: 8px;
-    color: var(--text-color);
-    font-family: var(--font-body);
-    font-size: 1rem;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: all var(--transition-fast);
+    border: 1px solid transparent;
+}
+.social-links a:hover {
+    color: var(--secondary-glow); /* Changed to Cyan */
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+    transform: translateX(5px);
+}
+.social-links a svg {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
 }
 
-.contact-form input:focus,
-.contact-form textarea:focus {
-    outline: none;
-    border-color: var(--primary-glow);
-    box-shadow: 0 0 10px rgba(122, 162, 247, 0.3);
+/* Form Panel Styling */
+.form-panel {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2.5rem;
 }
 
-.submit-btn {
-    background-color: var(--primary-glow);
-    color: var(--bg-color);
-    border: none;
-    padding: 0.8rem 2rem;
-    border-radius: 50px;
-    font-family: var(--font-body);
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.submit-btn:hover {
-    background-color: #6a91e3; /* Slightly lighter shade */
-    transform: translateY(-3px);
-}
 
 /* --- Responsive Design --- */
 @media (max-width: 900px) {
-    .container {
+    .contact-layout .container {
         grid-template-columns: 1fr;
-        gap: 3rem;
     }
-    .contact-info {
+    .info-panel {
         text-align: center;
     }
-    .social-icons {
+    .social-links {
+        flex-direction: row;
         justify-content: center;
+        flex-wrap: wrap;
     }
 }

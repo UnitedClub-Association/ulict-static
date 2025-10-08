@@ -1,17 +1,16 @@
-/* --- Global Styles & Tokyo Night Theme --- */
+/* ---
+  * REVAMP: About Us V2 - Cyber Core Upgrade
+--- */
+
+/* --- Cyber Core Theme --- */
 :root {
-    --bg-color: #1a1b26;
-    --bg-secondary: #16161e;
-    --card-bg: #292a36;
-    --border-color: rgba(122, 162, 247, 0.2);
-    --text-color: #a9b1d6;
-    --text-muted: #565f89;
-    --primary-glow: #7aa2f7;
-    --secondary-glow: #bb9af7;
-    --font-primary: 'Azonix', sans-serif;
-    --font-body: 'Xeroda', sans-serif;
+    --bg-color: #0A192F; --bg-secondary: #0D203A; --card-bg: #162C46;
+    --border-color: rgba(0, 207, 222, 0.2); --text-color: #CCD6F6;
+    --text-muted: #8892B0; --primary-glow: #FF9800; --secondary-glow: #00CFDE;
+    --font-title: 'Qood', sans-serif; --font-header: 'Raligo', sans-serif;
+    --font-subtitle: 'Strenx', sans-serif; --font-body: 'Xeroda', sans-serif;
     --transition-fast: 0.3s ease;
-    --transition-slow: 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    --transition-smooth: 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 /* --- Basic Setup --- */
@@ -21,6 +20,11 @@ body {
     color: var(--text-color);
     margin: 0;
     overflow-x: hidden;
+    background-image: 
+        radial-gradient(var(--bg-secondary) 1px, transparent 1px),
+        radial-gradient(var(--bg-secondary) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: 0 0, 20px 20px;
 }
 
 .container {
@@ -30,32 +34,54 @@ body {
     padding: 6rem 0;
 }
 
-/* --- Hero Section --- */
+/* --- Hero Section with 3D Canvas --- */
 .hero {
-    height: 50vh;
+    height: 85vh;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
+    overflow: hidden;
+}
+
+#hero-canvas-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.hero-content {
     position: relative;
-    background: linear-gradient(rgba(26, 27, 38, 0.8), rgba(26, 27, 38, 0.8)), url('https://placehold.co/1920x1080/1a1b26/1a1b26?text=') no-repeat center center/cover;
-    background-color: var(--bg-secondary);
+    z-index: 2;
 }
 
 .hero-content h1 {
-    font-family: var(--font-primary);
-    font-size: clamp(2.5rem, 9vw, 5rem);
+    font-family: var(--font-header);
+    font-size: clamp(3rem, 10vw, 7rem);
     color: var(--text-color);
-    text-shadow: 0 0 15px var(--primary-glow);
+    text-shadow: 0 0 20px var(--primary-glow), 0 0 40px var(--primary-glow);
     margin: 0;
     font-weight: normal;
+    letter-spacing: 2px;
 }
 
 .hero-subtitle {
-    font-family: var(--font-body);
-    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    font-family: var(--font-subtitle);
+    font-size: clamp(1rem, 3vw, 1.3rem);
     color: var(--text-muted);
     margin-top: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.content-wrapper {
+    background-color: var(--bg-color);
+    position: relative;
+    z-index: 5;
 }
 
 /* --- General Section Styling --- */
@@ -63,170 +89,194 @@ body {
     text-align: center;
     margin-bottom: 4rem;
 }
-
 .section-header h2 {
-    font-family: var(--font-primary);
-    font-size: clamp(2rem, 6vw, 3.5rem);
-    margin-bottom: 0.5rem;
+    font-family: var(--font-header);
+    font-size: clamp(2.2rem, 6vw, 3.8rem);
+    margin-bottom: 1rem;
     color: var(--text-color);
-    text-shadow: 0 0 8px var(--primary-glow);
+    position: relative;
+    display: inline-block;
 }
-
+.section-header h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 3px;
+    background: var(--secondary-glow);
+    border-radius: 2px;
+    box-shadow: 0 0 10px var(--secondary-glow);
+}
 .section-subtitle {
     font-family: var(--font-body);
-    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
     color: var(--text-muted);
     max-width: 600px;
+    margin: 1.5rem auto 0;
+}
+
+/* --- Genesis Timeline --- */
+.genesis-timeline {
+    position: relative;
+    max-width: 800px;
     margin: 0 auto;
-}
-
-/* --- Story Section --- */
-.story-section {
-    background-color: var(--bg-secondary);
-}
-
-.story-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 3rem;
-    align-items: center;
+}
+.genesis-timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 20px;
+    height: 100%;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, var(--primary-glow) 20%, var(--primary-glow) 80%, transparent);
+    opacity: 0.5;
 }
 
-.story-text p {
+.timeline-item {
+    position: relative;
+    padding-left: 60px;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 42px;
+    height: 42px;
+    background-color: var(--bg-color);
+    border: 2px solid var(--primary-glow);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.timeline-marker::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background-color: var(--primary-glow);
+    border-radius: 50%;
+    box-shadow: 0 0 15px 5px var(--primary-glow);
+    animation: pulse-marker 2s infinite ease-in-out;
+}
+@keyframes pulse-marker {
+    0%, 100% { transform: scale(0.8); opacity: 0.7; }
+    50% { transform: scale(1.2); opacity: 1; }
+}
+
+.timeline-date {
+    font-family: var(--font-header);
+    font-size: 1.8rem;
+    color: var(--secondary-glow);
+    margin-bottom: 0.75rem;
+}
+.timeline-content p {
     font-size: 1.1rem;
     line-height: 1.8;
     color: var(--text-muted);
-    margin-bottom: 1.5rem;
+    max-width: 60ch;
 }
-
-.story-text p:last-child {
-    margin-bottom: 0;
-}
-
-.story-text strong {
+.timeline-content strong {
     color: var(--primary-glow);
     font-weight: normal;
 }
 
-.story-image img {
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-    border: 1px solid var(--border-color);
-}
-
-/* --- Mission Section --- */
-.mission-section {
-    background-color: var(--bg-color);
-}
-
-.mission-content {
+/* --- Data Card Styling --- */
+.data-card-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 2rem;
 }
+.data-card-grid.three-col {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
 
-.mission-item {
-    background-color: var(--card-bg);
+.data-card {
+    background: 
+        linear-gradient(var(--card-bg), var(--card-bg)) padding-box,
+        linear-gradient(135deg, var(--secondary-glow), var(--primary-glow)) border-box;
+    border: 1px solid transparent;
+    border-radius: 12px;
     padding: 2.5rem;
-    border-radius: 12px;
-    border: 1px solid var(--border-color);
-    text-align: center;
-    transition: var(--transition-slow);
+    position: relative;
+    overflow: hidden;
+    transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
 }
 
-.mission-item:hover {
+.data-card:hover {
     transform: translateY(-10px);
-    border-color: var(--secondary-glow);
+    box-shadow: 0 20px 40px -15px rgba(0,0,0,0.5);
 }
 
-.mission-icon {
-    color: var(--secondary-glow);
+.data-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(0, 207, 222, 0.15) 0%, transparent 40%);
+    transform-origin: center center;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.data-card:hover::before {
+    opacity: 1;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 2;
 }
-
-.mission-icon svg {
-    width: 40px;
-    height: 40px;
+.card-header i { color: var(--secondary-glow); }
+.card-header h3, .card-header h4 {
+    font-family: var(--font-header);
+    font-size: clamp(1.6rem, 4vw, 2rem);
+    margin: 0;
 }
-
-.mission-item h3 {
-    font-family: var(--font-primary);
-    font-size: 1.8rem;
-    margin: 0 0 1rem 0;
-}
-
-.mission-item p {
+.card-body p {
     color: var(--text-muted);
     line-height: 1.7;
+    margin: 0;
+    position: relative;
+    z-index: 2;
 }
 
-/* --- Achievements Section --- */
-.achievements-section {
-    background-color: var(--bg-secondary);
-}
-
-.achievements-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-}
-
-.achievement-card {
-    background-color: var(--card-bg);
-    padding: 2rem;
-    border-radius: 12px;
-    border: 1px solid var(--border-color);
-    transition: var(--transition-slow);
-}
-
-.achievement-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--primary-glow);
-}
-
-.achievement-icon {
-    color: var(--primary-glow);
-    margin-bottom: 1.5rem;
-}
-
-.achievement-icon svg {
-    width: 32px;
-    height: 32px;
-}
-
-.achievement-card h4 {
-    font-family: var(--font-primary);
-    font-size: 1.5rem;
-    margin: 0 0 1rem 0;
-}
-
-.achievement-card p {
-    color: var(--text-muted);
-    line-height: 1.7;
-}
 
 /* --- Responsive Design --- */
-@media (max-width: 900px) {
-    .story-content {
-        grid-template-columns: 1fr;
-    }
-    .story-image {
-        order: -1; /* Move image to top on smaller screens */
-    }
-}
-
 @media (max-width: 768px) {
     .container {
-        padding: 4rem 0;
+        padding: 4rem 1rem;
     }
-    .mission-content {
-        grid-template-columns: 1fr;
+    .genesis-timeline::before {
+        left: 10px;
+    }
+    .timeline-item {
+        padding-left: 45px;
+    }
+    .timeline-marker {
+        width: 24px;
+        height: 24px;
+        left: 0;
+    }
+    .timeline-marker::before {
+        width: 6px;
+        height: 6px;
     }
 }
 
-/* --- Animation Start States (for JS) --- */
-/* This ensures elements are hidden before GSAP animates them, preventing a flash of content */
-.anim-fade-in, .anim-slide-up, .anim-card {
+/* --- Initial Animation States for GSAP --- */
+[data-anim] {
     opacity: 0;
 }

@@ -1,130 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MYXGNCY7V1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      gtag("js", new Date());
-      gtag("config", "G-MYXGNCY7V1");
-    </script>
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Explore focused workshops, challenges, and tech talks from the University Laboratory ICT Club (ULIC)." />
     <title>ULIC Mini Events | University Laboratory ICT Club</title>
 
-    <!-- Preconnect and Preload for Performance -->
     <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
     <link rel="preload" href="/css/mini-events.css" as="style" />
     <link rel="preload" href="/js/mini-events.js" as="script" />
+    <link rel="preload" href="/data/events.json" as="fetch" crossorigin="anonymous">
 
-    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/images/ulic-logo.ico" />
-
-    <!-- Stylesheets -->
     <link rel="stylesheet" href="/css/navbar.css" />
     <link rel="stylesheet" href="/css/footer.css" />
     <link rel="stylesheet" href="/css/mini-events.css" />
 
-    <!-- Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/feather-icons"></script>
 </head>
 <body>
-    <!-- Navbar Placeholder -->
     <div id="navbar-placeholder"></div>
 
     <main id="main-content">
-        <!-- Hero Section with Decoding Text Effect -->
         <section class="hero">
-            <div class="hero-overlay"></div>
             <div class="hero-content">
-                <h1 id="hero-title">Mini_Events</h1>
+                <h1 id="hero-title" class="glitch" data-text="Mini Events">Mini Events</h1>
                 <p class="hero-subtitle">Focused Workshops, Skill Challenges, and Tech Talks</p>
             </div>
         </section>
 
-        <!-- Mini Events Grid Section -->
-        <section class="mini-events-section" aria-labelledby="mini-events-heading">
-            <div class="container">
-                <div class="section-header">
-                    <h2 id="mini-events-heading">Our Mini Events</h2>
-                    <p class="section-subtitle">Bite-sized learning experiences designed to sharpen your skills.</p>
+        <div class="container">
+            <section class="event-category-section" id="workshops-section">
+                <h2 class="category-title">Workshops</h2>
+                <div class="event-grid" id="workshops-grid">
+                    <div class="loading-spinner"></div>
                 </div>
+            </section>
 
-                <!-- Filter Buttons -->
-                <div class="filter-bar">
-                    <button class="filter-btn active" data-filter="all">All</button>
-                    <button class="filter-btn" data-filter="workshop">Workshops</button>
-                    <button class="filter-btn" data-filter="challenge">Challenges</button>
-                    <button class="filter-btn" data-filter="talk">Talks</button>
+            <section class="event-category-section" id="challenges-section">
+                <h2 class="category-title">Challenges</h2>
+                <div class="event-grid" id="challenges-grid">
+                    <div class="loading-spinner"></div>
                 </div>
+            </section>
 
-                <!-- Events Grid -->
-                <div class="event-grid">
-                    <a href="/events/mini-events/build-your-portfolio.html" class="event-card" data-category="workshop">
-                        <div class="card-banner">
-                            <img src="/images/build-your-portfolio-banner.png" alt="Portfolio Workshop Banner" />
-                            <span class="card-tag">Workshop</span>
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Build Your Portfolio!</h3>
-                            <p class="card-desc">A hands-on workshop where members showcase their skills and build impressive portfolios.</p>
-                            <div class="card-footer">
-                                <span class="card-date"><i data-feather="calendar"></i> June 2, 2025</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <div class="event-card placeholder" data-category="challenge">
-                        <div class="card-banner">
-                             <img src="https://placehold.co/600x400/16161e/bb9af7?text=Code+Challenge" alt="Placeholder" />
-                            <span class="card-tag">Challenge</span>
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Coding Challenge</h3>
-                            <p class="card-desc">A friendly competition to test your problem-solving skills. Coming soon!</p>
-                             <div class="card-footer">
-                                <span class="card-date"><i data-feather="calendar"></i> TBD</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="event-card placeholder" data-category="talk">
-                        <div class="card-banner">
-                            <img src="https://placehold.co/600x400/16161e/bb9af7?text=Tech+Talk" alt="Placeholder" />
-                            <span class="card-tag">Tech Talk</span>
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">Tech Talk: AI Trends</h3>
-                            <p class="card-desc">An informal session to discuss the latest trends in Artificial Intelligence.</p>
-                             <div class="card-footer">
-                                <span class="card-date"><i data-feather="calendar"></i> TBD</span>
-                            </div>
-                        </div>
-                    </div>
+            <section class="event-category-section" id="talks-section">
+                <h2 class="category-title">Talks</h2>
+                <div class="event-grid" id="talks-grid">
+                    <div class="loading-spinner"></div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
     </main>
 
-    <!-- Footer Placeholder -->
+    <template id="event-card-template">
+        <a href="#" class="event-card">
+            <div class="card-banner">
+                <img src="" alt="" loading="lazy"/>
+                </div>
+            <div class="card-content">
+                <span class="card-tag"></span>
+                <h3 class="card-title"></h3>
+                <p class="card-desc"></p>
+                <div class="card-footer">
+                    <i data-feather="calendar"></i>
+                    <span class="card-date"></span>
+                </div>
+            </div>
+        </a>
+    </template>
+
+
     <div id="footer-placeholder"></div>
 
-    <!-- Scripts -->
     <script src="/js/include-fonts.js" defer></script> 
     <script src="/js/include-navbar.js" defer></script>
     <script src="/js/include-footer.js" defer></script>
     <script src="/js/mini-events.js" defer></script>
-    <script>
-        // Feather Icons Initialization
-        document.addEventListener("DOMContentLoaded", () => {
-            if (typeof feather !== 'undefined') {
-                feather.replace();
-            }
-        });
-    </script>
 </body>
 </html>

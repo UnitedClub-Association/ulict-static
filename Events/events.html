@@ -20,6 +20,8 @@
 
     <!-- Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Flip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/feather-icons"></script>
 </head>
 <body>
@@ -28,57 +30,83 @@
     <main id="main-content">
         <section class="hero">
             <div class="hero-content">
-                <div class="text-carousel"><div class="carousel-inner">
-                    <div class="carousel-item">Events</div>
-                    <div class="carousel-item">Innovation</div><div class="carousel-item">Collaboration</div>
-                    <div class="carousel-item">Connection</div><div class="carousel-item">Creation</div>
-                    <div class="carousel-item">Synergy</div><div class="carousel-item">Future</div>
-                    <div class="carousel-item">Events</div>
-                </div></div>
+                <div class="text-carousel">
+                    <div class="carousel-inner">
+                        <!-- Items for the reel animation -->
+                        <div class="carousel-item">Events</div>
+                        <div class="carousel-item">Innovation</div>
+                        <div class="carousel-item">Collaboration</div>
+                        <div class="carousel-item">Connection</div>
+                        <div class="carousel-item">Creation</div>
+                        <div class="carousel-item">Synergy</div>
+                        <div class="carousel-item">Future</div>
+                        <!-- Cloned first item for seamless looping math -->
+                        <div class="carousel-item">Events</div>
+                    </div>
+                </div>
                 <p class="hero-subtitle">The nexus of our community's activities and milestones.</p>
             </div>
         </section>
 
-        <section class="events-hub" aria-labelledby="hub-heading">
-            <div class="container">
-                <!-- Featured Event Section -->
-                <div id="featured-event-container">
-                    <!-- Featured event will be injected here -->
-                </div>
-
-                <!-- Filters and Other Events -->
-                <div class="section-header">
-                    <h2 id="hub-heading">All Events</h2>
-                    <p class="section-subtitle">Browse our full archive of main events, mini-events, and sessions.</p>
-                </div>
-
-                <div class="controls-wrapper">
-                    <div class="filter-controls" id="category-filters">
-                        <button class="filter-btn active" data-filter="all">All</button>
-                        <button class="filter-btn" data-filter="main-event">Main Events</button>
-                        <button class="filter-btn" data-filter="mini-event">Mini Events</button>
-                        <button class="filter-btn" data-filter="session">Sessions</button>
+        <!-- NEW: Wrapper for main content to ensure proper layering -->
+        <div class="main-content-wrapper">
+            <section class="events-hub" aria-labelledby="hub-heading">
+                <div class="container">
+                    <!-- Featured Event Section -->
+                    <div id="featured-event-container">
+                        <!-- Featured event will be injected here with data-anim attribute -->
                     </div>
-                    <div class="sort-controls">
-                        <label for="sort-select" class="visually-hidden">Sort events by</label>
-                        <div class="select-wrapper">
-                           <i data-feather="bar-chart-2"></i>
-                            <select id="sort-select" class="sort-select">
-                                <option value="newest-to-oldest">Newest to Oldest</option>
-                                <option value="oldest-to-newest">Oldest to Newest</option>
-                                <option value="most-popular">Most Popular</option>
-                                <option value="least-popular">Least Popular</option>
-                            </select>
+
+                    <!-- Filters and Other Events -->
+                    <div class="section-header" data-anim="fade-up">
+                        <h2 id="hub-heading">All Events</h2>
+                        <p class="section-subtitle">Browse our full archive of main events, mini-events, and sessions.</p>
+                    </div>
+
+                    <div class="controls-wrapper">
+                        <div class="filter-controls" id="category-filters">
+                            <button class="filter-btn active" data-filter="all" aria-label="Show all events">All</button>
+                            <button class="filter-btn" data-filter="main-event" aria-label="Show main events">Main Events</button>
+                            <button class="filter-btn" data-filter="mini-event" aria-label="Show mini events">Mini Events</button>
+                            <button class="filter-btn" data-filter="session" aria-label="Show sessions">Sessions</button>
+                        </div>
+                        <div class="sort-controls" data-anim="fade-up">
+                            <label for="sort-select" class="visually-hidden">Sort events by</label>
+                            <div class="select-wrapper">
+                               <i data-feather="bar-chart-2"></i>
+                                <select id="sort-select" class="sort-select">
+                                    <option value="newest-to-oldest">Newest to Oldest</option>
+                                    <option value="oldest-to-newest">Oldest to Newest</option>
+                                    <option value="most-popular">Most Popular</option>
+                                    <option value="least-popular">Least Popular</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="hub-grid" id="events-grid">
-                    <div class="loading-spinner"></div>
+                    <div class="hub-grid" id="events-grid" aria-live="polite">
+                        <div class="loading-spinner"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Event Card Template (Unchanged) -->
+    <template id="event-card-template">
+        <a href="#" class="hub-card">
+            <div class="card-image-wrapper"></div>
+            <div class="card-content">
+                <span class="card-tag"></span>
+                <h4></h4>
+                <p></p>
+                <div class="card-footer">
+                    <i data-feather="calendar"></i>
+                    <span class="card-date-text"></span>
                 </div>
             </div>
-        </section>
-    </main>
+        </a>
+    </template>
 
     <div id="footer-placeholder"></div>
 
