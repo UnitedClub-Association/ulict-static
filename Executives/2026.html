@@ -12,7 +12,7 @@
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="The 2026 executive panel of the University Laboratory ICT Club (ULIC) is yet to be announced." />
+    <meta name="description" content="Meet the 2026 'Protocore:Two' executive panel of the University Laboratory ICT Club (ULIC)." />
     <title>Executives 2026 | University Laboratory ICT Club</title>
 
     <!-- Preconnect and Preload for Performance -->
@@ -28,18 +28,79 @@
     <link rel="stylesheet" href="/executives-css/2026.css" />
 
     <!-- Libraries -->
-    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 </head>
 <body>
     <!-- Navbar Placeholder -->
     <div id="navbar-placeholder"></div>
 
     <main id="main-content">
-        <!-- Coming Soon Section -->
-        <section class="coming-soon">
-            <div class="content">
-                <h1>Panel for 2026</h1>
-                <p>The future leaders of ULIC are on the horizon. The executive panel for the 2026 session will be announced in due course. Stay tuned for updates.</p>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title" data-text="Protocore:Two">Protocore:Two</h1>
+                <p class="session-year">Executive Panel: 2026</p>
+            </div>
+        </section>
+
+        <!-- Profile Board Section -->
+        <section class="board-section">
+            <div class="board-container">
+                <!-- Tier 1: President -->
+                <div class="profile-card president" data-rank="1">
+                    <div class="card-content">
+                        <p class="rank-id">COMMAND</p>
+                        <h3 class="name">To Be Announced</h3>
+                        <p class="title">President</p>
+                    </div>
+                </div>
+
+                <div class="tier-connector"></div>
+
+                <!-- Tier 2: Leads -->
+                <div class="tier-2">
+                    <div class="profile-card lead-dev" data-rank="2">
+                        <div class="card-content">
+                            <p class="rank-id">TECHNICAL LEAD</p>
+                            <h3 class="name">To Be Announced</h3>
+                            <p class="title">Lead Developer</p>
+                        </div>
+                    </div>
+                    <div class="profile-card vice-pres" data-rank="3">
+                        <div class="card-content">
+                            <p class="rank-id">OPERATIONS LEAD</p>
+                            <h3 class="name">To Be Announced</h3>
+                            <p class="title">Vice President</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tier-connector-branch"></div>
+
+                <!-- Tier 3: Support -->
+                <div class="tier-3">
+                    <div class="profile-card lead-designer" data-rank="4">
+                        <div class="card-content">
+                            <p class="rank-id">DESIGN LEAD</p>
+                            <h3 class="name">To Be Announced</h3>
+                            <p class="title">Lead Designer</p>
+                        </div>
+                    </div>
+                    <div class="profile-card gen-sec" data-rank="5">
+                        <div class="card-content">
+                            <p class="rank-id">SUPPORT LEAD</p>
+                            <h3 class="name">To Be Announced</h3>
+                            <p class="title">General Secretary</p>
+                        </div>
+                    </div>
+                    <div class="profile-card media-man" data-rank="6">
+                        <div class="card-content">
+                            <p class="rank-id">MEDIA LEAD</p>
+                            <h3 class="name">To Be Announced</h3>
+                            <p class="title">Media Manager</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
@@ -51,5 +112,7 @@
     <script src="/js/include-fonts.js" defer></script>
     <script src="/js/include-navbar.js" defer></script>
     <script src="/js/include-footer.js" defer></script>
+    <script src="/executives-js/2026.js" defer></script>
 </body>
 </html>
+

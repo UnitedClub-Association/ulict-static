@@ -1,49 +1,188 @@
-/* --- Global Styles & Tokyo Night Theme --- */
+/* ---
+  * Executive Panel V8 - Project Chimera (Final)
+  * A definitive redesign focusing on a clear, professional hierarchy and improved animations.
+--- */
+
+/* --- "Vantablack & Gold" Theme --- */
 :root {
-    --bg-color: #1a1b26;
-    --bg-secondary: #16161e;
-    --text-color: #a9b1d6;
-    --text-muted: #565f89;
-    --primary-glow: #7aa2f7;
-    --font-primary: 'Azonix', sans-serif;
+    --bg-color: #121212; /* Near-black */
+    --bg-secondary: #1E1E1E; /* Dark charcoal */
+    --card-bg: rgba(30, 30, 30, 0.7);
+    --border-color: rgba(255, 191, 0, 0.2); /* Faint Gold */
+    --text-color: #EAEAEA; /* Off-white */
+    --text-muted: #888888; /* Mid-grey */
+    --primary-glow: #FFBF00; /* Rich Gold/Amber */
+
+    /* Fonts remain consistent with the main site */
+    --font-title: 'Qood', sans-serif;
+    --font-header: 'Raligo', sans-serif;
+    --font-subtitle: 'Strenx', sans-serif;
     --font-body: 'Xeroda', sans-serif;
+
+    --transition-fast: 0.3s ease;
+    --transition-smooth: 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 /* --- Basic Setup --- */
 body {
-    background-color: var(--bg-secondary);
+    background-color: var(--bg-color);
     font-family: var(--font-body);
     color: var(--text-color);
     margin: 0;
     overflow-x: hidden;
+    background-image:
+        linear-gradient(var(--bg-secondary) 1px, transparent 1px),
+        linear-gradient(90deg, var(--bg-secondary) 1px, transparent 1px);
+    background-size: 30px 30px;
 }
 
-/* --- Coming Soon Section --- */
-.coming-soon {
-    min-height: calc(100vh - 120px); /* Adjust based on navbar/footer height */
+/* --- Hero Section --- */
+.hero {
+    min-height: 50vh;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 2rem;
-    background: radial-gradient(ellipse at center, rgba(26, 27, 38, 0.5), var(--bg-secondary) 70%);
+    position: relative;
+    border-bottom: 1px solid var(--border-color);
+    overflow: hidden;
 }
-
-.content {
-    max-width: 700px;
-}
-
-.content h1 {
-    font-family: var(--font-primary);
-    font-size: clamp(2.5rem, 8vw, 4.5rem);
-    color: var(--primary-glow);
-    text-shadow: 0 0 15px var(--primary-glow);
-    margin: 0 0 1.5rem 0;
+.hero-title {
+    font-family: var(--font-title);
+    font-size: clamp(3rem, 10vw, 6rem);
+    margin: 0;
     font-weight: normal;
+    color: var(--text-color);
+    text-shadow: 0 0 10px rgba(255, 191, 0, 0.5);
+}
+.session-year {
+    font-family: var(--font-subtitle);
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 1rem;
 }
 
-.content p {
-    color: var(--text-muted);
-    font-size: 1.2rem;
-    line-height: 1.8;
+/* --- Profile Board Section --- */
+.board-section {
+    padding: 6rem 1rem;
+    display: flex;
+    justify-content: center;
 }
+.board-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0; /* Connectors will handle spacing */
+    width: 100%;
+    max-width: 1100px;
+}
+
+/* --- Connecting Lines for Hierarchy --- */
+.tier-connector, .tier-connector-branch {
+    width: 2px;
+    background: var(--border-color);
+    position: relative;
+}
+.tier-connector { height: 40px; }
+.tier-connector-branch { height: 40px; }
+/* Horizontal line for the branch */
+.tier-connector-branch::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 2px;
+    width: 50%;
+    background: var(--border-color);
+}
+
+
+/* --- Profile Card Base Styles --- */
+.profile-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    transition: transform var(--transition-smooth), box-shadow var(--transition-smooth), border-color var(--transition-fast);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    padding: 1.5rem;
+    text-align: center;
+    will-change: transform;
+}
+.profile-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    border-color: var(--primary-glow);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+    z-index: 10;
+}
+
+/* --- Hierarchy Tiers --- */
+.tier-2, .tier-3 {
+    display: grid;
+    gap: 2rem;
+    width: 100%;
+    padding-top: 40px; /* Space from the connector line */
+    position: relative;
+}
+
+/* Tier 1: President */
+.president {
+    width: 100%;
+    max-width: 450px;
+    border-width: 2px;
+    padding: 2rem;
+}
+.president .name { font-size: clamp(1.8rem, 4vw, 2.5rem); }
+
+/* Tier 2: Leads */
+.tier-2 { grid-template-columns: 1fr 1fr; }
+
+/* Tier 3: Support */
+.tier-3 { grid-template-columns: repeat(3, 1fr); }
+.tier-3 .profile-card {
+    transform: scale(0.95);
+}
+.tier-3 .profile-card:hover {
+    transform: translateY(-5px) scale(0.97);
+}
+
+
+.rank-id {
+    font-family: var(--font-subtitle);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+}
+.name {
+    font-family: var(--font-header);
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: var(--text-color);
+    margin: 0.5rem 0;
+}
+.title {
+    font-family: var(--font-body);
+    color: var(--primary-glow);
+    font-size: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .tier-3 {
+        grid-template-columns: 1fr;
+    }
+    .tier-connector-branch::before {
+        width: 2px; /* Make it a vertical line on mobile */
+    }
+}
+@media (max-width: 768px) {
+    .tier-2 {
+        grid-template-columns: 1fr;
+    }
+     .tier-connector-branch::before {
+        width: 2px; /* Make it a vertical line on mobile */
+    }
+}
+

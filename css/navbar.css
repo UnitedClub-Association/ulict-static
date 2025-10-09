@@ -63,6 +63,7 @@ body {
   --nav-icon-purple-bg: #9747FF;     /* A vibrant purple */
   --nav-icon-orange-bg: var(--nav-primary-glow); /* Now uses the new orange */
   --nav-icon-text-dark: #0A192F;     /* Dark text for on top of icons, matches bg */
+  --nav-icon-teal-bg: #26E0D8;       /* A futuristic teal */
   
   /* Animation variables */
   --nav-transition-fast: 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -181,6 +182,8 @@ body {
 .bg-purple .small-link-icon { background: var(--nav-icon-purple-bg); color: var(--nav-icon-text-dark); }
 .bg-orange:hover { background-color: rgba(255, 184, 108, 0.1); }
 .bg-orange .small-link-icon { background: var(--nav-icon-orange-bg); color: var(--nav-icon-text-dark); }
+.bg-teal:hover { background-color: rgba(38, 224, 216, 0.1); }
+.bg-teal .small-link-icon { background: var(--nav-icon-teal-bg); color: var(--nav-icon-text-dark); }
 
 /* --- Action Buttons --- */
 .nav-actions { display: flex; align-items: center; gap: 16px; }
