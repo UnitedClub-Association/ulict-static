@@ -1,57 +1,88 @@
 <footer class="site-footer">
     <div class="footer-container">
         <div class="footer-grid">
+            <!-- Branding Section -->
             <div class="footer-section footer-branding">
-                <a href="/index.html" class="footer-logo">
-                    <img src="/images/ulic-logo.jpg" alt="ULIC Logo" />
+                <a href="/" class="footer-logo">
+                    <img src="/images/ulic-logo.jpg" alt="ULIC Logo" loading="lazy" />
                     <div class="footer-logo-text">
                         <h2>ULIC</h2>
                         <p>University Laboratory ICT Club</p>
                     </div>
                 </a>
-                <p class="footer-tagline">Empowering ICT enthusiasts at University Laboratory since 2024.</p>
+                <p class="footer-tagline">
+                    A nexus for innovators, creators, and pioneers shaping the future of technology since 2024.
+                </p>
                 <div class="social-icons">
-                    <a href="https://www.facebook.com/ulic.fb" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i data-feather="facebook"></i></a>
-                    <a href="https://www.instagram.com/ulic.ig" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i data-feather="instagram"></i></a>
-                    <a href="https://www.youtube.com/@ulic.technology" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i data-feather="youtube"></i></a>
-                    <a href="mailto:ulictclub2024@gmail.com" aria-label="Email"><i data-feather="mail"></i></a>
+                    <a href="https://www.facebook.com/ulic.fb" target="_blank" class="social-link" aria-label="Facebook">
+                        <i data-feather="facebook"></i>
+                    </a>
+                    <a href="https://www.instagram.com/ulic.ig" target="_blank" class="social-link" aria-label="Instagram">
+                        <i data-feather="instagram"></i>
+                    </a>
+                    <a href="https://www.youtube.com/@ulic.technology" target="_blank" class="social-link" aria-label="YouTube">
+                        <i data-feather="youtube"></i>
+                    </a>
+                    <a href="mailto:ulictclub2024@gmail.com" class="social-link" aria-label="Email">
+                        <i data-feather="mail"></i>
+                    </a>
                 </div>
             </div>
 
+            <!-- Explore Links -->
             <div class="footer-section">
                 <h4>Explore</h4>
                 <ul>
-                    <li><a href="/index.html">Home</a></li>
-                    <li><a href="/events/events.html">Events</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/Events/events.html">Events</a></li>
+                    <li><a href="/leaderboard/">Leaderboard</a></li>
                     <li><a href="/about/about-us.html">About Us</a></li>
-                    <li><a href="/executives/2024-25.html">Executives</a></li>
-                    <li><a href="https://ulicapp.vercel.app" target="_blank">Join ULIC</a></li>
+                    <li><a href="https://ulicapp.vercel.app" target="_blank" style="color: var(--footer-accent-primary); font-weight: bold;">Join Community</a></li>
                 </ul>
             </div>
 
+            <!-- Learning Tracks -->
             <div class="footer-section">
                 <h4>Learn</h4>
                 <ul>
-                    <li><a href="/lessons/index.html">Web Development</a></li>
-                    <li><a href="/lessons/index.html">UI/UX Design</a></li>
-                    <li><a href="/lessons/index.html">Game Development</a></li>
-                    <li><a href="/lessons/index.html">Mobile Apps</a></li>
-                    <li><a href="/lessons/index.html">AI & Machine Learning</a></li>
-                    <li><a href="/lessons/index.html">DevOps & Cloud</a></li>
+                    <li><a href="/lessons/web-development/web-development.html">Web Development</a></li>
+                    <li><a href="/lessons/ui-uxdesigns/ui-uxdesigns.html">UI/UX Design</a></li>
+                    <li><a href="/lessons/gamedevelopment/gamedevelopment.html">Game Dev</a></li>
+                    <li><a href="/lessons/mobileapps/mobileapps.html">Mobile Apps</a></li>
+                    <li><a href="/lessons/aiml/ai-ml.html">AI & ML</a></li>
                 </ul>
             </div>
 
+            <!-- Contact Info -->
             <div class="footer-section">
-                <h4>Contact Us</h4>
+                <h4>Contact</h4>
                 <ul>
-                    <li><a href="mailto:ulictclub2024@gmail.com"><i data-feather="mail"></i> ulictclub2024@gmail.com</a></li>
-                    <li><a href="tel:+8801886150418"><i data-feather="phone"></i> +8801886150418</a></li>
-                    <li><span><i data-feather="map-pin"></i> University Laboratory School and College, Dhaka 1000, Bangladesh</span></li>
+                    <li>
+                        <a href="mailto:ulictclub2024@gmail.com" class="contact-link">
+                            <i data-feather="mail"></i>
+                            <span class="contact-text">ulictclub2024@gmail.com</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="tel:+8801886150418" class="contact-link">
+                            <i data-feather="phone"></i>
+                            <span class="contact-text">+880 1886 150418</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://goo.gl/maps/placeholder" target="_blank" class="contact-link" style="align-items: flex-start;">
+                            <i data-feather="map-pin" style="margin-top: 3px;"></i>
+                            <span class="contact-text">University Laboratory School<br>and College, Dhaka 1000</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
+
+        <!-- Footer Bottom -->
         <div class="footer-bottom">
-            <p>© 2025 ULIC. All rights reserved. | Built by <a href="https://sazidurrahman.netlify.app" target="_blank" rel="noopener noreferrer">Sazidur Rahman (ULIC President, 2024-25)</a></p>
+            <p>&copy; <span id="copyright-year">2025</span> University Laboratory ICT Club. All rights reserved.</p>
+            <p class="developer-credit">Designed & Developed by <a href="https://sazidurrahman.netlify.app" target="_blank">Sazidur Rahman</a></p>
         </div>
     </div>
 </footer>

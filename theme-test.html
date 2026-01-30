@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ULIC Theme Mixer & Tester</title>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        /* =========================================
+           1. CORE STYLES (From your index.css) 
+           ========================================= */
+        :root {
+            /* DEFAULT: Soft Modern (Your current favorite) */
+            --bg-color: #111827;
+            --bg-secondary: #1F2937;
+            --card-bg: rgba(31, 41, 55, 0.7); 
+            --border-color: rgba(255, 255, 255, 0.08);
+            
+            --text-color: #F3F4F6;
+            --text-muted: #9CA3AF;
+            
+            --primary-glow: #FDBA74;  /* Apricot */
+            --secondary-glow: #5EEAD4; /* Mint */
+
+            /* Derived Variables (Don't change these directly in the mixer) */
+            --font-body: system-ui, -apple-system, sans-serif;
+            --font-title: system-ui, sans-serif;
+            --transition-fast: 0.3s ease;
+        }
+
+        /* Essential Reset & Base */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-body);
+            transition: background-color 0.5s ease, color 0.5s ease;
+            overflow-x: hidden;
+            /* subtle grid texture */
+            background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"%3E%3Cg fill-rule="evenodd"%3E%3Cg fill="%23CCD6F6" fill-opacity="0.04"%3E%3Cpath d="M0 38.59l2.83-2.83 1.41 1.41L1.41 40H0v-1.41zM0 1.4l2.83 2.83 1.41-1.41L1.41 0H0v1.41zM38.59 40l-2.83-2.83 1.41-1.41L40 38.59V40h-1.41zM40 1.41l-2.83 2.83-1.41-1.41L38.59 0H40v1.41zM20 18.6l2.83-2.83 1.41 1.41L21.41 20l2.83 2.83-1.41 1.41L20 21.41l-2.83 2.83-1.41-1.41L18.59 20l-2.83-2.83 1.41-1.41L20 18.59z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+        }
+
+        /* Hero Simulation */
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: radial-gradient(circle at top, var(--bg-secondary) 0%, transparent 70%);
+        }
+        
+        .hero-subtitle {
+            color: var(--secondary-glow);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--text-color) 30%, var(--primary-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            /* Glow effect matches primary */
+            filter: drop-shadow(0 0 20px rgba(255,255,255,0.1));
+        }
+
+        .hero-tagline {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 12px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all var(--transition-fast);
+            cursor: pointer;
+            display: inline-block;
+        }
+        .btn-primary {
+            background-color: var(--secondary-glow);
+            color: var(--bg-color); /* Contrast text */
+            box-shadow: 0 0 15px -3px var(--secondary-glow);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px -3px var(--secondary-glow);
+            filter: brightness(1.1);
+        }
+        .btn-secondary {
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            margin-left: 10px;
+            background: rgba(255,255,255,0.02);
+        }
+        .btn-secondary:hover {
+            border-color: var(--primary-glow);
+            color: var(--primary-glow);
+        }
+
+        /* Cards Grid */
+        .preview-section {
+            padding: 4rem 10%;
+            background: var(--bg-color);
+        }
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            border-radius: 12px;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            border-color: var(--primary-glow);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px var(--primary-glow); 
+            /* Note: In real CSS use rgba() for shadow opacity, here we assume glow handles it */
+        }
+        .card h3 {
+            color: var(--primary-glow);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        .card p {
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* =========================================
+           2. MIXER PANEL STYLES (The Tool)
+           ========================================= */
+        #mixer-panel {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 320px;
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 20px;
+            z-index: 9999;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            backdrop-filter: blur(20px);
+            font-family: sans-serif;
+            color: #fff;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        #mixer-panel h2 { font-size: 1.2rem; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
+        
+        .control-group { margin-bottom: 20px; }
+        .control-label { display: block; font-size: 0.8rem; text-transform: uppercase; color: #94a3b8; margin-bottom: 8px; font-weight: bold; }
+        
+        .shade-options { display: flex; gap: 8px; flex-wrap: wrap; }
+        .shade-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.2);
+            cursor: pointer;
+            transition: transform 0.2s;
+            position: relative;
+        }
+        .shade-btn:hover { transform: scale(1.1); border-color: #fff; }
+        .shade-btn.active { border-color: #fff; transform: scale(1.2); box-shadow: 0 0 10px rgba(255,255,255,0.5); }
+        
+        /* Specific swatch styles for backgrounds to show border */
+        .shade-btn.bg-swatch { border-radius: 6px; width: 100%; height: 40px; text-align: left; padding: 0 10px; display: flex; align-items: center; font-size: 0.8rem; color: #ccc; }
+
+        .action-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+        .panel-btn {
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        .btn-random { background: #334155; color: #fff; }
+        .btn-copy { background: #22c55e; color: #000; }
+        .btn-random:hover { background: #475569; }
+        .btn-copy:hover { background: #4ade80; }
+
+        #css-output {
+            margin-top: 15px;
+            background: #000;
+            padding: 10px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.7rem;
+            color: #0f0;
+            display: none; /* Hidden until copy */
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <p class="hero-subtitle">Visual Theme Tester</p>
+                <h1 class="hero-title">University Laboratory<br>ICT Club</h1>
+                <p class="hero-tagline">Customize the "Soft Modern" palette. Switch shades, mix accents, and generate your new index.css variables.</p>
+                <div class="hero-actions">
+                    <a href="#" class="btn btn-primary">Join ULIC</a>
+                    <a href="#" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="preview-section">
+            <div class="cards-grid">
+                <div class="card">
+                    <h3><i data-feather="zap"></i> Activities</h3>
+                    <p>Experience the hover effect on this card. It uses the <strong>Primary Glow</strong> variable for the border and shadow.</p>
+                </div>
+                <div class="card">
+                    <h3><i data-feather="calendar"></i> Events</h3>
+                    <p>The buttons above use the <strong>Secondary Glow</strong>. Ensure they have enough contrast against the background.</p>
+                </div>
+                <div class="card">
+                    <h3><i data-feather="award"></i> Leaderboard</h3>
+                    <p>The background color is the <strong>Card BG</strong> variable, which includes transparency/blur.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="mixer-panel">
+        <h2>🎨 Theme Mixer</h2>
+
+        <div class="control-group">
+            <label class="control-label">Background Base</label>
+            <div class="shade-options" id="bg-controls">
+                </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label">Primary Accent (Glow)</label>
+            <div class="shade-options" id="primary-controls"></div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label">Secondary Accent (Buttons)</label>
+            <div class="shade-options" id="secondary-controls"></div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label">Text Contrast</label>
+            <div class="shade-options" id="text-controls"></div>
+        </div>
+
+        <div class="action-btns">
+            <button class="panel-btn btn-random" onclick="randomizeTheme()">🎲 Randomise</button>
+            <button class="panel-btn btn-copy" onclick="copyCSS()">📋 Copy CSS</button>
+        </div>
+        <div id="css-output"></div>
+    </div>
+
+    <script>
+        feather.replace();
+
+        // --- DATA: The Shades ---
+        const palettes = {
+            bg: [
+                { name: "Soft Modern (Default)", bg: "#111827", sec: "#1F2937", card: "rgba(31, 41, 55, 0.7)" },
+                { name: "Royal Deep", bg: "#020c1b", sec: "#0a192f", card: "rgba(17, 34, 64, 0.75)" },
+                { name: "Electric Night", bg: "#0B1120", sec: "#151E32", card: "rgba(21, 30, 50, 0.7)" },
+                { name: "Obsidian", bg: "#000000", sec: "#111111", card: "rgba(20, 20, 20, 0.8)" }
+            ],
+            primary: [
+                { name: "Apricot (Soft)", val: "#FDBA74" },
+                { name: "Amber (Royal)", val: "#FFB74D" },
+                { name: "Coral (Hot)", val: "#FF6B6B" },
+                { name: "Neon Orange", val: "#FF9800" },
+                { name: "Gold", val: "#F59E0B" }
+            ],
+            secondary: [
+                { name: "Mint (Soft)", val: "#5EEAD4" },
+                { name: "Electric Cyan", val: "#64FFDA" },
+                { name: "Sky Blue", val: "#38BDF8" },
+                { name: "Teal", val: "#14B8A6" },
+                { name: "Violet", val: "#A78BFA" }
+            ],
+            text: [
+                { name: "High Contrast", main: "#F3F4F6", muted: "#9CA3AF" },
+                { name: "Pure White", main: "#FFFFFF", muted: "#CCCCCC" },
+                { name: "Soft Grey", main: "#E5E7EB", muted: "#6B7280" }
+            ]
+        };
+
+        // --- INIT CONTROLS ---
+        const root = document.documentElement;
+
+        function renderControls() {
+            // Backgrounds
+            const bgContainer = document.getElementById('bg-controls');
+            palettes.bg.forEach((opt, idx) => {
+                const btn = document.createElement('div');
+                btn.className = 'shade-btn bg-swatch';
+                btn.style.background = opt.bg;
+                btn.innerText = opt.name;
+                btn.onclick = () => setBg(opt, btn);
+                if(idx === 0) btn.classList.add('active'); // Default
+                bgContainer.appendChild(btn);
+            });
+
+            // Primary
+            createColorSwatches('primary-controls', palettes.primary, setPrimary);
+            
+            // Secondary
+            createColorSwatches('secondary-controls', palettes.secondary, setSecondary);
+
+            // Text
+            const textContainer = document.getElementById('text-controls');
+            palettes.text.forEach((opt, idx) => {
+                const btn = document.createElement('div');
+                btn.className = 'shade-btn';
+                btn.style.background = opt.main;
+                btn.onclick = () => setText(opt, btn);
+                if(idx === 0) btn.classList.add('active');
+                textContainer.appendChild(btn);
+            });
+        }
+
+        function createColorSwatches(containerId, options, clickHandler) {
+            const container = document.getElementById(containerId);
+            options.forEach((opt, idx) => {
+                const btn = document.createElement('div');
+                btn.className = 'shade-btn';
+                btn.style.backgroundColor = opt.val;
+                btn.title = opt.name;
+                btn.onclick = () => clickHandler(opt, btn);
+                if(idx === 0) btn.classList.add('active');
+                container.appendChild(btn);
+            });
+        }
+
+        // --- UPDATE FUNCTIONS ---
+        function setActive(btn) {
+            const parent = btn.parentElement;
+            Array.from(parent.children).forEach(c => c.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        function setBg(opt, btn) {
+            root.style.setProperty('--bg-color', opt.bg);
+            root.style.setProperty('--bg-secondary', opt.sec);
+            root.style.setProperty('--card-bg', opt.card);
+            setActive(btn);
+        }
+
+        function setPrimary(opt, btn) {
+            root.style.setProperty('--primary-glow', opt.val);
+            setActive(btn);
+        }
+
+        function setSecondary(opt, btn) {
+            root.style.setProperty('--secondary-glow', opt.val);
+            setActive(btn);
+        }
+
+        function setText(opt, btn) {
+            root.style.setProperty('--text-color', opt.main);
+            root.style.setProperty('--text-muted', opt.muted);
+            setActive(btn);
+        }
+
+        // --- ACTIONS ---
+        function randomizeTheme() {
+            // Pick random index for each category
+            const rBg = Math.floor(Math.random() * palettes.bg.length);
+            const rPri = Math.floor(Math.random() * palettes.primary.length);
+            const rSec = Math.floor(Math.random() * palettes.secondary.length);
+            
+            // Trigger clicks to update UI state too
+            document.getElementById('bg-controls').children[rBg].click();
+            document.getElementById('primary-controls').children[rPri].click();
+            document.getElementById('secondary-controls').children[rSec].click();
+        }
+
+        function copyCSS() {
+            const style = getComputedStyle(root);
+            const css = `
+:root {
+    /* === ULIC CUSTOM THEME === */
+    --bg-color: ${style.getPropertyValue('--bg-color').trim()};
+    --bg-secondary: ${style.getPropertyValue('--bg-secondary').trim()};
+    --card-bg: ${style.getPropertyValue('--card-bg').trim()};
+    
+    --border-color: rgba(255, 255, 255, 0.1); /* Standardized */
+    
+    --text-color: ${style.getPropertyValue('--text-color').trim()};
+    --text-muted: ${style.getPropertyValue('--text-muted').trim()};
+    
+    --primary-glow: ${style.getPropertyValue('--primary-glow').trim()};
+    --secondary-glow: ${style.getPropertyValue('--secondary-glow').trim()};
+    
+    /* Font & Utils */
+    --font-title: 'Qood', sans-serif;
+    --font-header: 'Raligo', sans-serif;
+    --font-subtitle: 'Strenx', sans-serif;
+    --font-body: 'Xeroda', sans-serif;
+    --transition-fast: 0.3s ease;
+}
+            `;
+            
+            navigator.clipboard.writeText(css).then(() => {
+                const btn = document.querySelector('.btn-copy');
+                btn.innerText = "✅ Copied!";
+                setTimeout(() => btn.innerText = "📋 Copy CSS", 2000);
+            });
+        }
+
+        // Init
+        renderControls();
+
+    </script>
+</body>
+</html>

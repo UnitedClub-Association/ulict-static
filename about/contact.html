@@ -16,8 +16,11 @@
     <link rel="stylesheet" href="/css/footer.css" />
     <link rel="stylesheet" href="/css/contact.css" />
 
+    <!-- Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <!-- Anime.js Added -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script src="https://unpkg.com/feather-icons"></script>
 </head>
 <body>
@@ -25,42 +28,81 @@
 
     <main id="main-content">
         <section class="hero">
-            <canvas id="particle-canvas"></canvas>
+            <!-- Anime.js Grid Container -->
+            <div class="hero-background" id="anime-grid"></div>
+            
             <div class="hero-content">
-                <h1 id="hero-title">Contact Us</h1>
+                <h1 class="hero-title">
+                    <span class="text-wrapper">
+                        <span class="letters">Contact Us</span>
+                    </span>
+                </h1>
                 <p class="hero-subtitle">Have a question, suggestion, or project in mind? We'd love to hear from you.</p>
             </div>
         </section>
 
         <section class="contact-layout">
             <div class="container">
-                <div class="info-panel">
+                <!-- Info Panel -->
+                <div class="info-panel glass-panel">
                     <h2 class="panel-title">Connect With Us</h2>
                     <p class="panel-desc">Follow our journey and stay updated with our latest activities on our social media channels, or send us an email directly.</p>
+                    
+                    <div class="contact-methods">
+                        <div class="method-item">
+                            <i data-feather="map-pin"></i>
+                            <div>
+                                <h4>Visit Us</h4>
+                                <p>University Laboratory School & College, Dhaka</p>
+                            </div>
+                        </div>
+                        <div class="method-item">
+                            <i data-feather="mail"></i>
+                            <div>
+                                <h4>Email Us</h4>
+                                <p>ulictclub2024@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="social-links">
-                        <a href="https://www.facebook.com/ulic.fb" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                            <i data-feather="facebook"></i><span>Facebook</span>
+                        <a href="https://www.facebook.com/ulic.fb" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="social-icon">
+                            <i data-feather="facebook"></i>
                         </a>
-                        <a href="https://www.instagram.com/ulic.ig" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                            <i data-feather="instagram"></i><span>Instagram</span>
+                        <a href="https://www.instagram.com/ulic.ig" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-icon">
+                            <i data-feather="instagram"></i>
                         </a>
-                        <a href="https://www.youtube.com/@ulic.technology" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-                            <i data-feather="youtube"></i><span>YouTube</span>
-                        </a>
-                        <a href="mailto:ulictclub2024@gmail.com" aria-label="Email">
-                            <i data-feather="mail"></i><span>Email</span>
+                        <a href="https://www.youtube.com/@ulic.technology" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="social-icon">
+                            <i data-feather="youtube"></i>
                         </a>
                     </div>
                 </div>
 
-                <div class="form-panel">
-                    <h2 class="panel-title">Get in Touch</h2>
-                    <p class="panel-desc">
-                        For the quickest response, please reach out to us via our social media channels or the direct email address listed. We are always excited to connect with new people and explore new ideas.
-                    </p>
-                     <p class="panel-desc">
-                        Whether you have a question about an event, a suggestion for the club, or a collaboration proposal, don't hesitate to drop us a line.
-                    </p>
+                <!-- Functional Form Panel -->
+                <div class="form-panel glass-panel">
+                    <h2 class="panel-title">Send a Message</h2>
+                    <form id="contact-form" onsubmit="event.preventDefault();">
+                        <div class="form-group">
+                            <input type="text" id="name" class="form-input" placeholder=" " required>
+                            <label for="name" class="form-label">Your Name</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" class="form-input" placeholder=" " required>
+                            <label for="email" class="form-label">Email Address</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="subject" class="form-input" placeholder=" " required>
+                            <label for="subject" class="form-label">Subject</label>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" class="form-input" rows="4" placeholder=" " required></textarea>
+                            <label for="message" class="form-label">Your Message</label>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <span>Send Message</span>
+                            <i data-feather="send"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
         </section>

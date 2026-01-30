@@ -1,0 +1,33 @@
+{
+    "current_season": "s4",
+    "seasons": [
+        {
+            "id": "s1",
+            "name": "Season 1: Origin",
+            "date": "Sep 1 - Oct 31, 2025",
+            "file": "/data/leaderboard/s1.json",
+            "status": "completed"
+        },
+        {
+            "id": "s2",
+            "name": "Season 2: TripWare",
+            "date": "Nov 1 - Nov 30, 2025",
+            "file": "/data/leaderboard/s2.json",
+            "status": "completed"
+        },
+        {
+            "id": "s3",
+            "name": "Season 3: UIT26",
+            "date": "Dec 1 - Dec 31, 2025",
+            "file": "/data/leaderboard/s3.json",
+            "status": "completed"
+        },
+        {
+            "id": "s4",
+            "name": "Season 4: Gear:Unknown",
+            "date": "Jan 1 - Jan 31, 2026",
+            "file": "/data/leaderboard/s4.json",
+            "status": "active"
+        }
+    ]
+}

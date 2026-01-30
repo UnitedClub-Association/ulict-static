@@ -3,71 +3,91 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Dive deep into technology with expert-led sessions from the University Laboratory ICT Club (ULIC)." />
-    <title>ULIC Sessions | University Laboratory ICT Club</title>
+    <meta name="description" content="Technical sessions log: A chronological archive of workshops and coding sprints." />
+    <title>Sessions Log | University Laboratory ICT Club</title>
 
-    <!-- Preconnect and Preload for Performance -->
+    <!-- Font Loading Optimization -->
     <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
-    <link rel="preload" href="/css/sessions.css" as="style" />
-    <link rel="preload" href="/js/sessions.js" as="script" />
-    <link rel="preload" href="/data/events.json" as="fetch" crossorigin="anonymous">
 
-    <!-- Favicon & Stylesheets -->
-    <link rel="icon" type="image/x-icon" href="/images/ulic-logo.ico" />
+    <!-- CSS -->
     <link rel="stylesheet" href="/css/navbar.css" />
     <link rel="stylesheet" href="/css/footer.css" />
     <link rel="stylesheet" href="/css/sessions.css" />
 
     <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/feather-icons"></script>
 </head>
 <body>
-    <!-- Navbar Placeholder -->
+
     <div id="navbar-placeholder"></div>
 
-    <main id="main-content">
-        <!-- Hero Section with Interactive Canvas -->
-        <section class="hero">
-            <canvas id="constellation-canvas"></canvas>
+    <main>
+        <!-- Hero Section -->
+        <section class="sessions-hero">
+            <div id="sessions-particles"></div>
             <div class="hero-content">
-                <h1>ULIC Sessions</h1>
-                <p>Connect, Learn, and Grow with Our Expert-Led Sessions</p>
+                <div class="hero-badge">ULIC//ARCHIVE_LOG</div>
+                <h1 class="hero-title">
+                    SESSION <span class="text-gradient">PROTOCOLS</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Documenting the transfer of knowledge. Core workshops, technical briefings, and hands-on skill acquisition.
+                </p>
             </div>
         </section>
 
-        <!-- Sessions Timeline Section -->
-        <section class="sessions-section" aria-labelledby="sessions-heading">
-            <div class="container">
-                 <div class="section-header">
-                    <h2 id="sessions-heading">Our Learning Journey</h2>
-                    <p class="section-subtitle">Follow our timeline of sessions, from foundational concepts to advanced topics.</p>
-                </div>
-                <div class="timeline" id="timeline">
-                    <!-- Dynamic content will be injected here -->
-                    <div class="loading-spinner"></div>
+        <!-- Main Content -->
+        <div class="container main-layout">
+            
+            <div class="control-header">
+                <div class="stats-badge">
+                    <i data-feather="terminal"></i> 
+                    <span>LOG_ENTRIES: <span id="session-count">--</span></span>
                 </div>
             </div>
-        </section>
+
+            <!-- Timeline -->
+            <section class="log-container" id="sessions-timeline">
+                <div class="log-line"></div>
+                <!-- Items injected here -->
+                <div class="loading-state">
+                    <div class="spinner"></div>
+                </div>
+            </section>
+
+            <!-- Empty State -->
+            <div id="empty-state" class="hidden">
+                <i data-feather="slash"></i>
+                <p>NO_DATA_FOUND</p>
+            </div>
+        </div>
     </main>
 
-    <!-- Template for a single timeline item -->
+    <!-- Log Item Template -->
     <template id="timeline-item-template">
-        <div class="timeline-item">
-            <div class="timeline-content">
-                <span class="session-date"></span>
-                <h3 class="session-title"></h3>
-                <p class="session-desc"></p>
-                <a href="#" class="session-link">View Details <i data-feather="arrow-right"></i></a>
-            </div>
-            <div class="timeline-image">
-                 <img src="" alt="" loading="lazy" />
-            </div>
+        <div class="log-item">
+            <div class="log-marker"></div>
+            <div class="log-date"></div>
+            
+            <a href="#" class="log-card">
+                <div class="card-glow-border"></div>
+                <div class="card-image-wrapper">
+                    <img src="" alt="Session Cover" class="card-img" loading="lazy">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title"></h3>
+                    <p class="card-desc"></p>
+                    <div class="card-footer">
+                        <span class="read-more">ACCESS_MODULE <i data-feather="chevron-right"></i></span>
+                    </div>
+                </div>
+            </a>
         </div>
     </template>
 
-    <!-- Footer Placeholder -->
     <div id="footer-placeholder"></div>
 
     <!-- Scripts -->

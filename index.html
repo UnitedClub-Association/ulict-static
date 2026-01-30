@@ -28,30 +28,42 @@
     <link rel="stylesheet" href="./css/footer.css" />
     <link rel="stylesheet" href="./css/index.css" />
 
+    <!-- Core Libraries -->
     <script src="https://unpkg.com/feather-icons"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 </head>
 <body>
     <div id="navbar-placeholder"></div>
 
     <main id="main-content">
+        <!-- HERO SECTION -->
         <section class="hero" aria-labelledby="hero-heading">
-            <div class="hero-bg-shapes">
-                <div class="shape shape1"></div><div class="shape shape2"></div><div class="shape shape3"></div>
-                <div class="shape shape4"></div><div class="shape shape5"></div><div class="shape shape6"></div><div class="shape shape7"></div>
+            <div class="hero-visuals" id="hero-grid">
+                <!-- Grid elements injected via JS -->
             </div>
+            
             <div class="hero-content">
-                <p id="hero-heading" class="hero-subtitle">Welcome to the Grid</p>
-                <h1 class="hero-title">University Laboratory ICT Club</h1>
-                <p class="hero-tagline">A nexus for innovators, creators, and pioneers dedicated to shaping the future of technology.</p>
-                <div class="hero-actions">
+                <div class="hero-badge anim-hero-entry">
+                    <span class="status-dot"></span> Welcome to the Grid
+                </div>
+                <h1 class="hero-title anim-hero-entry">University Laboratory<br>ICT Club</h1>
+                <p class="hero-tagline anim-hero-entry">A nexus for innovators, creators, and pioneers dedicated to shaping the future of technology.</p>
+                <div class="hero-actions anim-hero-entry">
                     <a href="https://ulicapp.vercel.app" target="_blank" class="btn btn-primary">Join ULIC</a>
                     <a href="/about/about-us.html" class="btn btn-secondary">Learn More</a>
                 </div>
             </div>
+            
+            <div class="scroll-indicator">
+                <span class="mouse">
+                    <span class="wheel"></span>
+                </span>
+            </div>
         </section>
 
+        <!-- EXPLORE SECTION -->
         <section class="explore-ulic" aria-labelledby="explore-heading">
             <div class="container">
                 <div class="section-header anim-fade-in">
@@ -59,88 +71,153 @@
                     <p class="section-subtitle">Innovate, Collaborate, and push the boundaries of what's possible.</p>
                 </div>
                 <div class="explore-content">
-                    <div class="explore-text anim-slide-up">
+                    <div class="explore-card anim-slide-up">
+                        <div class="explore-icon-wrapper">
+                            <i data-feather="cpu"></i>
+                        </div>
                         <p>Dive into a world of innovation with ULIC. We bring together passionate tech enthusiasts to collaborate, learn, and create amazing things in the digital realm.</p>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- QUOTE SECTION -->
         <section class="philosophy-section">
             <div class="container">
                 <div class="quote-container">
-                    <span class="quote-icon top-left"></span>
+                    <span class="quote-decoration quote-top"></span>
                     <blockquote>Code is not just syntax; it's the architecture of ideas and the language of creation.</blockquote>
-                    <span class="quote-icon bottom-right"></span>
+                    <span class="quote-decoration quote-bottom"></span>
+                    <div class="quote-author">- The ULIC Manifesto</div>
                 </div>
             </div>
         </section>
 
+        <!-- HIGHLIGHTS SECTION -->
         <section class="featured-highlights" aria-labelledby="highlights-heading">
             <div class="container">
                 <div class="section-header anim-fade-in">
                     <h2 id="highlights-heading">Featured Highlights</h2>
                     <p class="section-subtitle">Discover our core activities and most memorable events.</p>
                 </div>
+                
                 <div class="highlights-container">
                     <div class="highlight-tabs">
                         <div class="tab-highlighter"></div>
-                        <button class="highlight-tab active" data-tab="activities"><i data-feather="zap"></i>Activities</button>
-                        <button class="highlight-tab" data-tab="events"><i data-feather="calendar"></i>Events</button>
+                        <button class="highlight-tab active" data-tab="activities">
+                            <span class="tab-icon"><i data-feather="zap"></i></span>
+                            <span class="tab-text">Activities</span>
+                        </button>
+                        <button class="highlight-tab" data-tab="events">
+                            <span class="tab-icon"><i data-feather="calendar"></i></span>
+                            <span class="tab-text">Events</span>
+                        </button>
+                        <button class="highlight-tab" data-tab="leaderboard">
+                            <span class="tab-icon"><i data-feather="bar-chart-2"></i></span>
+                            <span class="tab-text">Leaderboard</span>
+                        </button>
                     </div>
+
                     <div class="highlight-content-wrapper">
+                        <!-- Tab 1: Activities -->
                         <div class="highlight-content active" id="tab-content-activities">
                             <div class="cards-grid">
                                 <a href="activities/uca-unveiled.html" class="card anim-card">
+                                    <div class="card-icon"><i data-feather="flag"></i></div>
                                     <div class="card-content">
                                         <h3>Introductory Event</h3>
                                         <p>The official launch of ULIC under UCA, marking the beginning of a new era for tech enthusiasts.</p>
                                     </div>
+                                    <div class="card-arrow"><i data-feather="arrow-right"></i></div>
                                 </a>
                                 <a href="activities/offline-session1.html" class="card anim-card">
+                                    <div class="card-icon"><i data-feather="users"></i></div>
                                     <div class="card-content">
                                         <h3>First Offline Session</h3>
                                         <p>Our first in-person gathering where members connected, shared ideas, and kicked off hands-on projects.</p>
                                     </div>
+                                    <div class="card-arrow"><i data-feather="arrow-right"></i></div>
                                 </a>
                                 <a href="activities/online-session1.html" class="card anim-card">
+                                    <div class="card-icon"><i data-feather="wifi"></i></div>
                                     <div class="card-content">
                                         <h3>First Online Session</h3>
                                         <p>A virtual session to introduce ULIC’s vision and engage members in collaborative online activities.</p>
                                     </div>
+                                    <div class="card-arrow"><i data-feather="arrow-right"></i></div>
                                 </a>
                             </div>
                         </div>
+
+                        <!-- Tab 2: Events -->
                         <div class="highlight-content" id="tab-content-events">
                            <div class="events-grid">
                                 <a href="events/uca-unveiled.html" class="event-card anim-slide-up">
-                                    <img src="images/uca_logo.png" alt="UCA Unveiled" loading="lazy" />
+                                    <div class="event-card-img-wrapper">
+                                        <img src="images/uca_logo.png" alt="UCA Unveiled" loading="lazy" />
+                                    </div>
                                     <div class="event-card-overlay">
+                                        <div class="event-meta">Major Launch</div>
                                         <h3>UCA Unveiled</h3>
                                         <p class="event-desc">The grand launch of our parent organization.</p>
                                     </div>
                                 </a>
                                 <a href="events/ulic-launch.html" class="event-card anim-slide-up">
-                                    <img src="images/ulic-logo.jpg" alt="ULIC First Session" loading="lazy" />
+                                    <div class="event-card-img-wrapper">
+                                        <img src="images/ulic-logo.jpg" alt="ULIC First Session" loading="lazy" />
+                                    </div>
                                     <div class="event-card-overlay">
+                                        <div class="event-meta">Session 01</div>
                                         <h3>First Session</h3>
                                         <p class="event-desc">Our inaugural session to kick things off.</p>
                                     </div>
                                 </a>
                                 <a href="events/portfolio1.html" class="event-card anim-slide-up">
-                                    <img src="images/build-your-portfolio-banner.png" alt="Build Your Portfolio" loading="lazy" />
+                                    <div class="event-card-img-wrapper">
+                                        <img src="images/build-your-portfolio-banner.png" alt="Build Your Portfolio" loading="lazy" />
+                                    </div>
                                     <div class="event-card-overlay">
+                                        <div class="event-meta">Workshop</div>
                                         <h3>Build Your Portfolio!</h3>
                                         <p class="event-desc">A hands-on portfolio building workshop.</p>
                                     </div>
                                 </a>
                             </div>
                         </div>
+
+                        <!-- Tab 3: Leaderboard -->
+                        <div class="highlight-content" id="tab-content-leaderboard">
+                            <a href="/leaderboard/" class="leaderboard-showcase-card anim-card">
+                                <div class="leaderboard-showcase-content">
+                                    <div class="leaderboard-badge">Live Rankings</div>
+                                    <h3 class="leaderboard-showcase-title">Member Leaderboard</h3>
+                                    <p class="leaderboard-showcase-desc">Track member points, submissions, and friendly competition. See who's climbing the ranks daily, weekly, and monthly!</p>
+                                    <div class="leaderboard-showcase-link">
+                                        <span>View Rankings</span>
+                                        <i data-feather="arrow-right"></i>
+                                    </div>
+                                </div>
+                                <div class="leaderboard-showcase-visual">
+                                    <div class="rank-card rank-2">
+                                        <div class="rank-avatar"></div>
+                                        <div class="rank-bar"></div>
+                                    </div>
+                                    <div class="rank-card rank-1">
+                                        <div class="crown-icon"><i data-feather="award"></i></div>
+                                        <div class="rank-avatar"></div>
+                                        <div class="rank-bar"></div>
+                                    </div>
+                                    <div class="rank-card rank-3">
+                                        <div class="rank-avatar"></div>
+                                        <div class="rank-bar"></div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-
     </main>
 
     <div id="footer-placeholder"></div>

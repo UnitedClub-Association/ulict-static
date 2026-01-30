@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ULIC Navbar - Upgraded</title>
+    <title>ULIC Navbar - Immersive</title>
+    <!-- Use Google Fonts for Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-    <link rel="stylesheet" href="navbar.css">
-    <script src="navbar.js" defer></script>
+    <link rel="stylesheet" href="/css/navbar.css">
 </head>
 <body>
 
 <header class="navbar-header">
     <nav class="navbar-container">
+        <!-- Logo -->
         <div class="navbar-brand">
             <a class='logo-container' href='/'>
-                <img src="/images/ulic-favicon.jpg" alt="ULIC Logo" class="logo-img" />
+                <img src="/images/ulic-logo.jpg" alt="ULIC Logo" class="logo-img" />
                 <div class="logo-text-group">
                     <span class="logo-text-main">ULIC</span>
                     <span class="logo-text-sub">University Laboratory ICT Club</span>
@@ -22,12 +23,14 @@
             </a>
         </div>
 
+        <!-- Desktop Navigation -->
         <div class="nav-menu-desktop">
             <a href="/" class="nav-link">
                 <span class="material-symbols-outlined">home</span>
                 <span>Home</span>
             </a>
 
+            <!-- Mega Menu: Learn -->
             <div class="nav-item-group">
                 <button class="nav-link">
                     <span class="material-symbols-outlined">school</span>
@@ -35,67 +38,70 @@
                     <span class="material-symbols-outlined dropdown-arrow">expand_more</span>
                 </button>
                 <div class="dropdown-menu mega-menu">
+                    <!-- Left: Links Grid -->
                     <div class="mega-menu-grid">
                         <div class="mega-menu-intro">
                             <h3 class="mega-menu-title">Explore Our Tracks</h3>
-                            <p class="mega-menu-description">Dive deep into specialized fields with our curated learning paths and workshops.</p>
+                            <p class="mega-menu-description">Structured learning paths to master modern technology.</p>
                         </div>
                         <div class="mega-menu-links">
                             <a href="/lessons/web-development/web-development.html" class="mega-link-item">
                                 <div class="mega-link-icon icon-gradient-1"><span class="material-symbols-outlined">code</span></div>
                                 <div>
                                     <h4>Web Development</h4>
-                                    <p>Master Frontend, Backend, and Full-Stack development.</p>
+                                    <p>Frontend, Backend & Full-Stack.</p>
                                 </div>
                             </a>
                             <a href="/lessons/ui-uxdesigns/ui-uxdesigns.html" class="mega-link-item">
                                 <div class="mega-link-icon icon-gradient-2"><span class="material-symbols-outlined">design_services</span></div>
                                 <div>
                                     <h4>UI/UX Design</h4>
-                                    <p>Create intuitive and beautiful user interfaces.</p>
+                                    <p>Crafting intuitive interfaces.</p>
                                 </div>
                             </a>
                             <a href="/lessons/gamedevelopment/gamedevelopment.html" class="mega-link-item">
-                                <div class="mega-link-icon icon-gradient-3"><span class="material-symbols-outlined">gamepad</span></div>
+                                <div class="mega-link-icon icon-gradient-3"><span class="material-symbols-outlined">sports_esports</span></div>
                                 <div>
                                     <h4>Game Development</h4>
-                                    <p>Build immersive worlds with Unity and Unreal Engine.</p>
+                                    <p>Unity, Unreal & C# Logic.</p>
                                 </div>
                             </a>
                             <a href="/lessons/mobileapps/mobileapps.html" class="mega-link-item">
                                 <div class="mega-link-icon icon-gradient-4"><span class="material-symbols-outlined">smartphone</span></div>
                                 <div>
                                     <h4>Mobile Apps</h4>
-                                    <p>Develop for Android and iOS platforms.</p>
+                                    <p>Flutter & React Native.</p>
                                 </div>
                             </a>
                              <a href="/lessons/aiml/ai-ml.html" class="mega-link-item">
-                                <div class="mega-link-icon icon-gradient-5"><span class="material-symbols-outlined">model_training</span></div>
+                                <div class="mega-link-icon icon-gradient-5"><span class="material-symbols-outlined">psychology</span></div>
                                 <div>
-                                    <h4>AI & Machine Learning</h4>
-                                    <p>Explore the frontiers of artificial intelligence.</p>
+                                    <h4>AI & ML</h4>
+                                    <p>Python, TensorFlow & Data.</p>
                                 </div>
                             </a>
                             <a href="/lessons/devopsandcloud/devopscloud.html" class="mega-link-item">
-                                <div class="mega-link-icon icon-gradient-6"><span class="material-symbols-outlined">cloud_sync</span></div>
+                                <div class="mega-link-icon icon-gradient-6"><span class="material-symbols-outlined">cloud</span></div>
                                 <div>
                                     <h4>DevOps & Cloud</h4>
-                                    <p>Learn to deploy and scale modern applications.</p>
+                                    <p>AWS, Docker & CI/CD.</p>
                                 </div>
                             </a>
                         </div>
                     </div>
+                    <!-- Right: Featured -->
                     <div class="mega-menu-featured">
-                        <img src="/images/ulic-logo.jpg" alt="ULIC Social Media">
+                        <img src="/images/ulic-logo.jpg" alt="ULIC Community">
                         <div class="featured-content">
-                            <h4>Join Our Socials!</h4>
-                            <p>Stay connected and get the latest updates by following us on our social media platforms.</p>
+                            <h4>New Here?</h4>
+                            <p>Join our Web App community to get help with these lessons.</p>
                         </div>
-                        <a href="ulicapp.vercel.app" class="btn-primary">Follow Us</a>
+                        <a href="https://ulicapp.vercel.app" class="btn-primary" style="background: var(--nav-secondary); color: #111827; padding: 8px 20px; border-radius: 6px; text-decoration: none; font-weight: bold; margin-top: 10px; display:inline-block;">Join Community</a>
                     </div>
                 </div>
             </div>
 
+            <!-- Standard Dropdown: Events -->
             <div class="nav-item-group">
                 <button class="nav-link">
                     <span class="material-symbols-outlined">event</span>
@@ -103,68 +109,70 @@
                     <span class="material-symbols-outlined dropdown-arrow">expand_more</span>
                 </button>
                 <div class="dropdown-menu small-menu">
-                     <a href="/Events/events.html" class="small-link-item bg-pink">
-                        <div class="small-link-icon"><span class="material-symbols-outlined">celebration</span></div>
+                     <a href="/Events/events.html" class="small-link-item">
+                        <div class="small-link-icon icon-gradient-1"><span class="material-symbols-outlined">celebration</span></div>
                         <div>
                             <h4>All Events</h4>
-                            <p>Our upcoming and past events.</p>
+                            <p>Upcoming and past activities.</p>
                         </div>
                     </a>
-                     <a href="/Events/mini-events.html" class="small-link-item bg-blue">
-                        <div class="small-link-icon"><span class="material-symbols-outlined">history</span></div>
+                     <a href="/Events/mini-events.html" class="small-link-item">
+                        <div class="small-link-icon icon-gradient-2"><span class="material-symbols-outlined">timer</span></div>
                         <div>
                             <h4>Mini Events</h4>
-                            <p>Explore our bite-sized tech challenges.</p>
+                            <p>Quick challenges & competitions.</p>
                         </div>
                     </a>
-                    <a href="/Events/sessions.html" class="small-link-item bg-green">
-                        <div class="small-link-icon"><span class="material-symbols-outlined">groups</span></div>
+                    <a href="/Events/sessions.html" class="small-link-item">
+                        <div class="small-link-icon icon-gradient-4"><span class="material-symbols-outlined">school</span></div>
                         <div>
                             <h4>Tech Sessions</h4>
-                            <p>Join our interactive tech workshops.</p>
+                            <p>Workshops & seminars.</p>
                         </div>
                     </a>
                 </div>
             </div>
 
+            <!-- Standard Dropdown: About -->
             <div class="nav-item-group">
                 <button class="nav-link">
                     <span class="material-symbols-outlined">info</span>
                     <span>About</span>
                     <span class="material-symbols-outlined dropdown-arrow">expand_more</span>
                 </button>
-                <div class="dropdown-menu medium-menu grid-2x2">
-                    <a href="/about/about-us.html" class="small-link-item bg-green">
-                        <div class="small-link-icon"><span class="material-symbols-outlined">flag</span></div>
+                <div class="dropdown-menu small-menu">
+                    <a href="/about/about-us.html" class="small-link-item">
+                        <div class="small-link-icon icon-gradient-3"><span class="material-symbols-outlined">flag</span></div>
                         <div>
                             <h4>About Us</h4>
-                            <p>Our mission and goals.</p>
+                            <p>Our mission and vision.</p>
                         </div>
                     </a>
-                    <a href="/about/gallery.html" class="small-link-item bg-yellow">
-                        <div class="small-link-icon"><span class="material-symbols-outlined">photo_library</span></div>
+                    <a href="/about/gallery.html" class="small-link-item">
+                        <div class="small-link-icon icon-gradient-1"><span class="material-symbols-outlined">photo_library</span></div>
                         <div>
                             <h4>Gallery</h4>
-                            <p>Browse our event photos.</p>
+                            <p>Memories from our journey.</p>
                         </div>
                     </a>
-                     <a href="/about/achievements.html" class="small-link-item bg-purple">
-                        <div class="small-link-icon"><span class="material-symbols-outlined">military_tech</span></div>
+                     <a href="/about/achievements.html" class="small-link-item">
+                        <div class="small-link-icon icon-gradient-5"><span class="material-symbols-outlined">trophy</span></div>
                         <div>
                             <h4>Achievements</h4>
-                            <p>Celebrate our milestones.</p>
+                            <p>Awards and recognitions.</p>
                         </div>
                     </a>
-                    <a href="/about/contact.html" class="small-link-item bg-orange">
-                        <div class="small-link-icon"><span class="material-symbols-outlined">alternate_email</span></div>
+                    <a href="/about/contact.html" class="small-link-item">
+                        <div class="small-link-icon icon-gradient-6"><span class="material-symbols-outlined">mail</span></div>
                         <div>
                             <h4>Contact</h4>
-                            <p>Get in touch with us.</p>
+                            <p>Get in touch.</p>
                         </div>
                     </a>
                 </div>
             </div>
 
+            <!-- Standard Dropdown: Executives -->
             <div class="nav-item-group">
                 <button class="nav-link">
                     <span class="material-symbols-outlined">groups</span>
@@ -172,55 +180,109 @@
                     <span class="material-symbols-outlined dropdown-arrow">expand_more</span>
                 </button>
                 <div class="dropdown-menu small-menu">
-                    <a href="/Executives/2024-25.html" class="small-link-item bg-purple">
-                        <div class="small-link-icon"><span class="material-symbols-outlined">people</span></div>
+                    <a href="/Executives/2024-25.html" class="small-link-item">
+                        <div class="small-link-icon icon-gradient-4"><span class="material-symbols-outlined">badge</span></div>
                         <div>
                             <h4>Current Team</h4>
-                            <p>Meet the passionate student leaders.</p>
+                            <p>2024-25 Executive Committee.</p>
                         </div>
                     </a>
-
-                    <a href="/Executives/2026.html" class="small-link-item bg-teal">
-                        <div class="small-link-icon"><span class="material-symbols-outlined">rocket_launch</span></div>
+                    <a href="/Executives/2026.html" class="small-link-item">
+                        <div class="small-link-icon icon-gradient-2"><span class="material-symbols-outlined">rocket_launch</span></div>
                         <div>
                             <h4>Future Panel</h4>
-                            <p>See The Executives of Protocore:Two</p>
+                            <p>Protocore:Two</p>
                         </div>
                     </a>
-
-                    <a href="/Executives/alumni.html" class="small-link-item bg-orange">
-                        <div class="small-link-icon"><span class="material-symbols-outlined">school</span></div>
+                    <a href="/Executives/alumni.html" class="small-link-item">
+                        <div class="small-link-icon icon-gradient-1"><span class="material-symbols-outlined">history_edu</span></div>
                         <div>
                             <h4>Alumni</h4>
-                            <p>See where our former executives have gone.</p>
+                            <p>Hall of Fame.</p>
                         </div>
                     </a>
                 </div>
             </div>
         </div>
 
+        <!-- Mobile Toggle & Actions -->
         <div class="nav-actions">
             <a href="https://ulicapp.vercel.app" target="_blank" class="btn-secondary">Join ULIC</a>
             <div class="nav-menu-mobile-group">
-                <button class="mobile-menu-toggle" aria-label="Open menu" aria-expanded="false">
+                <button class="mobile-menu-toggle" aria-label="Open menu">
                     <span class="material-symbols-outlined">menu</span>
                 </button>
-                <div class="dropdown-menu mobile-menu">
-                    <a href="/" class="mobile-link"><span class="material-symbols-outlined">home</span>Home</a>
-                    <a href="/lessons/index.html" class="mobile-link"><span class="material-symbols-outlined">school</span>Learn</a>
-                    <a href="/Events/events.html" class="mobile-link"><span class="material-symbols-outlined">event</span>Events</a>
-                    <a href="/about/about-us.html" class="mobile-link"><span class="material-symbols-outlined">info</span>About</a>
-                    <a href="/Executives/executives.html" class="mobile-link"><span class="material-symbols-outlined">groups</span>Executives</a>
-                    <div class="mobile-menu-divider"></div>
-                    <a href="https://ulicapp.vercel.app" target="_blank" class="btn-primary">Join ULIC</a>
-                </div>
             </div>
         </div>
     </nav>
 </header>
 
-<main class="content">
-    </main>
+<!-- FULL SCREEN IMMERSIVE OVERLAY -->
+<div class="sidebar-wrapper">
+    <ul class="sidebar-menu">
+        <li class="sidebar-item-anim">
+            <a href="/" class="sidebar-link">
+                <div class="link-content">Home</div>
+            </a>
+        </li>
+        
+        <li class="sidebar-dropdown sidebar-item-anim">
+            <a href="#" class="sidebar-link">
+                <div class="link-content">Learn</div>
+                <span class="material-symbols-outlined dropdown-icon">expand_more</span>
+            </a>
+            <ul class="sidebar-dropdown-menu">
+                <li><a href="/lessons/web-development/web-development.html">Web Development</a></li>
+                <li><a href="/lessons/ui-uxdesigns/ui-uxdesigns.html">UI/UX Design</a></li>
+                <li><a href="/lessons/gamedevelopment/gamedevelopment.html">Game Development</a></li>
+                <li><a href="/lessons/mobileapps/mobileapps.html">Mobile Apps</a></li>
+                <li><a href="/lessons/aiml/ai-ml.html">AI & Machine Learning</a></li>
+                <li><a href="/lessons/devopsandcloud/devopscloud.html">DevOps & Cloud</a></li>
+            </ul>
+        </li>
 
+        <li class="sidebar-dropdown sidebar-item-anim">
+            <a href="#" class="sidebar-link">
+                <div class="link-content">Events</div>
+                <span class="material-symbols-outlined dropdown-icon">expand_more</span>
+            </a>
+            <ul class="sidebar-dropdown-menu">
+                <li><a href="/Events/events.html">All Events</a></li>
+                <li><a href="/Events/mini-events.html">Mini Events</a></li>
+                <li><a href="/Events/sessions.html">Tech Sessions</a></li>
+            </ul>
+        </li>
+
+        <li class="sidebar-dropdown sidebar-item-anim">
+            <a href="#" class="sidebar-link">
+                <div class="link-content">About</div>
+                <span class="material-symbols-outlined dropdown-icon">expand_more</span>
+            </a>
+            <ul class="sidebar-dropdown-menu">
+                <li><a href="/about/about-us.html">About Us</a></li>
+                <li><a href="/about/gallery.html">Gallery</a></li>
+                <li><a href="/about/achievements.html">Achievements</a></li>
+                <li><a href="/about/contact.html">Contact</a></li>
+            </ul>
+        </li>
+        
+        <li class="sidebar-dropdown sidebar-item-anim">
+            <a href="#" class="sidebar-link">
+                <div class="link-content">Executives</div>
+                <span class="material-symbols-outlined dropdown-icon">expand_more</span>
+            </a>
+            <ul class="sidebar-dropdown-menu">
+                <li><a href="/Executives/2024-25.html">Current Team</a></li>
+                <li><a href="/Executives/2026.html">Future Panel</a></li>
+                <li><a href="/Executives/alumni.html">Alumni</a></li>
+            </ul>
+        </li>
+    </ul>
+    <div class="sidebar-footer sidebar-item-anim">
+        <a href="https://ulicapp.vercel.app" target="_blank" class="btn-primary">Join Web App Community</a>
+    </div>
+</div>
+
+<script src="/js/navbar.js"></script>
 </body>
 </html>

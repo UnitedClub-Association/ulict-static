@@ -3,78 +3,114 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Explore focused workshops, challenges, and tech talks from the University Laboratory ICT Club (ULIC)." />
-    <title>ULIC Mini Events | University Laboratory ICT Club</title>
+    <meta name="description" content="Participate in ULIC's mini-events, coding challenges, and rapid-fire tech sprints." />
+    <title>Mini Events & Challenges | University Laboratory ICT Club</title>
 
+    <!-- Font Loading Optimization -->
     <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
-    <link rel="preload" href="/css/mini-events.css" as="style" />
-    <link rel="preload" href="/js/mini-events.js" as="script" />
-    <link rel="preload" href="/data/events.json" as="fetch" crossorigin="anonymous">
 
-    <link rel="icon" type="image/x-icon" href="/images/ulic-logo.ico" />
+    <!-- CSS -->
     <link rel="stylesheet" href="/css/navbar.css" />
     <link rel="stylesheet" href="/css/footer.css" />
     <link rel="stylesheet" href="/css/mini-events.css" />
 
+    <!-- Libraries: Anime.js + GSAP + Feather Icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/feather-icons"></script>
 </head>
 <body>
+
     <div id="navbar-placeholder"></div>
 
-    <main id="main-content">
-        <section class="hero">
+    <main>
+        <!-- Hero Section -->
+        <section class="mini-hero">
+            <div id="mini-hero-particles"></div>
             <div class="hero-content">
-                <h1 id="hero-title" class="glitch" data-text="Mini Events">Mini Events</h1>
-                <p class="hero-subtitle">Focused Workshops, Skill Challenges, and Tech Talks</p>
+                <div class="hero-badge">Rapid Fire</div>
+                <h1 class="hero-title">
+                    <span class="text-gradient">Mini</span> Events
+                </h1>
+                <p class="hero-subtitle">
+                    Short-term challenges, tech talks, and quick sprints designed to test your skills on the fly.
+                </p>
             </div>
         </section>
 
-        <div class="container">
-            <section class="event-category-section" id="workshops-section">
-                <h2 class="category-title">Workshops</h2>
-                <div class="event-grid" id="workshops-grid">
-                    <div class="loading-spinner"></div>
+        <div class="container main-layout">
+            
+            <!-- Quick Stats / Info Bar -->
+            <div class="info-bar">
+                <div class="info-item">
+                    <i data-feather="zap"></i>
+                    <span><strong>Active:</strong> <span id="active-count">0</span> Challenges</span>
+                </div>
+                <div class="info-item">
+                    <i data-feather="award"></i>
+                    <span><strong>Rewards:</strong> Certificates & Swag</span>
+                </div>
+            </div>
+
+            <!-- Section: Challenges -->
+            <section id="challenges-section" class="event-group">
+                <div class="section-header">
+                    <h2 class="section-title">Active <span class="highlight">Challenges</span></h2>
+                    <div class="section-line"></div>
+                </div>
+                
+                <div class="hub-grid" id="challenges-grid">
+                    <!-- Loading State -->
+                    <div class="loading-state">
+                        <div class="spinner"></div>
+                    </div>
                 </div>
             </section>
 
-            <section class="event-category-section" id="challenges-section">
-                <h2 class="category-title">Challenges</h2>
-                <div class="event-grid" id="challenges-grid">
-                    <div class="loading-spinner"></div>
+            <!-- Section: Talks (Hidden if empty) -->
+            <section id="talks-section" class="event-group hidden">
+                <div class="section-header">
+                    <h2 class="section-title">Tech <span class="highlight">Talks</span></h2>
+                    <div class="section-line"></div>
+                </div>
+                
+                <div class="hub-grid" id="talks-grid">
+                    <!-- Injected via JS -->
                 </div>
             </section>
 
-            <section class="event-category-section" id="talks-section">
-                <h2 class="category-title">Talks</h2>
-                <div class="event-grid" id="talks-grid">
-                    <div class="loading-spinner"></div>
-                </div>
-            </section>
         </div>
     </main>
 
-    <template id="event-card-template">
-        <a href="#" class="event-card">
-            <div class="card-banner">
-                <img src="" alt="" loading="lazy"/>
-                </div>
+    <!-- Shared Card Template -->
+    <template id="mini-card-template">
+        <a href="#" class="hub-card">
+            <div class="card-image-wrapper">
+                <img src="" alt="Event Cover" class="card-img" loading="lazy">
+                <div class="card-overlay"></div>
+                <span class="status-badge"></span>
+            </div>
             <div class="card-content">
-                <span class="card-tag"></span>
-                <h3 class="card-title"></h3>
+                <div class="card-header">
+                    <span class="card-type-tag"></span>
+                    <h4 class="card-title"></h4>
+                </div>
                 <p class="card-desc"></p>
                 <div class="card-footer">
-                    <i data-feather="calendar"></i>
-                    <span class="card-date"></span>
+                    <div class="card-meta">
+                        <i data-feather="calendar"></i>
+                        <span class="card-date-text"></span>
+                    </div>
+                    <span class="read-more">Participate &rarr;</span>
                 </div>
             </div>
         </a>
     </template>
 
-
     <div id="footer-placeholder"></div>
 
+    <!-- Scripts -->
     <script src="/js/include-fonts.js" defer></script> 
     <script src="/js/include-navbar.js" defer></script>
     <script src="/js/include-footer.js" defer></script>

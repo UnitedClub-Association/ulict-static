@@ -1,163 +1,174 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Check for GSAP and required plugins
-    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-        console.error("GSAP or ScrollTrigger plugin not loaded.");
-        return;
+    // --- 0. Init ---
+    if (typeof feather !== 'undefined') feather.replace();
+    if (typeof gsap !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
     }
-    gsap.registerPlugin(ScrollTrigger);
 
-    // --- 1. HERO ANIMATION ---
-    function animateHero() {
-        const heroTitle = document.getElementById('hero-title');
-        const heroSubtitle = document.querySelector('.hero-subtitle');
-        if (!heroTitle || !heroSubtitle) return;
+    const DOM = {
+        challengesGrid: document.getElementById('challenges-grid'),
+        talksGrid: document.getElementById('talks-grid'),
+        talksSection: document.getElementById('talks-section'),
+        activeCount: document.getElementById('active-count'),
+        template: document.getElementById('mini-card-template'),
+        particles: document.getElementById('mini-hero-particles')
+    };
 
-        gsap.set(heroSubtitle, { opacity: 0, y: 20 });
+    // --- 1. Particle Animation (Anime.js) ---
+    function initParticles() {
+        if (!DOM.particles || typeof anime === 'undefined') return;
         
-        const tl = gsap.timeline({ delay: 0.5 });
-        // Animate the custom properties for the CSS glitch effect
-        tl.to(heroTitle, {
-            '--glitch-opacity1': 1,
-            '--glitch-opacity2': 1,
-            duration: 0.8,
-            ease: "power2.inOut",
-        }).to(heroTitle, {
-            '--glitch-opacity1': 0,
-            '--glitch-opacity2': 0,
-            duration: 1.2,
-            ease: "power2.inOut"
-        }, ">0.2")
-        .to(heroSubtitle, { opacity: 1, y: 0, duration: 1, ease: 'expo.out' }, "-=1");
+        DOM.particles.innerHTML = '';
+        const count = 25;
+        
+        for (let i = 0; i < count; i++) {
+            const p = document.createElement('div');
+            p.style.cssText = `
+                position: absolute;
+                width: ${Math.random() * 5 + 2}px;
+                height: ${Math.random() * 5 + 2}px;
+                background: rgba(245, 158, 11, ${Math.random() * 0.4 + 0.1});
+                border-radius: 50%;
+                top: ${Math.random() * 100}%;
+                left: ${Math.random() * 100}%;
+            `;
+            DOM.particles.appendChild(p);
+        }
+
+        anime({
+            targets: DOM.particles.children,
+            translateY: [
+                { value: -30, duration: 3000 },
+                { value: 30, duration: 3000 }
+            ],
+            opacity: [
+                { value: 0.1, duration: 1500 },
+                { value: 0.5, duration: 1500 }
+            ],
+            delay: anime.stagger(150),
+            duration: 5000,
+            loop: true,
+            direction: 'alternate',
+            easing: 'easeInOutSine'
+        });
     }
 
-    // --- 2. DATA FETCHING & PROCESSING ---
-    async function fetchAndRenderEvents() {
-        const categories = {
-            workshop: document.getElementById('workshops-grid'),
-            challenge: document.getElementById('challenges-grid'),
-            talk: document.getElementById('talks-grid')
-        };
-
+    // --- 2. Data Logic ---
+    async function loadData() {
         try {
             const response = await fetch('/data/events.json');
-            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            if (!response.ok) throw new Error('Failed to load');
             const allEvents = await response.json();
-
-            const miniEvents = allEvents.filter(event => event.type === 'mini-event');
-
-            const categorizedEvents = {
-                workshop: miniEvents.filter(e => e.subType === 'workshop').sort((a, b) => new Date(b.date) - new Date(a.date)),
-                challenge: miniEvents.filter(e => e.subType === 'challenge').sort((a, b) => new Date(b.date) - new Date(a.date)),
-                talk: miniEvents.filter(e => e.subType === 'talk').sort((a, b) => new Date(b.date) - new Date(a.date)),
-            };
-
-            // Render each category
-            for (const category in categories) {
-                renderCategoryGrid(categorizedEvents[category], categories[category]);
-            }
-
-            feather.replace();
-            initScrollTriggers();
-
+            
+            processData(allEvents);
         } catch (error) {
-            console.error("Could not fetch events data:", error);
-            // Show error in all grids
-            for (const key in categories) {
-                if(categories[key]) categories[key].innerHTML = `<p class="error-message">Could not load mini events.</p>`;
-            }
+            console.error(error);
+            DOM.challengesGrid.innerHTML = `
+                <div style="grid-column: 1/-1; text-align: center; color: #ef4444; padding: 2rem;">
+                    <i data-feather="alert-circle" style="margin-bottom: 0.5rem"></i>
+                    <p>Unable to load events.</p>
+                </div>
+            `;
+            if (typeof feather !== 'undefined') feather.replace();
         }
     }
 
-    // --- 3. DYNAMIC RENDERING LOGIC ---
-    function renderCategoryGrid(events, gridElement) {
-        if (!gridElement) return;
-        const cardTemplate = document.getElementById('event-card-template');
-        if (!cardTemplate) return;
+    function processData(events) {
+        // Filter: Mini-Events (Challenges)
+        const challenges = events.filter(e => e.type === 'mini-event');
+        
+        // Filter: Talks (Explicit 'talk' type or sessions with 'talk' in title)
+        const talks = events.filter(e => 
+            e.type === 'talk' || 
+            (e.type === 'session' && e.title.toLowerCase().includes('talk'))
+        );
 
-        gridElement.innerHTML = ''; // Clear spinner
+        // Render Challenges
+        renderGrid(DOM.challengesGrid, challenges, 'No active challenges at the moment.');
+        
+        // Render Talks (or hide section)
+        if (talks.length > 0) {
+            DOM.talksSection.classList.remove('hidden');
+            renderGrid(DOM.talksGrid, talks, 'No upcoming talks.');
+        } else {
+            DOM.talksSection.classList.add('hidden');
+        }
 
-        // If a category has no events, hide the entire section for a cleaner UI
-        if (events.length === 0) {
-            gridElement.parentElement.style.display = 'none';
+        // Update Count
+        if (DOM.activeCount) DOM.activeCount.textContent = challenges.length;
+
+        // Init Card Animations
+        animateCards();
+    }
+
+    // --- 3. Rendering Helpers ---
+    function getStatus(event) {
+        const now = new Date();
+        const start = new Date(event.date);
+        const end = event.endDate ? new Date(event.endDate) : new Date(start);
+        
+        if (!event.endDate) end.setHours(23, 59, 59);
+
+        if (now < start) return { label: 'Upcoming', class: 'status-upcoming' };
+        if (now > end) return { label: 'Ended', class: 'status-past' };
+        return { label: 'Active', class: 'status-live' };
+    }
+
+    function formatDate(dateStr, endDateStr) {
+        if (!dateStr) return '';
+        const options = { month: 'short', day: 'numeric', year: 'numeric' };
+        const start = new Date(dateStr).toLocaleDateString('en-US', options);
+        return start;
+    }
+
+    function renderGrid(container, items, emptyMsg) {
+        container.innerHTML = '';
+
+        if (items.length === 0) {
+            container.innerHTML = `<div style="grid-column:1/-1; text-align:center; color:var(--text-muted); padding:2rem;">${emptyMsg}</div>`;
             return;
         }
 
-        events.forEach(event => {
-            const card = cardTemplate.content.cloneNode(true).firstElementChild;
-            
-            card.href = event.link || '#';
-            card.dataset.category = event.subType;
+        items.forEach(item => {
+            const node = DOM.template.content.cloneNode(true);
+            const status = getStatus(item);
 
-            const banner = card.querySelector('.card-banner');
-            banner.querySelector('img').src = event.image || 'https://placehold.co/600x400/162C46/FF9800?text=ULIC';
-            banner.querySelector('img').alt = event.title;
+            const img = node.querySelector('.card-img');
+            img.src = item.image || '/images/default-event.jpg';
+            img.alt = item.title;
 
-            // Inject status badge
-            const status = getEventStatus(event.date, event.endDate);
-            banner.insertAdjacentHTML('beforeend', `<div class="card-status ${status.class}">${status.text}</div>`);
+            const badge = node.querySelector('.status-badge');
+            badge.textContent = status.label;
+            badge.classList.add(status.class);
 
-            const tag = card.querySelector('.card-tag');
-            tag.textContent = event.subType;
-            tag.className = `card-tag tag-${event.subType}`;
+            node.querySelector('.card-type-tag').textContent = item.type === 'mini-event' ? 'Challenge' : 'Talk';
+            node.querySelector('.card-title').textContent = item.title;
+            node.querySelector('.card-desc').textContent = item.description;
+            node.querySelector('.card-date-text').textContent = formatDate(item.date, item.endDate);
+            node.querySelector('a').href = item.link || '#';
 
-            card.querySelector('.card-title').textContent = event.title;
-            card.querySelector('.card-desc').textContent = event.description;
-            card.querySelector('.card-date').textContent = new Date(event.date).toLocaleDateString('en-US', {
-                year: 'numeric', month: 'long', day: 'numeric'
-            });
-
-            if (!event.link || event.link === '#') {
-                card.classList.add('disabled');
-                card.removeAttribute('href');
-            }
-
-            gridElement.appendChild(card);
+            container.appendChild(node);
         });
+
+        if (typeof feather !== 'undefined') feather.replace();
     }
 
-    // --- 4. SCROLL ANIMATIONS ---
-    function initScrollTriggers() {
-        gsap.utils.toArray('.event-category-section').forEach(section => {
-            // Only animate sections that are visible (i.e., not hidden due to no events)
-            if (getComputedStyle(section).display !== 'none') {
-                const title = section.querySelector('.category-title');
-                const cards = section.querySelectorAll('.event-card');
+    // --- 4. GSAP Animation ---
+    function animateCards() {
+        if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
-                const tl = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: section,
-                        start: 'top 85%',
-                        toggleActions: 'play none none none'
-                    }
-                });
-                
-                tl.from(title, { opacity: 0, x: -50, duration: 0.8, ease: 'expo.out' })
-                  .from(cards, { opacity: 0, y: 50, duration: 0.8, stagger: 0.1, ease: 'expo.out' }, "-=0.5");
-            }
-        });
-    }
-
-    // --- 5. HELPER FUNCTIONS ---
-    function getEventStatus(startDateString, endDateString) {
-        const today = new Date(); today.setHours(0, 0, 0, 0);
-        const startDate = new Date(startDateString); startDate.setHours(0, 0, 0, 0);
+        const cards = document.querySelectorAll('.hub-card');
         
-        if (endDateString) {
-            const endDate = new Date(endDateString); endDate.setHours(23, 59, 59, 999);
-            if (today >= startDate && today <= endDate) return { text: 'Live', class: 'status-live' };
-        } else {
-            if (today.getTime() === startDate.getTime()) return { text: 'Today', class: 'status-live' };
-        }
-
-        if (today < startDate) return { text: 'Upcoming', class: 'status-upcoming' };
-        return { text: 'Past', class: 'status-past' };
+        ScrollTrigger.batch(cards, {
+            onEnter: batch => gsap.fromTo(batch, 
+                { y: 30, opacity: 0 }, 
+                { y: 0, opacity: 1, duration: 0.5, stagger: 0.1, ease: 'power2.out', overwrite: true }
+            ),
+            start: "top 90%"
+        });
     }
 
-    // --- 6. INITIALIZATION ---
-    function init() {
-        animateHero();
-        fetchAndRenderEvents();
-    }
-
-    init();
+    // Start
+    initParticles();
+    loadData();
 });

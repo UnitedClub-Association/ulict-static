@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="ULIC Member Leaderboard - Season Standings" />
+    <title>Leaderboard | University Laboratory ICT Club</title>
+
+    <link rel="icon" type="image/x-icon" href="/images/ulic-logo.ico" />
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/navbar.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+    <link rel="stylesheet" href="/css/leaderboard.css" />
+    
+    <!-- Libraries -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+    <div id="navbar-placeholder"></div>
+
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="leaderboard-hero">
+            <div class="hero-bg-anim"></div>
+            <div class="leaderboard-hero-content">
+                <div class="season-badge" id="active-season-badge">Season Loading...</div>
+                <h1>Club Standings</h1>
+                <p>Track progress across our operational seasons.</p>
+            </div>
+        </section>
+
+        <div class="leaderboard-wrapper">
+            <div class="leaderboard-container">
+                
+                <!-- Season Timeline Selector -->
+                <div class="season-timeline-wrapper">
+                    <div class="season-track" id="season-selector">
+                        <!-- Seasons injected by JS -->
+                    </div>
+                </div>
+                
+                <!-- Controls Row -->
+                <div class="controls-bar">
+                    <div class="stats-summary">
+                        <span id="season-date-range">...</span>
+                    </div>
+                    
+                    <div class="search-wrapper">
+                        <i data-feather="search"></i>
+                        <input type="text" id="memberSearch" placeholder="Find member..." />
+                    </div>
+                </div>
+
+                <!-- Podium (Hidden if 0 points) -->
+                <div class="podium-container" id="podium-display" style="display:none;">
+                    <!-- Top 3 -->
+                </div>
+                
+                <!-- Empty State / Zero Points Message -->
+                <div id="zero-points-message" class="zero-state" style="display:none;">
+                    <div class="zero-icon"><i data-feather="clock"></i></div>
+                    <h3>Season in Progress</h3>
+                    <p>Points have not yet been awarded for this season.</p>
+                </div>
+
+                <!-- Roster List -->
+                <div class="list-header">
+                    <span>Rank</span>
+                    <span>Member Identity</span>
+                    <span class="desktop-only">Specialty</span>
+                    <span>Points</span>
+                </div>
+                
+                <ul class="leaderboard-list">
+                     <li class="loading-state">Initializing Database...</li>
+                </ul>
+                
+            </div>
+        </div>
+
+    </main>
+
+    <div id="footer-placeholder"></div>
+    
+    <script src="/js/include-fonts.js" defer></script> 
+    <script src="/js/include-navbar.js" defer></script>
+    <script src="/js/include-footer.js" defer></script>
+    <script src="/js/leaderboard-main.js" defer></script>
+</body>
+</html>

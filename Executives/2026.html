@@ -29,15 +29,20 @@
 
     <!-- Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 </head>
 <body>
     <!-- Navbar Placeholder -->
     <div id="navbar-placeholder"></div>
 
     <main id="main-content">
-        <!-- Hero Section -->
+        <!-- Hero Section with Circuit Canvas -->
         <section class="hero">
+            <canvas id="circuit-canvas"></canvas>
             <div class="hero-content">
+                <div class="badge-wrapper">
+                    <span class="version-badge">VERSION 2.0 LOADING</span>
+                </div>
                 <h1 class="hero-title" data-text="Protocore:Two">Protocore:Two</h1>
                 <p class="session-year">Executive Panel: 2026</p>
             </div>
@@ -48,8 +53,12 @@
             <div class="board-container">
                 <!-- Tier 1: President -->
                 <div class="profile-card president" data-rank="1">
+                    <div class="card-glow"></div>
                     <div class="card-content">
-                        <p class="rank-id">COMMAND</p>
+                        <div class="icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        </div>
+                        <p class="rank-id">COMMAND NODE</p>
                         <h3 class="name">To Be Announced</h3>
                         <p class="title">President</p>
                     </div>
@@ -60,15 +69,17 @@
                 <!-- Tier 2: Leads -->
                 <div class="tier-2">
                     <div class="profile-card lead-dev" data-rank="2">
+                         <div class="card-glow"></div>
                         <div class="card-content">
-                            <p class="rank-id">TECHNICAL LEAD</p>
+                            <p class="rank-id">DEV OPS</p>
                             <h3 class="name">To Be Announced</h3>
                             <p class="title">Lead Developer</p>
                         </div>
                     </div>
                     <div class="profile-card vice-pres" data-rank="3">
+                         <div class="card-glow"></div>
                         <div class="card-content">
-                            <p class="rank-id">OPERATIONS LEAD</p>
+                            <p class="rank-id">SYS ADMIN</p>
                             <h3 class="name">To Be Announced</h3>
                             <p class="title">Vice President</p>
                         </div>
@@ -80,22 +91,25 @@
                 <!-- Tier 3: Support -->
                 <div class="tier-3">
                     <div class="profile-card lead-designer" data-rank="4">
+                         <div class="card-glow"></div>
                         <div class="card-content">
-                            <p class="rank-id">DESIGN LEAD</p>
+                            <p class="rank-id">UI/UX CORE</p>
                             <h3 class="name">To Be Announced</h3>
                             <p class="title">Lead Designer</p>
                         </div>
                     </div>
                     <div class="profile-card gen-sec" data-rank="5">
+                         <div class="card-glow"></div>
                         <div class="card-content">
-                            <p class="rank-id">SUPPORT LEAD</p>
+                            <p class="rank-id">LOGISTICS</p>
                             <h3 class="name">To Be Announced</h3>
                             <p class="title">General Secretary</p>
                         </div>
                     </div>
                     <div class="profile-card media-man" data-rank="6">
+                         <div class="card-glow"></div>
                         <div class="card-content">
-                            <p class="rank-id">MEDIA LEAD</p>
+                            <p class="rank-id">BROADCAST</p>
                             <h3 class="name">To Be Announced</h3>
                             <p class="title">Media Manager</p>
                         </div>
@@ -115,4 +129,3 @@
     <script src="/executives-js/2026.js" defer></script>
 </body>
 </html>
-

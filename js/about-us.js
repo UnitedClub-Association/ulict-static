@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!container) return;
 
         let scene, camera, renderer, particles, mouseX = 0, mouseY = 0;
+        let animationId;
         const windowHalfX = window.innerWidth / 2;
         const windowHalfY = window.innerHeight / 2;
 
@@ -20,24 +21,24 @@ document.addEventListener('DOMContentLoaded', () => {
         camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
         camera.position.z = 1000;
 
-        // Particles
+        // Particles Material - Updated to Soft Cyan to match new theme
         const material = new THREE.PointsMaterial({
-            color: 0x00CFDE, // --secondary-glow
-            size: 2,
+            color: 0x5EEAD4, // --secondary-glow hex value
+            size: 2.5,       // Slightly larger for softness
             transparent: true,
             blending: THREE.AdditiveBlending,
             depthWrite: false,
-            opacity: 0.7
+            opacity: 0.6     // Slightly more subtle
         });
 
         const geometry = new THREE.BufferGeometry();
         const vertices = [];
-        const numParticles = 5000;
+        const numParticles = 4000; // Optimized count
 
         for (let i = 0; i < numParticles; i++) {
-            const x = Math.random() * 2000 - 1000;
-            const y = Math.random() * 2000 - 1000;
-            const z = Math.random() * 2000 - 1000;
+            const x = Math.random() * 2500 - 1250;
+            const y = Math.random() * 2500 - 1250;
+            const z = Math.random() * 2500 - 1250;
             vertices.push(x, y, z);
         }
 
@@ -68,39 +69,43 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Animation loop
         function animate() {
-            requestAnimationFrame(animate);
+            animationId = requestAnimationFrame(animate);
             const time = Date.now() * 0.00005;
-            camera.position.x += (mouseX - camera.position.x) * 0.05;
-            camera.position.y += (-mouseY - camera.position.y) * 0.05;
+            
+            // Smoother camera movement
+            camera.position.x += (mouseX - camera.position.x) * 0.03;
+            camera.position.y += (-mouseY - camera.position.y) * 0.03;
+            
             camera.lookAt(scene.position);
-            particles.rotation.x = time * 0.2;
-            particles.rotation.y = time * 0.5;
+            
+            // Gentle rotation
+            particles.rotation.x = time * 0.15;
+            particles.rotation.y = time * 0.3;
+            
             renderer.render(scene, camera);
         }
         
-        animate();
+        // Performance: Pause when not visible
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animate();
+                } else {
+                    cancelAnimationFrame(animationId);
+                }
+            });
+        });
+        
+        if(container.parentElement) observer.observe(container.parentElement);
+        else animate();
     }
 
     // --- 2. GSAP Scroll-Triggered Animations ---
     function initScrollAnimations() {
         const animations = {
-            'hero-title': {
-                y: 30,
-                duration: 1.5,
-                ease: 'expo.out',
-                delay: 0.5
-            },
-            'hero-subtitle': {
-                y: 30,
-                duration: 1.5,
-                ease: 'expo.out',
-                delay: 0.7
-            },
-            'fade-up': {
-                y: 50,
-                duration: 1.2,
-                ease: 'expo.out'
-            }
+            'hero-title': { y: 40, duration: 1.6, ease: 'power3.out', delay: 0.2 },
+            'hero-subtitle': { y: 20, duration: 1.4, ease: 'power3.out', delay: 0.4 },
+            'fade-up': { y: 60, duration: 1, ease: 'power2.out' }
         };
 
         gsap.utils.toArray('[data-anim]').forEach(elem => {
@@ -118,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         delay: config.delay || 0,
                         scrollTrigger: {
                             trigger: elem,
-                            start: 'top 90%',
+                            start: 'top 88%', // Trigger slightly earlier
                             toggleActions: 'play none none none',
                             once: true
                         }
@@ -127,25 +132,47 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Staggered card animation
+        // Staggered Cards
         gsap.utils.toArray('.data-card-grid').forEach(grid => {
             gsap.fromTo(grid.querySelectorAll('.data-card'),
-                { opacity: 0, y: 50 },
+                { opacity: 0, y: 60 },
                 {
                     opacity: 1,
                     y: 0,
-                    duration: 1,
-                    ease: 'expo.out',
-                    stagger: 0.2,
+                    duration: 1.2,
+                    ease: 'power3.out',
+                    stagger: 0.15,
                     scrollTrigger: {
                         trigger: grid,
-                        start: 'top 85%',
+                        start: 'top 80%',
                         toggleActions: 'play none none none',
                         once: true
                     }
                 }
             );
         });
+
+        // Timeline Items Stagger
+        const timelineItems = gsap.utils.toArray('.timeline-item');
+        if (timelineItems.length > 0) {
+            timelineItems.forEach((item, i) => {
+                gsap.fromTo(item,
+                    { opacity: 0, x: -30 },
+                    {
+                        opacity: 1,
+                        x: 0,
+                        duration: 1,
+                        ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: item,
+                            start: 'top 90%',
+                            toggleActions: 'play none none none',
+                            once: true
+                        }
+                    }
+                );
+            });
+        }
     }
 
     // --- 3. Initialization ---

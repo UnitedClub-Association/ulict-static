@@ -1,43 +1,73 @@
 /* ---
-  * REVAMP: Achievements V2 - Cyber Core Vision
+  * REVAMP: Achievements V3 - Soft Modern Upgrade
 --- */
 
-/* --- Cyber Core Theme --- */
+/* --- Theme Variables (Matched to About Us V3) --- */
 :root {
-    --bg-color: #0A192F; --bg-secondary: #0D203A; --card-bg: #162C46;
-    --border-color: rgba(0, 207, 222, 0.2); --text-color: #CCD6F6;
-    --text-muted: #8892B0; --primary-glow: #FF9800; --secondary-glow: #00CFDE;
-    --font-title: 'Qood', sans-serif; --font-header: 'Raligo', sans-serif;
-    --font-subtitle: 'Strenx', sans-serif; --font-body: 'Xeroda', sans-serif;
+    /* Base Colors */
+    --bg-color: #111827;       /* Deep Gunmetal */
+    --bg-secondary: #1F2937;   /* Lighter Slate */
+
+    /* Surfaces (Glassmorphism) */
+    --card-bg: rgba(31, 41, 55, 0.6);
+    --card-hover: rgba(55, 65, 81, 0.8);
+    --border-color: rgba(255, 255, 255, 0.08);
+
+    /* Text */
+    --text-color: #F3F4F6;
+    --text-muted: #9CA3AF;
+
+    /* Accents */
+    --primary-glow: #FDBA74;   /* Apricot/Orange Warmth */
+    --primary-dim: #9A632F;
+    --secondary-glow: #5EEAD4; /* Pastel Cyan/Tech */
+    --secondary-dim: #115E59;
+
+    /* Gradients */
+    --grad-text: linear-gradient(135deg, #F3F4F6 30%, var(--primary-glow));
+    --grad-glow: linear-gradient(135deg, var(--secondary-glow), var(--primary-glow));
+
+    /* Fonts */
+    --font-title: 'Qood', sans-serif;
+    --font-header: 'Raligo', sans-serif;
+    --font-subtitle: 'Strenx', sans-serif;
+    --font-body: 'Xeroda', sans-serif;
+
+    /* Transitions */
     --transition-fast: 0.3s ease;
     --transition-smooth: 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* --- Basic Setup --- */
+/* --- Global Setup --- */
 body {
     background-color: var(--bg-color);
     font-family: var(--font-body);
     color: var(--text-color);
     margin: 0;
     overflow-x: hidden;
+    /* Subtle geometric pattern */
     background-image: 
-        radial-gradient(var(--bg-secondary) 1px, transparent 1px),
-        radial-gradient(var(--bg-secondary) 1px, transparent 1px);
-    background-size: 40px 40px;
-    background-position: 0 0, 20px 20px;
+        radial-gradient(circle at 50% 0%, rgba(253, 186, 116, 0.05) 0%, transparent 50%),
+        linear-gradient(var(--bg-secondary) 1px, transparent 1px),
+        linear-gradient(90deg, var(--bg-secondary) 1px, transparent 1px);
+    background-size: 100% 100%, 50px 50px, 50px 50px;
+    background-position: center, 0 0, 0 0;
 }
 
 .container {
     width: 90%;
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 6rem 0;
 }
 
+/* --- Typography --- */
+h1, h2, h3, h4 { margin: 0; font-weight: 400; }
+
 /* --- Hero Section --- */
 .hero {
     height: 70vh;
-    min-height: 400px;
+    min-height: 500px;
     position: relative;
     display: flex;
     justify-content: center;
@@ -45,169 +75,331 @@ body {
     text-align: center;
     overflow: hidden;
     padding: 0 1rem;
-    background: radial-gradient(ellipse at 50% 100%, var(--bg-secondary), transparent 70%);
+}
+
+/* Abstract background glow for hero */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120%;
+    height: 150%;
+    background: radial-gradient(circle, rgba(94, 234, 212, 0.08) 0%, transparent 60%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
 }
 
 .hero-content h1 {
     font-family: var(--font-header);
-    font-size: clamp(2.8rem, 9vw, 6rem);
-    color: var(--text-color);
-    text-shadow: 0 0 20px var(--primary-glow);
-    margin: 0;
-    font-weight: normal;
+    font-size: clamp(3.5rem, 10vw, 7rem);
+    line-height: 1.1;
+    background: linear-gradient(135deg, #fff 0%, var(--primary-glow) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 20px 60px rgba(253, 186, 116, 0.15);
 }
 
 .hero-subtitle {
     font-family: var(--font-subtitle);
-    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
     color: var(--text-muted);
-    margin-top: 1.5rem;
-    max-width: 650px;
-    margin-left: auto;
-    margin-right: auto;
+    max-width: 700px;
+    margin: 0 auto;
     line-height: 1.6;
+    letter-spacing: 1px;
 }
 
 .content-wrapper {
-    background-color: var(--bg-color);
     position: relative;
     z-index: 5;
+    background: linear-gradient(to bottom, transparent, var(--bg-color) 150px);
 }
 
 /* --- General Section Styling --- */
-.section-header { text-align: center; margin-bottom: 4rem; }
-.section-header h2 { font-family: var(--font-header); font-size: clamp(2.2rem, 6vw, 3.8rem); margin-bottom: 1rem; color: var(--text-color); position: relative; display: inline-block; }
-.section-header h2::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 70%; height: 3px; background: var(--secondary-glow); border-radius: 2px; box-shadow: 0 0 10px var(--secondary-glow); }
-.section-subtitle { font-family: var(--font-body); font-size: clamp(1rem, 2.5vw, 1.1rem); color: var(--text-muted); max-width: 700px; margin: 1.5rem auto 0; line-height: 1.7; }
+.section-header { text-align: center; margin-bottom: 5rem; }
 
-/* --- Foundation Section --- */
+.section-header h2 {
+    font-family: var(--font-header);
+    font-size: clamp(2.5rem, 7vw, 4rem);
+    background: var(--grad-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+
+.section-header p {
+    font-family: var(--font-body);
+    font-size: clamp(1.1rem, 2.5vw, 1.25rem);
+    color: var(--text-muted);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+/* --- Foundation Cards (Glassmorphism) --- */
 .foundation-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2.5rem;
 }
-.foundation-card {
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-color);
-    padding: 2.5rem;
-    border-radius: 12px;
-    text-align: center;
-    transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
-}
-.foundation-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px -15px rgba(0,0,0,0.5);
-    border-color: var(--secondary-glow);
-}
-.card-icon { color: var(--secondary-glow); margin-bottom: 1.5rem; }
-.card-icon svg { width: 40px; height: 40px; }
-.card-title { font-family: var(--font-header); font-size: 1.8rem; margin: 0 0 1rem 0; }
-.card-desc { color: var(--text-muted); line-height: 1.7; }
 
-/* --- Roadmap Section --- */
-.roadmap-section { background-color: var(--bg-secondary); }
+.foundation-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 3rem 2.5rem;
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: all var(--transition-smooth);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Gradient Border Hover Effect */
+.foundation-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+.foundation-card:hover {
+    transform: translateY(-8px);
+    background: var(--card-hover);
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.card-icon {
+    color: var(--secondary-glow);
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    padding: 12px;
+    background: rgba(94, 234, 212, 0.1);
+    border-radius: 12px;
+}
+.card-icon svg { width: 32px; height: 32px; }
+
+.card-title {
+    font-family: var(--font-header);
+    font-size: 1.8rem;
+    color: var(--text-color);
+    margin: 0 0 1rem 0;
+}
+
+.card-desc {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+/* --- Roadmap Timeline (Soft Modern Style) --- */
+.roadmap-section {
+    position: relative;
+}
+
 .roadmap-timeline {
     position: relative;
-    max-width: 800px;
-    margin: 2rem auto 0;
+    max-width: 850px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: 4rem;
 }
+
+/* Vertical Line */
 .roadmap-timeline::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 20px;
-    height: 100%;
+    top: 20px;
+    left: 24px; /* Centered with marker */
+    height: calc(100% - 40px);
     width: 2px;
-    background: linear-gradient(to bottom, transparent, var(--primary-glow) 20%, var(--primary-glow) 80%, transparent);
-    opacity: 0.5;
+    background: linear-gradient(to bottom, 
+        transparent, 
+        var(--primary-dim) 20%, 
+        var(--secondary-dim) 80%, 
+        transparent
+    );
+    opacity: 0.6;
 }
 
-.roadmap-item { position: relative; padding-left: 60px; }
+.roadmap-item {
+    position: relative;
+    padding-left: 80px;
+}
+
+/* Marker */
 .roadmap-marker {
     position: absolute;
     left: 0;
-    top: 5px;
-    width: 42px;
-    height: 42px;
-    background-color: var(--bg-secondary);
-    border: 2px solid var(--primary-glow);
+    top: 0;
+    width: 50px;
+    height: 50px;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-.roadmap-marker::before {
-    content: '';
-    width: 10px;
-    height: 10px;
-    background-color: var(--primary-glow);
-    border-radius: 50%;
-    box-shadow: 0 0 15px 5px var(--primary-glow);
-    animation: pulse-marker 2.5s infinite ease-in-out;
-}
-@keyframes pulse-marker {
-    0%, 100% { transform: scale(0.8); opacity: 0.7; }
-    50% { transform: scale(1.2); opacity: 1; }
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    z-index: 2;
+    transition: var(--transition-fast);
 }
 
+.roadmap-marker::before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: var(--grad-glow);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--primary-glow);
+}
+
+.roadmap-item:hover .roadmap-marker {
+    border-color: var(--primary-glow);
+    transform: scale(1.1);
+}
+
+/* Status Pill */
 .roadmap-status {
     display: inline-block;
-    font-size: 0.9rem;
-    font-weight: bold;
+    font-family: var(--font-subtitle);
+    font-size: 0.85rem;
+    letter-spacing: 1px;
     color: var(--secondary-glow);
     margin-bottom: 1rem;
-    padding: 0.3rem 1rem;
-    border: 1px solid var(--secondary-glow);
+    padding: 0.4rem 1rem;
+    border: 1px solid rgba(94, 234, 212, 0.3);
     border-radius: 50px;
-    background-color: rgba(0, 207, 222, 0.1);
+    background: rgba(94, 234, 212, 0.05);
+    text-transform: uppercase;
 }
+
+.roadmap-content {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: var(--transition-fast);
+}
+
 .roadmap-content h4 {
     font-family: var(--font-header);
     font-size: 1.8rem;
     color: var(--text-color);
-    margin: 0 0 0.75rem 0;
+    margin-bottom: 0.75rem;
 }
-.roadmap-content p { font-size: 1.1rem; line-height: 1.8; color: var(--text-muted); max-width: 65ch; }
+
+.roadmap-content p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+}
+
+.roadmap-item:hover .roadmap-content {
+    background: var(--card-hover);
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateX(10px);
+}
 
 /* --- Partner / CTA Section --- */
 .partner-section .container {
-    background-color: var(--card-bg);
-    border: 1px solid var(--primary-glow);
-    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(31, 41, 55, 0.8), rgba(17, 24, 39, 0.9));
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
     text-align: center;
-    padding: 4rem 2rem;
-    box-shadow: 0 0 40px -10px var(--primary-glow);
+    padding: 5rem 2rem;
+    position: relative;
+    overflow: hidden;
 }
-.partner-section h2 { font-family: var(--font-header); font-size: clamp(2rem, 5vw, 3rem); margin: 0 0 1rem 0; }
-.partner-section p { color: var(--text-muted); max-width: 700px; margin: 0 auto 2.5rem auto; line-height: 1.7; }
+
+/* Glow Effect behind CTA */
+.partner-section .container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(253, 186, 116, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.partner-section h2 {
+    font-family: var(--font-header);
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+}
+
+.partner-section p {
+    color: var(--text-muted);
+    max-width: 700px;
+    margin: 0 auto 3rem auto;
+    line-height: 1.8;
+    font-size: 1.15rem;
+    position: relative;
+    z-index: 2;
+}
+
 .cta-button {
     display: inline-block;
-    background-color: var(--primary-glow);
-    color: var(--bg-color);
+    background: var(--grad-glow);
+    color: #000;
     font-family: var(--font-subtitle);
     font-size: 1.1rem;
-    font-weight: bold;
-    padding: 1rem 2.5rem;
-    border-radius: 8px;
+    font-weight: 600;
+    padding: 1rem 3rem;
+    border-radius: 50px;
     text-decoration: none;
     transition: all var(--transition-fast);
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 10px 20px -5px rgba(253, 186, 116, 0.4);
 }
+
 .cta-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 20px -5px rgba(255, 152, 0, 0.4);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 15px 30px -5px rgba(253, 186, 116, 0.6);
 }
 
 /* --- Responsive Design --- */
 @media (max-width: 768px) {
-    .container { padding: 4rem 1rem; }
-    .roadmap-timeline::before { left: 10px; }
-    .roadmap-item { padding-left: 45px; }
-    .roadmap-marker { width: 24px; height: 24px; left: 0; }
-    .roadmap-marker::before { width: 6px; height: 6px; }
+    .container { padding: 4rem 1.5rem; }
+    
+    .roadmap-timeline::before { left: 14px; }
+    .roadmap-item { padding-left: 60px; }
+    .roadmap-marker { width: 30px; height: 30px; }
+    .roadmap-marker::before { width: 8px; height: 8px; }
+    
+    .roadmap-item:hover .roadmap-content {
+        transform: translateY(-5px); /* Up instead of right on mobile */
+    }
+
+    .foundation-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
-/* --- Initial Animation States for GSAP --- */
+/* --- Initial Animation States --- */
 [data-anim] { opacity: 0; }

@@ -1,250 +1,265 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Check for GSAP and required plugins
-    if (typeof gsap === 'undefined') {
-        console.error("GSAP not loaded.");
-        return;
-    }
-    if (typeof Flip === 'undefined' || typeof ScrollTrigger === 'undefined') {
-        console.error("GSAP Flip or ScrollTrigger plugin not loaded. Please add the script tags.");
-        return;
-    }
+    // --- 0. Setup & Init ---
+    // Initialize Feather Icons
+    if (typeof feather !== 'undefined') feather.replace();
 
-    gsap.registerPlugin(Flip, ScrollTrigger);
+    const STATE = {
+        allEvents: [],
+        displayedEvents: [],
+        filters: {
+            type: 'all',
+            search: ''
+        },
+        sort: 'newest'
+    };
 
-    // --- 1. STATE & DOM REFERENCES ---
-    let allEvents = [];
-    let currentCategoryFilter = 'all';
-    let currentSortOrder = 'newest-to-oldest';
+    const DOM = {
+        grid: document.getElementById('events-grid'),
+        spotlightContainer: document.getElementById('featured-event-container'),
+        searchInput: document.getElementById('event-search'),
+        filterBtns: document.querySelectorAll('.filter-btn'),
+        sortSelect: document.getElementById('sort-select'),
+        gridTemplate: document.getElementById('event-card-template'),
+        spotlightTemplate: document.getElementById('spotlight-card-template'),
+        emptyState: document.getElementById('empty-state'),
+        heroParticles: document.getElementById('hero-particles')
+    };
 
-    const grid = document.getElementById('events-grid');
-    const featuredContainer = document.getElementById('featured-event-container');
-    const categoryFilters = document.getElementById('category-filters');
-    const sortSelect = document.getElementById('sort-select');
-    const cardTemplate = document.getElementById('event-card-template');
-
-    // --- 2. DATA FETCHING ---
-    async function fetchEvents() {
-        if (grid) grid.innerHTML = `<div class="loading-spinner"></div>`;
-        try {
-            const response = await fetch('/data/events.json');
-            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-            allEvents = await response.json();
-            
-            renderFeaturedEvent();
-            renderGridEvents(true);
-            updateFilterCounts();
-            
-            // --- THE FIX ---
-            // Previously, this was in init(). Now it waits for all data and rendering to complete.
-            initScrollTriggers();
-
-        } catch (error) {
-            console.error("Could not fetch events data:", error);
-            if (grid) grid.innerHTML = `<p class="error-message">Could not load events.</p>`;
-        }
-    }
-
-    // --- 3. RENDERING LOGIC ---
-
-    function renderFeaturedEvent() {
-        if (!featuredContainer) return;
-        const featuredEvent = allEvents.find(event => event.spotlight);
-        if (!featuredEvent) {
-            featuredContainer.style.display = 'none';
-            return;
-        }
-        const { link, image, title, description, date, endDate } = featuredEvent;
-        const status = getEventStatus(date, endDate);
-        const card = document.createElement('a');
-        card.href = link;
-        card.className = 'featured-card';
-        card.setAttribute('data-anim', 'fade-up');
-        card.innerHTML = `
-            <div class="featured-image-wrapper">
-                <img src="${image}" alt="${title}" class="featured-image" loading="lazy">
-                <div class="card-status ${status.class}">${status.text}</div>
-            </div>
-            <div class="featured-content">
-                <div>
-                    <span class="card-tag tag-main-event">Spotlight Event</span>
-                    <h3>${title}</h3>
-                </div>
-                <p>${description}</p>
-                <div class="featured-footer">
-                    <div class="featured-date">
-                        <i data-feather="calendar"></i>
-                        <span>${formatDate(date, endDate)}</span>
-                    </div>
-                    <span class="featured-cta">View Details</span>
-                </div>
-            </div>
-        `;
-        featuredContainer.innerHTML = '';
-        featuredContainer.appendChild(card);
-    }
-
-    function renderGridEvents() {
-        if (!grid || !cardTemplate) return;
-        const cards = Array.from(grid.children);
-        const state = Flip.getState(cards, { props: "opacity, filter" });
-        const filteredEvents = allEvents.filter(event => !event.spotlight).filter(event => currentCategoryFilter === 'all' || event.type === currentCategoryFilter);
-        const sortedEvents = filteredEvents.sort((a, b) => {
-            switch (currentSortOrder) {
-                case 'oldest-to-newest': return new Date(a.date) - new Date(b.date);
-                case 'most-popular': return b.popularity - a.popularity;
-                case 'least-popular': return a.popularity - b.popularity;
-                default: return new Date(b.date) - new Date(a.date);
-            }
-        });
-
-        grid.innerHTML = '';
-        if (sortedEvents.length === 0) {
-            grid.innerHTML = `<p class="no-results-message">No events found.</p>`;
-            return;
-        }
-        sortedEvents.forEach(event => {
-            const card = cardTemplate.content.cloneNode(true).firstElementChild;
-            populateCard(card, event);
-            grid.appendChild(card);
-        });
-        feather.replace();
-        Flip.from(state, {
-            duration: 0.7,
-            ease: "power3.inOut",
-            stagger: 0.05,
-            absolute: true,
-            onEnter: elements => gsap.from(elements, { opacity: 0, scale: 0.8, duration: 0.5, delay: 0.1 }),
-            onLeave: elements => gsap.to(elements, { opacity: 0, scale: 0.8, duration: 0.5 })
-        });
-    }
-
-    function populateCard(cardElement, event) {
-        cardElement.href = event.link;
-        const { image, icon, type, title, description, date, endDate } = event;
-        const status = getEventStatus(date, endDate);
-        const imageWrapper = cardElement.querySelector('.card-image-wrapper');
-        const imageContent = image ? `<img src="${image}" alt="${title}" class="card-image" loading="lazy">` : `<div class="placeholder-icon"><i data-feather="${icon || 'star'}"></i></div>`;
-        imageWrapper.innerHTML = `${imageContent}<div class="card-status ${status.class}">${status.text}</div>`;
-        cardElement.querySelector('.card-tag').textContent = type.replace('-', ' ');
-        cardElement.querySelector('.card-tag').className = `card-tag tag-${type}`;
-        cardElement.querySelector('h4').textContent = title;
-        cardElement.querySelector('p').textContent = description;
-        cardElement.querySelector('.card-date-text').textContent = formatDate(date, endDate);
-    }
-
-    // --- 4. HELPER FUNCTIONS ---
-    function getEventStatus(startDateString, endDateString) {
-        const today = new Date(); today.setHours(0, 0, 0, 0);
-        const startDate = new Date(startDateString); startDate.setHours(0, 0, 0, 0);
-        if (endDateString) {
-            const endDate = new Date(endDateString); endDate.setHours(23, 59, 59, 999);
-            if (today >= startDate && today <= endDate) return { text: 'Live', class: 'status-live' };
-            if (today < startDate) return { text: 'Upcoming', class: 'status-upcoming' };
-            return { text: 'Past', class: 'status-past' };
-        } else {
-            if (today.getTime() === startDate.getTime()) return { text: 'Live', class: 'status-live' };
-            if (today < startDate) return { text: 'Upcoming', class: 'status-upcoming' };
-            return { text: 'Past', class: 'status-past' };
-        }
-    }
-    
-    function formatDate(startDateString, endDateString) {
-        const startDate = new Date(startDateString); const options = { month: 'long', day: 'numeric' };
-        if (endDateString) {
-            const endDate = new Date(endDateString);
-            if (startDate.getFullYear() === endDate.getFullYear()) {
-                 if (startDate.getMonth() === endDate.getMonth()) { return `${startDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })} - ${endDate.toLocaleDateString('en-US', { day: 'numeric', year: 'numeric' })}`; }
-                return `${startDate.toLocaleDateString('en-US', options)} - ${endDate.toLocaleDateString('en-US', {...options, year: 'numeric'})}`;
-            }
-            return `${startDate.toLocaleDateString('en-US', {...options, year: 'numeric'})} - ${endDate.toLocaleDateString('en-US', {...options, year: 'numeric'})}`;
-        }
-        return startDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-    }
-
-    function updateFilterCounts() {
-        const nonSpotlightEvents = allEvents.filter(event => !event.spotlight);
-        document.querySelectorAll('#category-filters .filter-btn').forEach(btn => {
-            const filter = btn.dataset.filter;
-            const count = filter === 'all' ? nonSpotlightEvents.length : nonSpotlightEvents.filter(e => e.type === filter).length;
-            let countEl = btn.querySelector('.count');
-            if (!countEl) { countEl = document.createElement('span'); countEl.className = 'count'; btn.appendChild(countEl); }
-            countEl.textContent = count;
-        });
-    }
-
-    // --- 5. ANIMATIONS (UPGRADED) ---
-    
-    function animateHeroCarousel() {
-        const carousel = document.querySelector(".text-carousel .carousel-inner");
-        const subtitle = document.querySelector(".hero-subtitle");
-        if (!carousel) return;
-
-        const originalItems = Array.from(carousel.querySelectorAll(".carousel-item")).slice(0, -1);
-        const itemHeight = originalItems[0].clientHeight;
-        const cycles = 6;
-        const targetWord = "Events";
+    // --- 1. Animation System (Anime.js) ---
+    function initParticles() {
+        if (!DOM.heroParticles || typeof anime === 'undefined') return;
         
-        carousel.innerHTML = '';
-        for (let i = 0; i < cycles; i++) {
-            originalItems.forEach(item => carousel.appendChild(item.cloneNode(true)));
+        const count = 30;
+        for (let i = 0; i < count; i++) {
+            const p = document.createElement('div');
+            p.style.cssText = `
+                position: absolute;
+                width: ${Math.random() * 4 + 2}px;
+                height: ${Math.random() * 4 + 2}px;
+                background: rgba(16, 185, 129, ${Math.random() * 0.3 + 0.1});
+                border-radius: 50%;
+                top: ${Math.random() * 100}%;
+                left: ${Math.random() * 100}%;
+            `;
+            DOM.heroParticles.appendChild(p);
         }
-        originalItems.forEach(item => carousel.appendChild(item.cloneNode(true)));
 
-        const allItems = Array.from(carousel.children);
-        const targetIndex = allItems.findIndex((item, index) => 
-            index >= cycles * originalItems.length && item.textContent.trim() === targetWord
-        );
-
-        const finalY = -targetIndex * itemHeight;
-        gsap.set(subtitle, { opacity: 0, y: 20 });
-
-        const tl = gsap.timeline();
-        tl.to(carousel, { y: finalY, duration: cycles, ease: "expo.inOut", })
-          .to(subtitle, { opacity: 1, y: 0, duration: 1.2, ease: "expo.out" }, "-=0.8");
-    }
-
-    function initScrollTriggers() {
-        gsap.utils.toArray('[data-anim="fade-up"]').forEach(el => {
-            gsap.from(el, {
-                opacity: 0, y: 50, duration: 1, ease: 'expo.out',
-                scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' }
-            });
-        });
-        gsap.from('.filter-btn', {
-            opacity: 0, y: 30, duration: 0.8, ease: 'expo.out', stagger: 0.1,
-            scrollTrigger: { trigger: '.filter-controls', start: 'top 85%', toggleActions: 'play none none none' }
+        anime({
+            targets: DOM.heroParticles.children,
+            translateY: [
+                { value: -20, duration: 2000 },
+                { value: 20, duration: 2000 }
+            ],
+            translateX: [
+                { value: -10, duration: 2000 },
+                { value: 10, duration: 2000 }
+            ],
+            opacity: [
+                { value: 0.2, duration: 1500 },
+                { value: 0.6, duration: 1500 }
+            ],
+            delay: anime.stagger(200),
+            duration: 4000,
+            loop: true,
+            direction: 'alternate',
+            easing: 'easeInOutQuad'
         });
     }
 
-    // --- 6. EVENT LISTENERS ---
-    function setupEventListeners() {
-        categoryFilters?.addEventListener('click', e => {
-            const button = e.target.closest('.filter-btn');
-            if (!button) return;
+    // --- 2. Data Fetching ---
+    async function loadEvents() {
+        try {
+            // Using relative path to events.json. 
+            // Ensure events.json is in the same directory or adjust path to '/data/events.json'
+            const response = await fetch('/data/events.json'); 
+            if (!response.ok) throw new Error('Failed to load events');
             
-            if (!button.classList.contains('active')) {
-                currentCategoryFilter = button.dataset.filter;
-                document.querySelectorAll('#category-filters .filter-btn').forEach(b => b.classList.remove('active'));
-                button.classList.add('active');
-                renderGridEvents();
+            const data = await response.json();
+            STATE.allEvents = data;
+            
+            // Initial render
+            processAndRender();
+        } catch (error) {
+            console.error(error);
+            DOM.grid.innerHTML = `
+                <div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: #ef4444;">
+                    <h3>Oops! Could not load events.</h3>
+                    <p>Please check back later.</p>
+                </div>
+            `;
+        }
+    }
+
+    // --- 3. Rendering Logic ---
+
+    function getStatus(event) {
+        const now = new Date();
+        const start = new Date(event.date);
+        const end = event.endDate ? new Date(event.endDate) : new Date(start);
+        
+        // Adjust end date to end of day if it's just a date string
+        if (!event.endDate) end.setHours(23, 59, 59);
+
+        if (now < start) return { label: 'Upcoming', class: 'status-upcoming' };
+        if (now > end) return { label: 'Past', class: 'status-past' };
+        return { label: 'Live Now', class: 'status-live' };
+    }
+
+    function formatDate(dateStr, endDateStr) {
+        if (!dateStr) return '';
+        const options = { month: 'short', day: 'numeric', year: 'numeric' };
+        const start = new Date(dateStr).toLocaleDateString('en-US', options);
+        
+        if (endDateStr) {
+            const end = new Date(endDateStr).toLocaleDateString('en-US', options);
+            return `${start} - ${end}`;
+        }
+        return start;
+    }
+
+    function renderSpotlight(event) {
+        if (!event || !DOM.spotlightContainer) return;
+
+        DOM.spotlightContainer.innerHTML = ''; // Clear
+        DOM.spotlightContainer.style.display = 'block';
+
+        const node = DOM.spotlightTemplate.content.cloneNode(true);
+        const status = getStatus(event);
+
+        node.querySelector('.spotlight-title').textContent = event.title;
+        node.querySelector('.spotlight-desc').textContent = event.description;
+        node.querySelector('.sp-date').textContent = formatDate(event.date, event.endDate);
+        node.querySelector('.sp-status').textContent = status.label;
+        node.querySelector('img').src = event.image || '/images/default-event.jpg';
+        
+        const btn = node.querySelector('.spotlight-btn');
+        btn.href = event.link || '#';
+        
+        DOM.spotlightContainer.appendChild(node);
+        
+        // Re-run feather icons for the new content
+        if (typeof feather !== 'undefined') feather.replace();
+
+        // Animate in
+        gsap.from('.spotlight-card', { 
+            y: 30, opacity: 0, duration: 0.8, ease: 'power2.out' 
+        });
+    }
+
+    function renderGrid(events) {
+        DOM.grid.innerHTML = ''; // Clear loading state or previous items
+
+        if (events.length === 0) {
+            DOM.emptyState.classList.remove('hidden');
+            return;
+        } else {
+            DOM.emptyState.classList.add('hidden');
+        }
+
+        events.forEach(event => {
+            const node = DOM.gridTemplate.content.cloneNode(true);
+            const status = getStatus(event);
+
+            // Populate data
+            const img = node.querySelector('.card-img');
+            img.src = event.image || '/images/default-event.jpg';
+            img.alt = event.title;
+
+            const badge = node.querySelector('.status-badge');
+            badge.textContent = status.label;
+            badge.classList.add(status.class);
+
+            node.querySelector('.card-type-tag').textContent = event.type || 'Event';
+            node.querySelector('.card-title').textContent = event.title;
+            node.querySelector('.card-desc').textContent = event.description;
+            node.querySelector('.card-date-text').textContent = formatDate(event.date, event.endDate);
+            node.querySelector('a').href = event.link || '#';
+
+            DOM.grid.appendChild(node);
+        });
+
+        // Re-run icons
+        if (typeof feather !== 'undefined') feather.replace();
+
+        // Stagger Animation for grid items
+        gsap.fromTo('.hub-card', 
+            { y: 20, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.4, stagger: 0.1, ease: 'power2.out', clearProps: 'all' }
+        );
+    }
+
+    // --- 4. Filtering & Sorting ---
+
+    function processAndRender() {
+        let result = [...STATE.allEvents];
+
+        // 1. Extract Spotlight (if exists and matches generic filters?)
+        // Usually spotlight is separate. Let's find the first spotlight item.
+        const spotlightItem = result.find(e => e.spotlight === true);
+        if (spotlightItem) {
+            renderSpotlight(spotlightItem);
+            // Optional: Remove spotlight from grid? 
+            // result = result.filter(e => e.id !== spotlightItem.id);
+        }
+
+        // 2. Filter by Search
+        if (STATE.filters.search) {
+            const term = STATE.filters.search.toLowerCase();
+            result = result.filter(e => 
+                e.title.toLowerCase().includes(term) || 
+                e.description.toLowerCase().includes(term)
+            );
+        }
+
+        // 3. Filter by Type
+        if (STATE.filters.type !== 'all') {
+            result = result.filter(e => e.type === STATE.filters.type);
+        }
+
+        // 4. Sort
+        result.sort((a, b) => {
+            const dateA = new Date(a.date);
+            const dateB = new Date(b.date);
+            
+            switch (STATE.sort) {
+                case 'newest': return dateB - dateA;
+                case 'oldest': return dateA - dateB;
+                case 'popular': return (b.popularity || 0) - (a.popularity || 0);
+                default: return 0;
             }
         });
 
-        sortSelect?.addEventListener('change', e => {
-            currentSortOrder = e.target.value;
-            renderGridEvents();
+        renderGrid(result);
+    }
+
+    // --- 5. Event Listeners ---
+
+    // Search Input
+    DOM.searchInput.addEventListener('input', (e) => {
+        STATE.filters.search = e.target.value;
+        processAndRender();
+    });
+
+    // Filter Buttons
+    DOM.filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // UI Toggle
+            DOM.filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            // Logic
+            STATE.filters.type = btn.dataset.filter;
+            processAndRender();
         });
-    }
+    });
 
-    // --- 7. INITIALIZATION ---
-    function init() {
-        // Run animations that don't depend on fetched data
-        animateHeroCarousel();
-        // Fetch data, which will then trigger the rest of the animations
-        fetchEvents();
-        setupEventListeners();
-    }
+    // Sort Select
+    DOM.sortSelect.addEventListener('change', (e) => {
+        STATE.sort = e.target.value;
+        processAndRender();
+    });
 
-    init();
+    // --- 6. Start ---
+    initParticles();
+    loadEvents();
 });
-
