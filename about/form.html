@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Membership Application - ULIC</title>
+    
+    <!-- Core CSS & Fonts -->
+    <link rel="stylesheet" href="/css/navbar.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+    <link rel="stylesheet" href="/css/form.css" />
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    
+    <!-- Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+</head>
+<body>
+    <!-- Navbar Placeholder -->
+    <div id="navbar-placeholder"></div>
+
+    <main class="form-page-container">
+        <!-- HEADER -->
+        <div class="form-header">
+            <h1 class="animate-title">Join the Legacy</h1>
+            <p class="animate-subtitle">Become an official member of the University Laboratory ICT Club.</p>
+        </div>
+
+        <!-- APPLICATION FORM -->
+        <div class="form-wrapper" id="application-form-container">
+            <!-- Floating Utilities -->
+            <div class="form-utilities">
+                <div class="toggle-switch">
+                    <input type="checkbox" id="phonetic-mode">
+                    <label for="phonetic-mode" class="toggle-label">
+                        <span class="toggle-circle"></span>
+                        <span class="toggle-text">Bangla Phonetic Typing (Avro Style)</span>
+                    </label>
+                </div>
+            </div>
+
+            <form id="ulic-application-form">
+                <!-- Section: Personal Info -->
+                <div class="form-section">
+                    <h3><i data-feather="user"></i> Applicant Details</h3>
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label for="nameEn">Name (English) <span class="required">*</span></label>
+                            <input type="text" id="nameEn" required placeholder="e.g. John Doe" class="input-animate">
+                        </div>
+                        <div class="input-group">
+                            <label for="nameBn">Name (Bangla) <span class="required">*</span></label>
+                            <input type="text" id="nameBn" required placeholder="e.g. জন ডো" class="bangla-input input-animate">
+                            <small class="hint-text">Type in English, press SPACE to convert</small>
+                        </div>
+                        <div class="input-group">
+                            <label for="email">Email Address <span class="required">*</span></label>
+                            <input type="email" id="email" required placeholder="john@example.com" class="input-animate">
+                        </div>
+                        <div class="input-group">
+                            <label for="phone">Phone Number <span class="required">*</span></label>
+                            <div class="phone-wrapper input-animate">
+                                <span class="phone-prefix">+880</span>
+                                <input type="tel" id="phone" required placeholder="1XXXXXXXXX" maxlength="10">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section: Family Info -->
+                <div class="form-section">
+                    <h3><i data-feather="users"></i> Family Information</h3>
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label for="fatherEn">Father's Name (English) <span class="required">*</span></label>
+                            <input type="text" id="fatherEn" required class="input-animate">
+                        </div>
+                        <div class="input-group">
+                            <label for="fatherBn">Father's Name (Bangla) <span class="required">*</span></label>
+                            <input type="text" id="fatherBn" required class="bangla-input input-animate">
+                        </div>
+                        <div class="input-group">
+                            <label for="motherEn">Mother's Name (English) <span class="required">*</span></label>
+                            <input type="text" id="motherEn" required class="input-animate">
+                        </div>
+                        <div class="input-group">
+                            <label for="motherBn">Mother's Name (Bangla) <span class="required">*</span></label>
+                            <input type="text" id="motherBn" required class="bangla-input input-animate">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section: Academic Info -->
+                <div class="form-section">
+                    <h3><i data-feather="book"></i> Academic Details</h3>
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label for="classSelect">Class <span class="required">*</span></label>
+                            <select id="classSelect" required class="input-animate">
+                                <option value="" disabled selected>Select Class</option>
+                                <option value="VI">VI</option>
+                                <option value="VII">VII</option>
+                                <option value="VIII">VIII</option>
+                                <option value="IX">IX</option>
+                                <option value="X">X</option>
+                                <option value="XI">XI</option>
+                                <option value="XII">XII</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="versionSelect">Version <span class="required">*</span></label>
+                            <select id="versionSelect" required class="input-animate">
+                                <option value="" disabled selected>Select Version</option>
+                                <option value="English">English Version</option>
+                                <option value="Bangla">Bangla Version</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="sectionSelect">Section <span class="required">*</span></label>
+                            <select id="sectionSelect" required class="input-animate">
+                                <option value="" disabled selected>Select Section</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="H">H</option>
+                                <option value="EV">EV</option>
+                            </select>
+                        </div>
+                        <div class="input-group full-width">
+                            <label for="address">Address <span class="required">*</span></label>
+                            <textarea id="address" rows="2" required placeholder="Present Address" class="input-animate"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section: Additional -->
+                <div class="form-section">
+                    <h3><i data-feather="message-square"></i> Additional</h3>
+                    <div class="input-group full-width">
+                        <label for="reason">Why do you want to join ULIC? (Optional)</label>
+                        <textarea id="reason" rows="3" placeholder="Tell us about your interest in ICT..." class="input-animate"></textarea>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="form-actions">
+                    <button type="submit" class="btn-submit">Generate Application Token</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- LOADING OVERLAY -->
+        <div id="loading-overlay" style="display: none;">
+            <div class="loader-content">
+                <div class="anime-circle"></div>
+                <h3>Processing Application...</h3>
+                <p>Establishing secure connection to ULIC Legacy Server</p>
+            </div>
+        </div>
+
+        <!-- SUCCESS SCREEN -->
+        <div id="success-screen" class="success-container" style="display: none;">
+            <div class="success-icon-wrapper">
+                <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                    <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                    <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                </svg>
+            </div>
+            <h2>Registration Successful!</h2>
+            <p>Your application token has been generated. Please download the JSON file below.</p>
+            
+            <div class="token-display">
+                <span>Token:</span>
+                <strong id="display-token">---</strong>
+            </div>
+
+            <div class="instruction-box">
+                <h4>Next Steps:</h4>
+                <ol>
+                    <li><strong>Download the JSON file</strong> (Primary).</li>
+                    <li>Keep the file safe and send it to us when requested.</li>
+                    <li>(Optional) Print the form using the Print button.</li>
+                </ol>
+            </div>
+
+            <div class="success-actions">
+                <button id="btn-download-json" class="btn-action btn-download">
+                    <i data-feather="file-text"></i> Download JSON
+                </button>
+                <button id="btn-print" class="btn-action btn-print">
+                    <i data-feather="printer"></i> Print Form
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- PRINT TEMPLATE (Same as before) -->
+    <div id="printable-area">
+        <div class="print-page page-1">
+            <div class="print-header">
+                <div class="print-logo uca-logo">
+                    <img src="/images/uca_logo.png" alt="UCA Logo">
+                </div>
+                <div class="print-title">
+                    <h2>University Laboratory ICT Club</h2>
+                    <h3>Official Membership Application Form</h3>
+                    <p>Under United Club Association (UCA)</p>
+                </div>
+                <div class="print-logo ulic-logo">
+                    <img src="/images/ulic-favicon.jpg" alt="ULIC Logo">
+                </div>
+            </div>
+
+            <div class="print-meta">
+                <div class="meta-item">
+                    <strong>Date:</strong> <span id="print-date"></span>
+                </div>
+                <div class="meta-item">
+                    <strong>Token:</strong> <span class="print-token-ref"></span>
+                </div>
+            </div>
+
+            <div class="print-body">
+                <table class="info-table">
+                    <tr><td colspan="2" class="table-header">Personal Information</td></tr>
+                    <tr><td class="label">Name (English):</td><td id="p-nameEn"></td></tr>
+                    <tr><td class="label">Name (Bangla):</td><td id="p-nameBn"></td></tr>
+                    <tr><td class="label">Email:</td><td id="p-email"></td></tr>
+                    <tr><td class="label">Phone:</td><td id="p-phone"></td></tr>
+                    <tr><td colspan="2" class="table-header">Family Information</td></tr>
+                    <tr><td class="label">Father's Name:</td><td><span id="p-fatherEn"></span> / <span id="p-fatherBn"></span></td></tr>
+                    <tr><td class="label">Mother's Name:</td><td><span id="p-motherEn"></span> / <span id="p-motherBn"></span></td></tr>
+                    <tr><td colspan="2" class="table-header">Academic Details</td></tr>
+                    <tr><td class="label">Class:</td><td id="p-class"></td></tr>
+                    <tr><td class="label">Version:</td><td id="p-version"></td></tr>
+                    <tr><td class="label">Section:</td><td id="p-section"></td></tr>
+                    <tr><td class="label">Address:</td><td id="p-address"></td></tr>
+                </table>
+            </div>
+
+            <div class="signature-area">
+                <div class="sig-block">
+                    <div class="sig-line"></div>
+                    <p>Applicant Signature</p>
+                </div>
+                <div class="sig-block">
+                    <div class="sig-line"></div>
+                    <p>ULIC Executive Signature</p>
+                    <p class="tiny">(Official Approval)</p>
+                </div>
+            </div>
+            <div class="print-footer"><p>Note: Membership is confirmed only after payment.</p></div>
+        </div>
+
+        <div class="print-page page-2">
+            <div class="token-page-content">
+                <div class="token-watermark">ULIC</div>
+                <h1>OFFICIAL TOKEN</h1>
+                <p>Keep this token safe for your records.</p>
+                <div class="big-token-box">
+                    <span>YOUR TOKEN IS:</span>
+                    <h1 class="print-token-ref display-token-large"></h1>
+                </div>
+                <p class="token-sub">Generated on <span id="print-date-2"></span></p>
+                <div class="token-logos">
+                   <img src="/images/uca_logo.png" alt="UCA" style="height: 50px;">
+                   <img src="/images/ulic-favicon.jpg" alt="ULIC" style="height: 50px;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="/js/include-navbar.js"></script>
+    <script src="/js/include-footer.js"></script>
+    <script src="/js/form.js"></script>
+</body>
+</html>
