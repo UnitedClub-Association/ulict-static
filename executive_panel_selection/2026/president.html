@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ULIC - President</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <style>
+        /* 1. Custom Font - Critical Mass LDR */
+        @font-face {
+            font-family: 'Critical Mass LDR';
+            src: url('../fonts/critical-mass-ldr.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        :root {
+            /* ONLY used for the main title */
+            --font-title: 'Critical Mass LDR', sans-serif; 
+            /* Used for everything else */
+            --font-body: 'Rajdhani', sans-serif;
+            
+            --color-core: #FF0000;
+            --color-bg: #030000;
+        }
+
+        html, body {
+            background-color: var(--color-bg);
+            color: #ffffff;
+            font-family: var(--font-body);
+            overflow-x: hidden; /* Prevents horizontal scroll */
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* --- BACKGROUND EFFECTS --- */
+        .scanlines {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2));
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.15;
+        }
+        
+        #embers-canvas {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; pointer-events: none;
+        }
+
+        /* --- LAYOUT & UI --- */
+        .glass-panel {
+            background: rgba(10, 0, 0, 0.92);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+            width: 100%;
+            max-width: 100%;
+        }
+
+        /* --- TITLE SECTION --- */
+        .page-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            padding: 0 1rem;
+        }
+
+        .main-title {
+            font-family: var(--font-title); /* EXCLUSIVE USE */
+            color: #FF0000;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-shadow: 0 0 25px rgba(255, 0, 0, 0.6);
+            line-height: 1.1;
+            display: inline-block;
+            /* RESPONSIVE SCALING */
+            font-size: clamp(2rem, 8vw, 6rem); 
+            word-break: break-word;
+        }
+
+        /* --- FORM STYLING --- */
+        .input-group { position: relative; margin-bottom: 2rem; }
+        
+        .input-group label {
+            display: block;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #aaa;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .input-group input, 
+        .input-group textarea,
+        .input-group select {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid #440000;
+            border-left: 4px solid #660000;
+            color: white;
+            padding: 1rem;
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            transition: all 0.2s ease;
+            border-radius: 0; /* Sharp edges */
+        }
+
+        .input-group input:focus, 
+        .input-group textarea:focus,
+        .input-group select:focus {
+            border-color: #FF0000;
+            border-left-width: 8px;
+            background: rgba(40, 0, 0, 0.9);
+            outline: none;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.2);
+        }
+        
+        /* Valid/Invalid Styling hooks */
+        .input-group input:invalid:not(:placeholder-shown) {
+            border-color: #ff0000;
+            border-left-color: #ff0000;
+        }
+        
+        @media (min-width: 768px) {
+            .input-group input:focus, 
+            .input-group textarea:focus,
+            .input-group select:focus {
+                transform: translateX(5px);
+            }
+        }
+
+        .input-group input:focus + label,
+        .input-group textarea:focus + label,
+        .input-group select:focus + label {
+            color: #FF0000;
+        }
+
+        .section-header {
+            font-family: var(--font-body);
+            font-weight: 700;
+            color: #FF0000;
+            font-size: 1.3rem;
+            border-bottom: 1px solid #440000;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-header::before {
+            content: ''; display: block; width: 6px; height: 6px; background: #FF0000;
+        }
+
+        /* --- BUTTON --- */
+        .btn-submit {
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(90deg, #1a0000 0%, #330000 100%);
+            border: 2px solid #FF0000;
+            color: #FF0000;
+            font-family: var(--font-body); 
+            font-weight: 800;
+            font-size: 1.3rem;
+            letter-spacing: 0.2em;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        .btn-submit:hover {
+            color: #fff;
+            box-shadow: 0 0 50px rgba(255, 0, 0, 0.6);
+            background: #FF0000;
+        }
+        .btn-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            filter: grayscale(1);
+        }
+
+        /* Back Link */
+        .back-nav-container {
+            width: 100%;
+            max-width: 80rem; 
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: flex-start;
+            padding: 0 1rem;
+        }
+
+        .back-nav {
+            font-family: var(--font-body);
+            font-weight: 700;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            padding: 0.5rem 0;
+        }
+        .back-nav:hover { color: #FF0000; padding-left: 5px; }
+
+        /* Responsive Adjustments */
+        @media (max-width: 640px) {
+            .glass-panel { padding: 1.5rem; }
+            .section-header { font-size: 1.1rem; }
+            .btn-submit { font-size: 1.1rem; padding: 1rem; }
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div class="scanlines"></div>
+    <canvas id="embers-canvas"></canvas>
+
+    <!-- INLINED SOUND LOGIC -->
+    <script>
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        let audioCtx;
+
+        function initAudio() {
+            if (!audioCtx) audioCtx = new AudioContext();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+        }
+
+        function playTone(freq, type, duration) {
+            if (!audioCtx) return;
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = type;
+            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+            gain.gain.setValueAtTime(0.05, audioCtx.currentTime); 
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + duration);
+        }
+
+        window.playHoverSound = function() { initAudio(); playTone(200, 'triangle', 0.1); };
+        window.playClickSound = function() { initAudio(); playTone(400, 'square', 0.15); };
+    </script>
+
+    <main class="w-full min-h-screen flex flex-col items-center pt-6 pb-20">
+        
+        <!-- Back Button -->
+        <div class="back-nav-container">
+            <a href="main.html" class="back-nav" onmouseenter="playHoverSound()" onclick="playClickSound()">
+                <span>&lt;</span> Return to Grid
+            </a>
+        </div>
+
+        <!-- CENTERED HEADER -->
+        <div class="page-header gs-reveal">
+            <div class="flex items-center justify-center flex-wrap">
+                <h1 class="main-title">PRESIDENT</h1>
+            </div>
+            <p class="text-red-500 font-bold tracking-[0.4em] uppercase mt-2 text-xs md:text-sm">
+                The Core // The Soul
+            </p>
+        </div>
+
+        <!-- FORM CONTAINER -->
+        <div class="w-full max-w-5xl glass-panel p-6 md:p-12 border-t-4 border-t-red-600 rounded-sm gs-reveal opacity-0 mx-4">
+            <form id="president-form">
+                
+                <!-- 1. IDENTITY -->
+                <div class="mb-10">
+                    <h3 class="section-header">01 // IDENTITY</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                        <div class="input-group">
+                            <label>Applicant Name (English)</label>
+                            <input type="text" id="name_en" required pattern="[a-zA-Z\s.]+" title="Only English characters allowed" onmouseenter="playHoverSound()" onfocus="playClickSound()">
+                        </div>
+                        <div class="input-group">
+                            <label>Applicant Name (Bangla)</label>
+                            <input type="text" id="name_bn" required pattern="[\u0980-\u09FF\s.]+" title="Only Bangla characters allowed" onmouseenter="playHoverSound()" onfocus="playClickSound()">
+                        </div>
+                        <div class="input-group">
+                            <label>Father's Name (English)</label>
+                            <input type="text" id="father_en" required pattern="[a-zA-Z\s.]+" title="Only English characters allowed" onmouseenter="playHoverSound()" onfocus="playClickSound()">
+                        </div>
+                        <div class="input-group">
+                            <label>Father's Name (Bangla)</label>
+                            <input type="text" id="father_bn" required pattern="[\u0980-\u09FF\s.]+" title="Only Bangla characters allowed" onmouseenter="playHoverSound()" onfocus="playClickSound()">
+                        </div>
+                        <div class="input-group">
+                            <label>Mother's Name (English)</label>
+                            <input type="text" id="mother_en" required pattern="[a-zA-Z\s.]+" title="Only English characters allowed" onmouseenter="playHoverSound()" onfocus="playClickSound()">
+                        </div>
+                        <div class="input-group">
+                            <label>Mother's Name (Bangla)</label>
+                            <input type="text" id="mother_bn" required pattern="[\u0980-\u09FF\s.]+" title="Only Bangla characters allowed" onmouseenter="playHoverSound()" onfocus="playClickSound()">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. CONTACT -->
+                <div class="mb-10">
+                    <h3 class="section-header">02 // CONTACT & LOCATION</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                        <div class="input-group md:col-span-2">
+                            <label>Residential Address</label>
+                            <input type="text" id="address" required onmouseenter="playHoverSound()" onfocus="playClickSound()">
+                        </div>
+                        <div class="input-group">
+                            <label>Email Address</label>
+                            <input type="email" id="email" required onmouseenter="playHoverSound()" onfocus="playClickSound()">
+                        </div>
+                        <div class="input-group">
+                            <label>Mobile Number</label>
+                            <!-- Hardcoded +880, allow 10 more digits -->
+                            <input type="tel" id="mobile" value="+880" maxlength="14" required onmouseenter="playHoverSound()" onfocus="playClickSound()">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. ACADEMIC -->
+                <div class="mb-10">
+                    <h3 class="section-header">03 // ACADEMIC PROFILE</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                        <div class="input-group">
+                            <label>Class</label>
+                            <select id="class_grade" required onmouseenter="playHoverSound()" onfocus="playClickSound()">
+                                <option value="" disabled selected>Select</option>
+                                <option>VI</option>
+                                <option>VII</option>
+                                <option>VIII</option>
+                                <option>IX</option>
+                                <option>X</option>
+                                <option>XI</option>
+                                <option>XII</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Section</label>
+                            <select id="section" required onmouseenter="playHoverSound()" onfocus="playClickSound()">
+                                <option value="" disabled selected>Select</option>
+                                <option>A</option>
+                                <option>B</option>
+                                <option>C</option>
+                                <option>H</option>
+                                <option>EV</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Version</label>
+                            <select id="version" required onmouseenter="playHoverSound()" onfocus="playClickSound()">
+                                <option value="" disabled selected>Select</option>
+                                <option>Bangla</option>
+                                <option>English</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. MANIFESTO -->
+                <div class="mb-8">
+                    <h3 class="section-header">04 // MANIFESTO</h3>
+                    <div class="input-group">
+                        <label class="text-red-500 font-bold">Why do you want to apply?</label>
+                        <p class="text-xs text-gray-500 mb-2 font-mono">Explain your vision, determination, and what makes you unique.</p>
+                        <textarea id="manifesto" rows="6" required onmouseenter="playHoverSound()" onfocus="playClickSound()"></textarea>
+                    </div>
+                </div>
+
+                <div class="pt-4">
+                    <button type="submit" id="submit-btn" class="btn-submit" onmouseenter="playHoverSound()" onclick="playClickSound()">
+                        CONFIRM APPLICATION
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </main>
+
+    <!-- Visual Animations -->
+    <script>
+        // Embers Background
+        const initEmbers = () => {
+            const canvas = document.getElementById('embers-canvas');
+            const ctx = canvas.getContext('2d');
+            let w, h;
+            
+            const resize = () => {
+                w = window.innerWidth;
+                h = window.innerHeight;
+                canvas.width = w;
+                canvas.height = h;
+            };
+            window.addEventListener('resize', resize);
+            resize();
+
+            const particles = [];
+            for(let i=0; i<60; i++) {
+                particles.push({
+                    x: Math.random() * w,
+                    y: Math.random() * h,
+                    size: Math.random() * 3 + 0.5,
+                    speedY: Math.random() * 1.5 + 0.5,
+                    opacity: Math.random() * 0.5 + 0.1
+                });
+            }
+
+            const animate = () => {
+                ctx.clearRect(0, 0, w, h);
+                particles.forEach(p => {
+                    p.y -= p.speedY;
+                    if (p.y < -10) {
+                        p.y = h + 10;
+                        p.x = Math.random() * w;
+                    }
+                    ctx.beginPath();
+                    // Red/Orange/Yellow embers
+                    const hue = Math.random() > 0.8 ? 50 : (Math.random() > 0.5 ? 20 : 0);
+                    ctx.fillStyle = `hsla(${hue}, 100%, 50%, ${p.opacity})`;
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+                requestAnimationFrame(animate);
+            };
+            animate();
+        };
+
+        // Entrance
+        const playEntrance = () => {
+            gsap.to(".gs-reveal", {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                stagger: 0.2,
+                ease: "power3.out"
+            });
+        };
+
+        // Mobile Input Prefix Logic
+        const initMobileInput = () => {
+            const mobileInput = document.getElementById('mobile');
+            mobileInput.addEventListener('input', (e) => {
+                if (!mobileInput.value.startsWith('+880')) {
+                    mobileInput.value = '+880';
+                }
+            });
+            // Validation for exactly 10 digits after +880
+            mobileInput.addEventListener('blur', () => {
+                const numberPart = mobileInput.value.substring(4);
+                if (numberPart.length !== 10 || !/^\d+$/.test(numberPart)) {
+                    mobileInput.setCustomValidity('Please enter exactly 10 digits after +880');
+                } else {
+                    mobileInput.setCustomValidity('');
+                }
+            });
+        };
+
+        // --- SUPABASE INTEGRATION ---
+        const initSupabase = () => {
+            // NOTE: YOU MUST REPLACE THESE WITH YOUR ACTUAL SUPABASE KEYS
+            // Since this is a static file, we use placeholders. Use .env in your build system.
+            const SUPABASE_URL = 'YOUR_SUPABASE_URL_HERE';
+            const SUPABASE_KEY = 'YOUR_SUPABASE_ANON_KEY_HERE';
+            
+            // Check if keys are set
+            if(SUPABASE_URL === 'YOUR_SUPABASE_URL_HERE') {
+                console.warn('Supabase keys not set. Database submission will fail.');
+                return;
+            }
+
+            const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+            const form = document.getElementById('president-form');
+            const submitBtn = document.getElementById('submit-btn');
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                submitBtn.disabled = true;
+                submitBtn.innerText = "TRANSMITTING...";
+
+                // Collect Data
+                const formData = {
+                    role: 'president',
+                    name_en: document.getElementById('name_en').value,
+                    name_bn: document.getElementById('name_bn').value,
+                    father_en: document.getElementById('father_en').value,
+                    father_bn: document.getElementById('father_bn').value,
+                    mother_en: document.getElementById('mother_en').value,
+                    mother_bn: document.getElementById('mother_bn').value,
+                    address: document.getElementById('address').value,
+                    email: document.getElementById('email').value,
+                    mobile: document.getElementById('mobile').value,
+                    class: document.getElementById('class_grade').value,
+                    section: document.getElementById('section').value,
+                    version: document.getElementById('version').value,
+                    manifesto: document.getElementById('manifesto').value
+                };
+
+                try {
+                    const { data, error } = await supabase
+                        .from('applications')
+                        .insert([formData]);
+
+                    if (error) throw error;
+
+                    alert('Application Submitted Successfully. Good luck.');
+                    window.location.href = 'main.html';
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('Submission Error: ' + error.message);
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = "CONFIRM APPLICATION";
+                }
+            });
+        };
+
+        window.addEventListener('load', () => {
+            initEmbers();
+            // Preset GSAP elements for reveal
+            gsap.set(".gs-reveal", { y: 30, opacity: 0 });
+            playEntrance();
+            initMobileInput();
+            initSupabase();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+/* --- ULIC SELECTION BANNER STYLES --- */
+
+/* Scoped variables to prevent conflicts */
+#ulic-banner-root {
+    --banner-font-main: 'Eurosteal', sans-serif;
+    --banner-font-sub: 'Rajdhani', sans-serif;
+    --banner-font-mono: 'Share Tech Mono', monospace;
+    
+    --col-pres: #FF0000;
+    --col-vp:   #00FFFF;
+    --col-gs:   #FFD700;
+    --col-dev:  #00A86B;
+    --col-des:  #A259FF;
+    --col-med:  #FF4500;
+    
+    --bg-deep: #020202;
+    
+    position: relative;
+    width: 100%;
+    height: 550px; /* Adjust height as needed */
+    background-color: var(--bg-deep);
+    color: white;
+    overflow: hidden;
+    display: block; /* For anchor tag behavior */
+    text-decoration: none;
+    cursor: pointer;
+    font-family: var(--banner-font-sub);
+    z-index: 10; /* Ensure it sits nicely in the stack */
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Load Fonts */
+@font-face {
+    font-family: 'Eurosteal';
+    src: url('../fonts/Eurosteal.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Layout Container */
+.banner-inner-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 10;
+}
+
+/* Canvas Layers */
+.banner-canvas-layer {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+}
+#banner-bg-grid { z-index: 1; opacity: 0.3; }
+#banner-bg-particles { z-index: 2; }
+
+/* Effects Overlays (Scoped from Fixed to Absolute) */
+.banner-scanlines {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.5));
+    background-size: 100% 4px;
+    z-index: 50;
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+.banner-vignette {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at center, transparent 0%, #000 90%);
+    z-index: 4;
+    pointer-events: none;
+}
+
+/* Typography & Visuals */
+.banner-glitch-wrapper {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 2rem;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(10px);
+    border-image: linear-gradient(45deg, var(--col-pres), var(--col-gs), var(--col-dev), var(--col-vp), var(--col-des), var(--col-med)) 1;
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    clip-path: polygon(
+        20px 0, 100% 0, 
+        100% calc(100% - 20px), calc(100% - 20px) 100%, 
+        0 100%, 0 20px
+    );
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect for the whole block via the wrapper */
+#ulic-banner-root:hover .banner-glitch-wrapper {
+    transform: scale(1.02);
+    box-shadow: 0 0 70px rgba(0,0,0,0.9);
+}
+
+h1.banner-mega-title {
+    font-family: var(--banner-font-main);
+    font-size: clamp(2rem, 5vw, 4.5rem);
+    line-height: 0.9;
+    text-transform: uppercase;
+    color: #fff;
+    position: relative;
+    margin: 0;
+    letter-spacing: 0.05em;
+    text-shadow: 0 0 20px rgba(255,255,255,0.3);
+}
+
+.banner-year-tag {
+    font-family: var(--banner-font-main);
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255,255,255,0.5);
+    letter-spacing: 0.5em;
+    margin-top: 1rem;
+    position: relative;
+    display: inline-block;
+}
+
+.banner-year-fill {
+    position: absolute; top: 0; left: 0; width: 0%; height: 100%;
+    color: #fff;
+    -webkit-text-stroke: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 4px solid white;
+    animation: bannerFillYear 3s cubic-bezier(0.19, 1, 0.22, 1) forwards 1s;
+}
+
+@keyframes bannerFillYear { to { width: 100%; } }
+
+.banner-subtitle-bar {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    font-family: var(--banner-font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    margin-top: 2rem;
+    opacity: 0;
+}
+
+.banner-role-pip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #aaa;
+    transition: color 0.3s;
+}
+#ulic-banner-root:hover .banner-role-pip { color: #fff; text-shadow: 0 0 8px currentColor; }
+.pip-dot { width: 8px; height: 8px; transform: rotate(45deg); }
+
+/* HUD Elements */
+.banner-hud-corner {
+    position: absolute;
+    width: 60px; height: 60px;
+    border: 2px solid rgba(255,255,255,0.1);
+    z-index: 5;
+    transition: all 0.5s;
+}
+.hud-tl { top: 20px; left: 20px; border-right: none; border-bottom: none; }
+.hud-tr { top: 20px; right: 20px; border-left: none; border-bottom: none; }
+.hud-bl { bottom: 20px; left: 20px; border-right: none; border-top: none; }
+.hud-br { bottom: 20px; right: 20px; border-left: none; border-top: none; }
+
+#ulic-banner-root:hover .banner-hud-corner {
+    width: 80px; height: 80px;
+    border-color: rgba(255,255,255,0.4);
+    box-shadow: 0 0 15px rgba(255,255,255,0.1);
+}
+
+.gs-banner-reveal { opacity: 0; transform: translateY(20px); }

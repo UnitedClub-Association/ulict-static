@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ULIC - General Secretary</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Chakra+Petch:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <style>
+        /* 1. Custom Font - Scary Glyphs And Nice Characters */
+        @font-face {
+            font-family: 'Scary Glyphs And Nice Characters';
+            src: url('../fonts/scary_glyphs_and_nice_characters.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        :root {
+            --font-title: 'Scary Glyphs And Nice Characters', sans-serif; 
+            --font-body: 'Rajdhani', sans-serif;
+            --font-tech: 'Chakra Petch', sans-serif;
+            
+            --color-core: #FFD700; /* Gold/Yellow */
+            --color-accent: #FFFF00; /* Bright Yellow */
+            --color-bg: #1a1a00; /* Darker Yellowish Background */
+        }
+
+        html, body {
+            background-color: var(--color-bg);
+            color: #ffffff;
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* --- BACKGROUND --- */
+        #hex-canvas {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; pointer-events: none;
+            /* Changed from pure black to a deep golden radial gradient */
+            background: radial-gradient(circle at center, #2e2e00 0%, #0a0a00 100%);
+        }
+        
+        .honeycomb-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5z' fill='none' stroke='%23FFD700' stroke-width='1' opacity='0.08'/%3E%3C/svg%3E");
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* --- UI ELEMENTS --- */
+        .glass-panel {
+            background: rgba(20, 20, 0, 0.7); 
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 215, 0, 0.4);
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.15);
+            width: 100%;
+            position: relative;
+        }
+        
+        /* Decorative corner accents - Cleaner look */
+        .glass-panel::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, transparent, var(--color-core), transparent);
+        }
+
+        /* --- TYPOGRAPHY --- */
+        .main-title {
+            font-family: var(--font-title);
+            color: var(--color-core);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            line-height: 1;
+            display: inline-block;
+            font-size: clamp(2.5rem, 9vw, 6rem);
+            position: relative;
+        }
+
+        .subtitle {
+            font-family: var(--font-tech);
+            color: #FFEA00;
+            letter-spacing: 0.2em;
+            font-size: 0.9rem;
+            font-weight: 700;
+            opacity: 0.9;
+            text-transform: uppercase;
+            margin-top: 1rem;
+        }
+
+        /* --- FORM STYLING --- */
+        .input-group { position: relative; margin-bottom: 2rem; }
+        
+        .input-group label {
+            display: block;
+            font-family: var(--font-tech);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--color-core);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        .input-group input, 
+        .input-group textarea,
+        .input-group select {
+            width: 100%;
+            background: rgba(40, 40, 0, 0.4);
+            border: 1px solid #665500;
+            color: #ffffdd;
+            padding: 0.8rem 1rem;
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            transition: all 0.2s ease;
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
+        }
+
+        .input-group input:focus, 
+        .input-group textarea:focus,
+        .input-group select:focus {
+            border-color: var(--color-core);
+            background: rgba(60, 60, 0, 0.6);
+            outline: none;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.25);
+        }
+
+        /* Section Header - Cleaned up */
+        .section-header {
+            font-family: var(--font-tech);
+            color: var(--color-core);
+            font-size: 1.4rem;
+            border-left: 4px solid var(--color-core);
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(90deg, rgba(255, 215, 0, 0.1), transparent);
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+
+        /* --- BUTTON --- */
+        .btn-submit {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--color-core);
+            border: none;
+            color: #000;
+            font-family: var(--font-tech);
+            font-weight: 800;
+            font-size: 1.2rem;
+            letter-spacing: 0.1em;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+            text-transform: uppercase;
+            clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+        }
+        
+        .btn-submit:hover {
+            background: #FFF;
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
+            letter-spacing: 0.15em;
+        }
+
+        /* Back Link */
+        .back-nav-container {
+            width: 100%; max-width: 80rem; margin-bottom: 2rem; display: flex; justify-content: flex-start; padding: 0 1rem;
+        }
+        .back-nav {
+            font-family: var(--font-tech);
+            font-size: 0.9rem;
+            color: #aaa; 
+            text-transform: uppercase;
+            text-decoration: none;
+            display: flex; align-items: center; gap: 10px; transition: all 0.3s;
+            font-weight: bold;
+        }
+        .back-nav:hover { color: var(--color-core); transform: translateX(-5px); }
+
+        @media (max-width: 640px) {
+            .glass-panel { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="honeycomb-overlay"></div>
+    <canvas id="hex-canvas"></canvas>
+
+    <!-- AUDIO LOGIC (Cooperative/Zippy Theme) -->
+    <script>
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        let audioCtx;
+
+        function initAudio() {
+            if (!audioCtx) audioCtx = new AudioContext();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+        }
+
+        function playTone(freq, type, duration, vol=0.05) {
+            if (!audioCtx) return;
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = type;
+            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+            gain.gain.setValueAtTime(vol, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + duration);
+        }
+
+        // Zippy / Energetic sounds
+        window.playHoverSound = function() {
+            initAudio();
+            // Fast upward slide (zippy)
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(400, audioCtx.currentTime);
+            osc.frequency.linearRampToValueAtTime(800, audioCtx.currentTime + 0.1);
+            gain.gain.setValueAtTime(0.03, audioCtx.currentTime);
+            gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.1);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.1);
+        };
+
+        window.playClickSound = function() {
+            initAudio();
+            // Crisp high tick
+            playTone(1000, 'square', 0.08, 0.05);
+        };
+    </script>
+
+    <main class="w-full min-h-screen flex flex-col items-center pt-6 pb-20">
+        
+        <!-- Back Button -->
+        <div class="back-nav-container">
+            <a href="main.html" class="back-nav" onmouseenter="playHoverSound()" onclick="playClickSound()">
+                <span>&lt;&lt;</span> Back to Grid
+            </a>
+        </div>
+
+        <!-- HEADER -->
+        <div class="text-center mb-10 relative z-10 w-full px-4 gs-reveal">
+            <h1 class="main-title">GENERAL SECRETARY</h1>
+            <p class="subtitle">Cooperation // Energy</p>
+        </div>
+
+        <!-- FORM -->
+        <div class="w-full max-w-5xl glass-panel p-6 md:p-12 rounded-sm gs-reveal opacity-0 mx-4">
+            <form id="gensec-form">
+                
+                <!-- 1. IDENTITY -->
+                <div class="mb-12">
+                    <h3 class="section-header">01 // IDENTITY</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                        <div class="input-group">
+                            <label>Applicant Name (English)</label>
+                            <input type="text" id="name_en" required pattern="[a-zA-Z\s.]+" onmouseenter="playHoverSound()" onfocus="playClickSound()">
+                        </div>
+                        <div class="input-group">
+                            <label>Applicant Name (Bangla)</label>
+                            <input type="text" id="name_bn" required pattern="[\u0980-\u09FF\s.]+" onmouseenter="playHoverSound()" onfocus="playClickSound()">
+                        </div>
+                        <div class="input-group">
+                            <label>Father's Name (English)</label>
+                            <input type="text" id="father_en" required onmouseenter="playHoverSound()" onfocus="playClickSound()">
+                        </div>
+                        <div class="input-group">
+                            <label>Father's Name (Bangla)</label>
+                            <input type="text" id="father_bn" required onmouseenter="playHoverSound()" onfocus="playClickSound()">
+                        </div>
+                        <div class="input-group">
+                            <label>Mother's Name (English)</label>
+                            <input type="text" id="mother_en" required onmouseenter="playHoverSound()" onfocus="playClickSound()">
+                        </div>
+                        <div class="input-group">
+                            <label>Mother's Name (Bangla)</label>
+                            <input type="text" id="mother_bn" required onmouseenter="playHoverSound()" onfocus="playClickSound()">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. CONTACT -->
+                <div class="mb-12">
+                    <h3 class="section-header">02 // CONTACT INFO</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                        <div class="input-group md:col-span-2">
+                            <label>Residential Address</label>
+                            <input type="text" id="address" required onmouseenter="playHoverSound()" onfocus="playClickSound()">
+                        </div>
+                        <div class="input-group">
+                            <label>Email Address</label>
+                            <input type="email" id="email" required onmouseenter="playHoverSound()" onfocus="playClickSound()">
+                        </div>
+                        <div class="input-group">
+                            <label>Mobile Number</label>
+                            <input type="tel" id="mobile" value="+880" maxlength="14" required onmouseenter="playHoverSound()" onfocus="playClickSound()">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. ACADEMIC -->
+                <div class="mb-12">
+                    <h3 class="section-header">03 // ACADEMIC DETAILS</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                        <div class="input-group">
+                            <label>Class</label>
+                            <select id="class_grade" required onmouseenter="playHoverSound()" onfocus="playClickSound()">
+                                <option value="" disabled selected>SELECT</option>
+                                <option>VI</option>
+                                <option>VII</option>
+                                <option>VIII</option>
+                                <option>IX</option>
+                                <option>X</option>
+                                <option>XI</option>
+                                <option>XII</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Section</label>
+                            <select id="section" required onmouseenter="playHoverSound()" onfocus="playClickSound()">
+                                <option value="" disabled selected>SELECT</option>
+                                <option>A</option>
+                                <option>B</option>
+                                <option>C</option>
+                                <option>H</option>
+                                <option>EV</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Version</label>
+                            <select id="version" required onmouseenter="playHoverSound()" onfocus="playClickSound()">
+                                <option value="" disabled selected>SELECT</option>
+                                <option>Bangla</option>
+                                <option>English</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. MANIFESTO -->
+                <div class="mb-10">
+                    <h3 class="section-header">04 // YOUR VISION</h3>
+                    <div class="input-group">
+                        <label style="color: var(--color-core); font-size: 0.9rem;">Why apply for General Secretary?</label>
+                        <textarea id="manifesto" rows="6" required onmouseenter="playHoverSound()" onfocus="playClickSound()"></textarea>
+                    </div>
+                </div>
+
+                <div class="pt-4">
+                    <button type="submit" id="submit-btn" class="btn-submit" onmouseenter="playHoverSound()" onclick="playClickSound()">
+                        SUBMIT APPLICATION
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </main>
+
+    <!-- Visuals & Logic -->
+    <script>
+        // Hexagon Background Logic
+        const initHex = () => {
+            const canvas = document.getElementById('hex-canvas');
+            const ctx = canvas.getContext('2d');
+            let w, h;
+            
+            const resize = () => {
+                w = window.innerWidth;
+                h = window.innerHeight;
+                canvas.width = w;
+                canvas.height = h;
+            };
+            window.addEventListener('resize', resize);
+            resize();
+
+            const hexes = [];
+            for(let i=0; i<35; i++) {
+                hexes.push({
+                    x: Math.random() * w,
+                    y: Math.random() * h,
+                    size: Math.random() * 20 + 15,
+                    speed: Math.random() * 0.4 + 0.1,
+                    opacity: Math.random() * 0.3 + 0.05
+                });
+            }
+
+            const drawHex = (x, y, r, opacity) => {
+                ctx.beginPath();
+                for (let i = 0; i < 6; i++) {
+                    ctx.lineTo(x + r * Math.cos(i * Math.PI / 3), y + r * Math.sin(i * Math.PI / 3));
+                }
+                ctx.closePath();
+                ctx.strokeStyle = `rgba(255, 215, 0, ${opacity})`;
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            };
+
+            const animate = () => {
+                ctx.clearRect(0, 0, w, h);
+                
+                hexes.forEach(h => {
+                    h.y -= h.speed;
+                    if(h.y < -50) h.y = window.innerHeight + 50;
+                    h.opacity = 0.2 + Math.sin(Date.now() * 0.0015 + h.x) * 0.15;
+                    drawHex(h.x, h.y, h.size, h.opacity);
+                });
+                requestAnimationFrame(animate);
+            };
+            animate();
+        };
+
+        const playEntrance = () => {
+            gsap.to(".gs-reveal", {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                stagger: 0.1,
+                ease: "power2.out",
+                delay: 0.1
+            });
+        };
+
+        const initMobileInput = () => {
+            const mobileInput = document.getElementById('mobile');
+            mobileInput.addEventListener('input', (e) => {
+                if (!mobileInput.value.startsWith('+880')) {
+                    mobileInput.value = '+880';
+                }
+            });
+        };
+
+        // --- SUPABASE INTEGRATION ---
+        const initSupabase = () => {
+            const SUPABASE_URL = 'YOUR_SUPABASE_URL_HERE';
+            const SUPABASE_KEY = 'YOUR_SUPABASE_ANON_KEY_HERE';
+            
+            if(SUPABASE_URL === 'YOUR_SUPABASE_URL_HERE') return;
+
+            const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+            const form = document.getElementById('gensec-form');
+            const submitBtn = document.getElementById('submit-btn');
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                submitBtn.disabled = true;
+                submitBtn.innerText = "SENDING...";
+
+                const formData = {
+                    role: 'general_secretary',
+                    name_en: document.getElementById('name_en').value,
+                    name_bn: document.getElementById('name_bn').value,
+                    father_en: document.getElementById('father_en').value,
+                    father_bn: document.getElementById('father_bn').value,
+                    mother_en: document.getElementById('mother_en').value,
+                    mother_bn: document.getElementById('mother_bn').value,
+                    address: document.getElementById('address').value,
+                    email: document.getElementById('email').value,
+                    mobile: document.getElementById('mobile').value,
+                    class: document.getElementById('class_grade').value,
+                    section: document.getElementById('section').value,
+                    version: document.getElementById('version').value,
+                    manifesto: document.getElementById('manifesto').value
+                };
+
+                try {
+                    const { data, error } = await supabase.from('applications').insert([formData]);
+                    if (error) throw error;
+                    alert('Submitted successfully.');
+                    window.location.href = 'main.html';
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('Error: ' + error.message);
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = "RETRY";
+                }
+            });
+        };
+
+        window.addEventListener('load', () => {
+            initHex();
+            // Preset GSAP
+            gsap.set(".gs-reveal", { y: 30, opacity: 0 });
+            playEntrance();
+            initMobileInput();
+            initSupabase();
+        });
+    </script>
+</body>
+</html>
