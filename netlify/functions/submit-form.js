@@ -1,42 +1,29 @@
 const { neon } = require('@neondatabase/serverless');
 
 exports.handler = async (event, context) => {
-  // 1. CORS Headers - Allow requests from your website
   const headers = {
-    'Access-Control-Allow-Origin': '*', // Change '*' to your specific domain in production for better security
+    'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Allow-Methods': 'POST, OPTIONS'
   };
 
-  // 2. Handle Preflight OPTIONS request (Browser checks permissions first)
   if (event.httpMethod === "OPTIONS") {
-    return {
-      statusCode: 200,
-      headers,
-      body: "OK"
-    };
+    return { statusCode: 200, headers, body: "OK" };
   }
 
-  // 3. Only allow POST requests for data submission
   if (event.httpMethod !== "POST") {
-    return { 
-      statusCode: 405, 
-      headers,
-      body: JSON.stringify({ error: "Method Not Allowed" }) 
-    };
+    return { statusCode: 405, headers, body: JSON.stringify({ error: "Method Not Allowed" }) };
   }
 
   try {
-    // 4. Check for Database Connection String
     if (!process.env.DATABASE_URL) {
-      throw new Error("Missing DATABASE_URL environment variable");
+      console.error("Missing DATABASE_URL");
+      throw new Error("Server Configuration Error");
     }
 
     const sql = neon(process.env.DATABASE_URL);
     const data = JSON.parse(event.body);
 
-    // 5. Insert into Neon Database
-    // Note: We expect the frontend to send data with these exact key names (snake_case)
     await sql`
       INSERT INTO applications (
         role, name_en, name_bn, father_en, father_bn, 
@@ -55,15 +42,19 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ message: "Application submitted successfully" }),
+      body: JSON.stringify({ message: "Success" }),
     };
 
   } catch (error) {
-    console.error("Submission Error:", error);
+    // SECURITY: Log the full error to Netlify Console (Private)
+    console.error("Detailed Submission Error:", error);
+
+    // SECURITY: Send a generic error to the User (Public)
+    // This prevents leaking passwords if the DB connection fails
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({ error: error.message || "Internal Server Error" }),
+      body: JSON.stringify({ error: "Internal Server Error. Please contact support." }),
     };
   }
 };
