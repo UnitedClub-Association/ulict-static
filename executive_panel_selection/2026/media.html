@@ -11,13 +11,12 @@
     
     <!-- Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <style>
         /* 1. Custom Font - Sector 017 */
         @font-face {
             font-family: 'Sector 017';
-            src: url('../fonts/sector_017.ttf') format('truetype');
+            src: url('../../fonts/sector_017.ttf') format('truetype');
             font-weight: normal;
             font-style: normal;
         }
@@ -453,20 +452,17 @@
             });
         };
 
-        // --- SUPABASE INTEGRATION ---
-        const initSupabase = () => {
-            const SUPABASE_URL = 'YOUR_SUPABASE_URL_HERE';
-            const SUPABASE_KEY = 'YOUR_SUPABASE_ANON_KEY_HERE';
-            
-            if(SUPABASE_URL === 'YOUR_SUPABASE_URL_HERE') return;
-
-            const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        // --- NEW BACKEND INTEGRATION ---
+        const initBackend = () => {
             const form = document.getElementById('media-form');
             const submitBtn = document.getElementById('submit-btn');
+
+            if(!form) return;
 
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 submitBtn.disabled = true;
+                const originalText = submitBtn.innerText;
                 submitBtn.innerText = "TRANSMITTING...";
 
                 const formData = {
@@ -487,15 +483,24 @@
                 };
 
                 try {
-                    const { data, error } = await supabase.from('applications').insert([formData]);
-                    if (error) throw error;
-                    alert('Submission Successful.');
-                    window.location.href = 'main.html';
+                    const response = await fetch('/.netlify/functions/submit-form', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(formData)
+                    });
+
+                    if (response.ok) {
+                        alert('Submission Successful.');
+                        window.location.href = 'main.html';
+                    } else {
+                        const result = await response.json();
+                        throw new Error(result.error || 'Server error');
+                    }
                 } catch (error) {
                     console.error('Error:', error);
                     alert('Error: ' + error.message);
                     submitBtn.disabled = false;
-                    submitBtn.innerText = "RETRY";
+                    submitBtn.innerText = originalText;
                 }
             });
         };
@@ -506,7 +511,7 @@
             gsap.set(".gs-reveal", { y: 30, opacity: 0 });
             playEntrance();
             initMobileInput();
-            initSupabase();
+            initBackend();
         });
     </script>
 </body>
