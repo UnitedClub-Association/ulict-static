@@ -466,8 +466,8 @@
             try {
                 dropdown.innerHTML = '<option value="" disabled selected>-- Fetching Database... --</option>';
 
-                // Fetch real data from your Neon database via Netlify
-                const response = await fetch('/.netlify/functions/get-applicants');
+                // FIX: Changed "get-applicants" to "get_applicants" to match the actual filename
+                const response = await fetch('/.netlify/functions/get_applicants');
                 
                 if (!response.ok) throw new Error("Failed to load applicants");
                 
